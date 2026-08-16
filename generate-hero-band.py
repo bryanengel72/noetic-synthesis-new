@@ -43,7 +43,7 @@ def smooth_path(pts):
 
 # --------------------------------------------------------------------- braid
 
-def braid(seed=12, channels=11, samples=46):
+def braid(seed=12, channels=13, samples=46):
     """A bundle of channels that pinch together and swell apart.
 
     Separation is built in rather than checked afterwards. Channel i sits at the
