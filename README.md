@@ -53,6 +53,13 @@ production. (`api/ask.js` is deliberately excluded by `.vercelignore`.)
 vercel deploy --prod
 ```
 
+**Note the Vercel project name:** this folder is linked (`.vercel/project.json`)
+to the Vercel project **`noetic-synthesis-cb1a4ca7`** — the same name as the
+dormant React app, because the static site was deployed over the top of that
+existing project. Despite the name, it is the production project serving
+noeticsynthesis.com. Don't create a new Vercel project for this site, and don't
+assume that project contains the React code.
+
 To re-enable the ask endpoint: remove the `api/ask.js` line from
 `.vercelignore` and make sure `ANTHROPIC_API_KEY` is set in the Vercel
 project's environment variables.
