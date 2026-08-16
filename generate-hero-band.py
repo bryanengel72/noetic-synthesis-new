@@ -14,6 +14,10 @@ import random
 W, H = 1600.0, 300.0
 MID = H * 0.5
 
+# Clearance every branch keeps from its parent, in viewBox units. The band is
+# ~1600 units wide on screen, so this is close to a 1:1 pixel gap.
+GAP = 5.5
+
 
 def smooth_path(pts):
     """Catmull-Rom through pts, emitted as integer-rounded cubic beziers."""
@@ -54,7 +58,7 @@ def reach(rng, x0, x1, y0, y1, bow, samples=11):
     return pts
 
 
-def braid(seed=12, depth=3):
+def braid(seed=12, depth=4):
     """Grow anabranches as deviations from a parent curve.
 
     A channel is a function x -> y, not a chord. A child channel is its parent
@@ -77,14 +81,14 @@ def braid(seed=12, depth=3):
         pts = [(x0 + (x1 - x0) * (s / n), 0.0) for s in range(n + 1)]
         out.append(([(x, curve(x)) for x, _ in pts], d))
 
-    def grow(x0, x1, curve, d, amp):
+    def grow(x0, x1, curve, d, amp, sign=0):
         draw(x0, x1, curve, d)
         span = x1 - x0
-        if d == 0 or span < 190:
+        if d == 0 or span < 125:
             return
         # island count follows the length of the reach, otherwise a long trunk
         # spawns two islands and leaves a dead flat stretch between them
-        count = max(1, min(4, int(round(span / 380.0))))
+        count = max(1, min(4, int(round(span / 300.0))))
         edge = span * 0.06
         usable = span - 2 * edge
         # uneven slot widths - an even partition makes the band read as a
@@ -98,20 +102,37 @@ def braid(seed=12, depth=3):
             xa = cursor + wspan * rng.uniform(0.03, 0.26)
             xb = cursor + wspan - wspan * rng.uniform(0.03, 0.26)
             cursor += wspan
-            if xb - xa > 90:
+            if xb - xa > 68:
                 slots.append((xa, xb))
         for xa, xb in slots:
-            # unequal branches either side; often only one splits off
-            sides = [-1, 1] if rng.random() < 0.6 else [rng.choice([-1, 1])]
+            # unequal branches either side; often only one splits off. Once a
+            # branch has picked a side it keeps it, so its own branches fan
+            # further out instead of curving back across the parent.
+            if sign:
+                sides = [sign]
+            else:
+                sides = [-1, 1] if rng.random() < 0.74 else [rng.choice([-1, 1])]
             scale = rng.uniform(0.45, 1.15)
-            for sign in sides:
-                bow = sign * amp * scale * rng.uniform(0.5, 1.0)
+            for s in sides:
+                bow = s * amp * scale * rng.uniform(0.5, 1.0)
 
                 def child(x, xa=xa, xb=xb, bow=bow, curve=curve):
                     t = (x - xa) / (xb - xa)
                     return curve(x) + bow * math.sin(math.pi * t) ** 2
 
-                grow(xa, xb, child, d - 1, amp * 0.5)
+                # A branch is drawn only over the stretch where it is at least
+                # GAP away from its parent, so the two never meet. Anything too
+                # shallow to clear the gap over a useful length is dropped
+                # rather than drawn as a stub.
+                if abs(bow) < GAP * 1.30:
+                    continue
+                tlo = math.asin(math.sqrt(GAP / abs(bow))) / math.pi
+                xa2 = xa + (xb - xa) * tlo
+                xb2 = xb - (xb - xa) * tlo
+                if xb2 - xa2 < 42:
+                    continue
+
+                grow(xa2, xb2, child, d - 1, amp * 0.5, s)
 
     grow(-70.0, W + 70.0, trunk, depth, H * 0.30)
     return out
