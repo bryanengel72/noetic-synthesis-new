@@ -1,8 +1,8 @@
 """Generate SVG path data for the Noetic Synthesis hero band alternatives.
 
-braid   a braided channel: a trunk that repeatedly splits into anabranches and
-        rejoins downstream, leaving lens-shaped islands. Modelled recursively so
-        the pattern is self-similar at every scale, the way real braids are.
+braid   a braided channel: a bundle of lines that bunch into a cord in places
+        and open into islands in others. Spacing is built in, not checked after
+        the fact, so channels can close right up without ever touching.
 
 strata  stacked layers that share one fold and flatten with depth. Amplitude
         decays monotonically, so lines can never cross - which is what separates
@@ -16,7 +16,7 @@ MID = H * 0.5
 
 # Clearance every branch keeps from its parent, in viewBox units. The band is
 # ~1600 units wide on screen, so this is close to a 1:1 pixel gap.
-GAP = 5.5
+GAP = 6.0
 
 
 def smooth_path(pts):
@@ -43,32 +43,20 @@ def smooth_path(pts):
 
 # --------------------------------------------------------------------- braid
 
-def reach(rng, x0, x1, y0, y1, bow, samples=11):
-    """One channel segment: straight run from end to end, bowed to one side."""
-    pts = []
-    for s in range(samples + 1):
-        t = s / samples
-        x = x0 + (x1 - x0) * t
-        y = y0 + (y1 - y0) * t
-        # sin^2 has zero slope at t=0 and t=1, so a branch leaves and rejoins
-        # its junction tangentially. Plain sin() leaves at an angle and the
-        # island ends up a sharp V instead of a lens.
-        y += bow * math.sin(math.pi * t) ** 2
-        pts.append((x, y))
-    return pts
+def braid(seed=12, channels=11, samples=46):
+    """A bundle of channels that pinch together and swell apart.
 
+    Separation is built in rather than checked afterwards. Channel i sits at the
+    running sum of the gaps below it, and every gap is GAP plus a non-negative
+    swell, so neighbours can close to GAP but never nearer, and never cross.
+    Each gap swells in its own places, so the bundle bunches here and opens into
+    an island there, which is what reads as a braid.
 
-def braid(seed=12, depth=4):
-    """Grow anabranches as deviations from a parent curve.
-
-    A channel is a function x -> y, not a chord. A child channel is its parent
-    plus a sin^2 bulge over a window, which is zero-valued and zero-sloped at
-    both ends - so it leaves and rejoins the parent tangentially and the island
-    comes out a lens. (Building islands from two straight chords meeting at an
-    apex is what produces sharp Vs.)
+    Grown recursively instead, a branch must either nest inside its parent's
+    bulge or be dropped once it has to keep clear of it, and the band turns into
+    rows of concentric leaf shapes.
     """
     rng = random.Random(seed)
-    out = []  # (points, depth)
 
     def trunk(x):
         t = x / W
@@ -76,83 +64,75 @@ def braid(seed=12, depth=4):
                 + 30.0 * math.sin(t * math.pi * 1.25 + 0.5)
                 + 13.0 * math.sin(t * math.pi * 2.8 + 1.4))
 
-    def draw(x0, x1, curve, d):
-        n = max(6, min(20, int((x1 - x0) / 42)))
-        pts = [(x0 + (x1 - x0) * (s / n), 0.0) for s in range(n + 1)]
-        out.append(([(x, curve(x)) for x, _ in pts], d))
+    # Each gap opens in a few specific places and is shut everywhere else.
+    # Periodic swells average out into an evenly spaced ribbon; localised bumps
+    # are what make the bundle bunch into a cord here and open into an island
+    # there.
+    swells = []
+    for _ in range(channels - 1):
+        bumps = []
+        for _ in range(rng.randint(1, 3)):
+            bumps.append((
+                rng.uniform(-0.05, 1.05),    # centre, in t
+                rng.uniform(0.05, 0.17),     # width
+                rng.uniform(16.0, 62.0),     # how far it opens
+            ))
+        swells.append(bumps)
 
-    def grow(x0, x1, curve, d, amp, sign=0):
-        draw(x0, x1, curve, d)
-        span = x1 - x0
-        if d == 0 or span < 125:
-            return
-        # island count follows the length of the reach, otherwise a long trunk
-        # spawns two islands and leaves a dead flat stretch between them
-        count = max(1, min(4, int(round(span / 300.0))))
-        edge = span * 0.06
-        usable = span - 2 * edge
-        # uneven slot widths - an even partition makes the band read as a
-        # repeating decorative wave rather than a river
-        weights = [rng.uniform(0.6, 1.7) for _ in range(count)]
-        total = sum(weights)
-        slots = []
-        cursor = x0 + edge
-        for wgt in weights:
-            wspan = usable * (wgt / total)
-            xa = cursor + wspan * rng.uniform(0.03, 0.26)
-            xb = cursor + wspan - wspan * rng.uniform(0.03, 0.26)
-            cursor += wspan
-            if xb - xa > 68:
-                slots.append((xa, xb))
-        for xa, xb in slots:
-            # unequal branches either side; often only one splits off. Once a
-            # branch has picked a side it keeps it, so its own branches fan
-            # further out instead of curving back across the parent.
-            if sign:
-                sides = [sign]
-            else:
-                sides = [-1, 1] if rng.random() < 0.74 else [rng.choice([-1, 1])]
-            scale = rng.uniform(0.45, 1.15)
-            for s in sides:
-                bow = s * amp * scale * rng.uniform(0.5, 1.0)
+    def gap_at(i, t):
+        g = GAP
+        for centre, width, amp in swells[i]:
+            g += amp * math.exp(-(((t - centre) / width) ** 2))
+        return g
 
-                def child(x, xa=xa, xb=xb, bow=bow, curve=curve):
-                    t = (x - xa) / (xb - xa)
-                    return curve(x) + bow * math.sin(math.pi * t) ** 2
+    xs = [-70.0 + (W + 140.0) * (s / samples) for s in range(samples + 1)]
+    # precompute every gap at every station, so the running sums are cheap
+    table = [[gap_at(i, (x + 70.0) / (W + 140.0)) for i in range(channels - 1)]
+             for x in xs]
 
-                # A branch is drawn only over the stretch where it is at least
-                # GAP away from its parent, so the two never meet. Anything too
-                # shallow to clear the gap over a useful length is dropped
-                # rather than drawn as a stub.
-                if abs(bow) < GAP * 1.30:
-                    continue
-                tlo = math.asin(math.sqrt(GAP / abs(bow))) / math.pi
-                xa2 = xa + (xb - xa) * tlo
-                xb2 = xb - (xb - xa) * tlo
-                if xb2 - xa2 < 42:
-                    continue
+    raw = []
+    for i in range(channels):
+        pts = []
+        for xi, x in enumerate(xs):
+            row = table[xi]
+            pts.append((x, trunk(x) + sum(row[:i]) - sum(row) * 0.5))
+        raw.append(pts)
 
-                grow(xa2, xb2, child, d - 1, amp * 0.5, s)
+    # How wide the bundle runs depends on where the swells happen to land, so
+    # fit it to the band rather than hoping. Scaling about the bundle's own
+    # centre keeps every gap in proportion; separation scales with it.
+    ys = [y for pts in raw for _, y in pts]
+    lo, hi = min(ys), max(ys)
+    pad = 14.0
+    k = min(1.0, (H - 2 * pad) / max(1e-6, hi - lo))
+    centre = (lo + hi) * 0.5
 
-    grow(-70.0, W + 70.0, trunk, depth, H * 0.30)
+    out = []
+    half = (channels - 1) / 2.0
+    for i, pts in enumerate(raw):
+        fitted = [(x, MID + (y - centre) * k) for x, y in pts]
+        # the middle of the bundle is the main channel and reads heaviest
+        centrality = 1.0 - abs(i - half) / half
+        out.append((fitted, centrality))
     return out
 
 
 def braid_paths():
     items = braid()
-    maxd = max(d for _, d in items) or 1
-    out = []
-    for i, (pts, d) in enumerate(items):
-        # trunk-order channels read heavier than high-order threads
-        k = d / maxd
-        wgt = round(0.6 + 1.0 * k, 2)
-        op = round(0.30 + 0.55 * k, 2)
+    n = len(items)
+    # emit from the middle outward, so the stagger fills from the main channel
+    order = sorted(range(n), key=lambda i: -items[i][1])
+    out = [None] * n
+    for rank, i in enumerate(order):
+        pts, centrality = items[i]
+        # the centre of the bundle is the main channel and carries the weight
+        wgt = round(0.55 + 1.05 * centrality, 2)
+        op = round(0.32 + 0.5 * centrality, 2)
         # pathLength=1 normalises every path so one dash animation draws them all
-        # at the same rate whatever their real length. --i staggers them in
-        # emission order, which is trunk first, so the braid fills the way water
-        # would rather than every channel arriving at once.
-        out.append(
-            f'<path pathLength="1" style="--i:{i}" d="{smooth_path(pts)}" '
+        # at the same rate whatever their real length. --i staggers them by rank,
+        # so the braid fills outward from its main channel rather than all at once.
+        out[i] = (
+            f'<path pathLength="1" style="--i:{rank}" d="{smooth_path(pts)}" '
             f'stroke-width="{wgt}" opacity="{op}"/>'
         )
     return out
