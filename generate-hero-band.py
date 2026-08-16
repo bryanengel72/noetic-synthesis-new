@@ -121,12 +121,19 @@ def braid_paths():
     items = braid()
     maxd = max(d for _, d in items) or 1
     out = []
-    for pts, d in items:
+    for i, (pts, d) in enumerate(items):
         # trunk-order channels read heavier than high-order threads
         k = d / maxd
         wgt = round(0.6 + 1.0 * k, 2)
         op = round(0.30 + 0.55 * k, 2)
-        out.append(f'<path d="{smooth_path(pts)}" stroke-width="{wgt}" opacity="{op}"/>')
+        # pathLength=1 normalises every path so one dash animation draws them all
+        # at the same rate whatever their real length. --i staggers them in
+        # emission order, which is trunk first, so the braid fills the way water
+        # would rather than every channel arriving at once.
+        out.append(
+            f'<path pathLength="1" style="--i:{i}" d="{smooth_path(pts)}" '
+            f'stroke-width="{wgt}" opacity="{op}"/>'
+        )
     return out
 
 
