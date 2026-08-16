@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://noeticsynthesis.com/sitemap.xml
+Sitemap: https://www.noeticsynthesis.com/sitemap.xml

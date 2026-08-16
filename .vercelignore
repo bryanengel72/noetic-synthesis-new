@@ -1,0 +1,4 @@
+# The Art of the Question endpoint stays in the repo but out of production
+# until the public demo ships — it bills Opus tokens and nothing on the site
+# calls it. Delete this line to deploy it again.
+api/ask.js

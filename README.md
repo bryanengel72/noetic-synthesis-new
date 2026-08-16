@@ -1,52 +1,40 @@
 # noeticsynthesis.com — source
 
-## Where this came from
+The live site: a hand-written static `index.html` + `offerings.html` plus two
+serverless functions, deployed on Vercel. Canonical host is
+`https://www.noeticsynthesis.com` (the apex 308-redirects to www).
 
-These files were **recovered from the live Vercel deployment**
-(`dpl_6kzXb4o5ax5PX5X7MuFuWoesxvdf`, production, 2026-08-15), not from a repo.
+## History
 
-At the time of recovery the site's source existed in no git repository:
+These files were originally **recovered from the live Vercel deployment**
+(`dpl_6kzXb4o5ax5PX5X7MuFuWoesxvdf`, production, 2026-08-15) after the local
+source folder was lost. The source now lives in git at
+`bryanengel72/noetic-synthesis-new` — the deployment is no longer the only copy.
 
-- `bryanengel72/noetic-synthesis-new` contains only a README
-- `bryanengel72/noetic-synthesis-cb1a4ca7` holds an older React/Vite version of
-  the site, unrelated to what is actually live
-- no working copy existed anywhere on the Mac
-
-The live site is a hand-written static `index.html` plus two serverless
-functions, and it has been shipped with `vercel deploy` from a local folder that
-is now gone. Until this is committed somewhere, **the deployment is the only
-copy.**
+The older React/Vite version of the site
+(`bryanengel72/noetic-synthesis-cb1a4ca7`, in the sibling folder) is **not**
+what is live; it's a dormant earlier direction.
 
 ## Files
 
 | file | what it is |
 | --- | --- |
-| `index.html` | the live page, byte-identical to production |
-| `index-braid.html` | same page with the hero photo swapped for a drawn SVG band |
+| `index.html` | the live page. The hero closes on an inline SVG braid band (formerly a separate `index-braid.html`; the band was merged in and the CloudFront hero photo it replaced is gone from production) |
 | `offerings.html` | the offerings page |
-| `api/ask.js`, `api/contact.js` | the two serverless functions |
-| `llms.txt`, `robots.txt`, `sitemap.xml` | as deployed |
-| `vercel.json`, `package.json` | as deployed |
-| `generate-hero-band.py` | regenerates the SVG band artwork |
+| `api/ask.js` | Art of the Question endpoint — **excluded from deployment** via `.vercelignore` until the public demo ships, because it bills Opus tokens and nothing on the site calls it. It has a per-IP rate limiter for when it comes back. |
+| `api/contact.js` | contact form handler (Resend, mailto fallback). Deployed but unreferenced by the site. |
+| `og.png` | 1200×630 social share card, referenced by `og:image` on both pages |
+| `generate-og-image.py` | regenerates `og.png` (needs Pillow) |
+| `generate-hero-band.py` | regenerates the SVG braid band artwork |
+| `llms.txt`, `robots.txt`, `sitemap.xml` | crawler/AI-agent files |
+| `vercel.json`, `package.json` | deploy config |
 
 ## The hero band
 
-The live hero closes on a full-bleed photograph hotlinked from the image
-generator's CDN:
+The braid: one channel in, many paths through, one out. ~6 KB inline SVG,
+strokes inherit `currentColor` so it themes with the page, sharp at any width.
 
-```
-https://d8j0ntlcm91z4.cloudfront.net/user_.../hf_20260815_213506_39244972-....png
-```
-
-That link is a liability — 3.7 MB, a third-party host that can expire, black
-letterbox bars baked into the source, and a `grayscale + sepia` filter whose only
-job is to beat the photo into the site's palette.
-
-`index-braid.html` replaces it with an inline SVG braided channel: one channel
-in, many paths through, one out. About 6 KB, strokes inherit `currentColor` so it
-themes with the page, sharp at any width, no second asset for mobile.
-
-To regenerate or reshape the artwork:
+To regenerate or reshape:
 
 ```bash
 python3 generate-hero-band.py
@@ -57,9 +45,14 @@ times channels subdivide.
 
 ## Deploying
 
-Push to git first, then deploy. Deploy the whole folder — the two functions live
-in `api/` and a deploy from a folder without them removes them from production.
+Push to git first, then deploy. Deploy the whole folder — `api/contact.js`
+lives in `api/` and a deploy from a folder without it removes it from
+production. (`api/ask.js` is deliberately excluded by `.vercelignore`.)
 
 ```bash
 vercel deploy --prod
 ```
+
+To re-enable the ask endpoint: remove the `api/ask.js` line from
+`.vercelignore` and make sure `ANTHROPIC_API_KEY` is set in the Vercel
+project's environment variables.
