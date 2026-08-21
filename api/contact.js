@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
-  const { name, email, track, message } = req.body || {};
+  const { name, email, organization, message } = req.body || {};
   if (!name || !email || !message) {
     return res.status(400).json({ ok: false, error: "Missing fields" });
   }
@@ -24,8 +24,8 @@ export default async function handler(req, res) {
         from: process.env.CONTACT_FROM || "Noetic Synthesis <onboarding@resend.dev>",
         to: [to],
         reply_to: email,
-        subject: `Co-build inquiry — ${name} (${track || "unspecified"})`,
-        text: `Name: ${name}\nEmail: ${email}\nTrack: ${track}\n\n${message}`,
+        subject: `New inquiry — ${name}${organization ? " · " + organization : ""}`,
+        text: `Name: ${name}\nEmail: ${email}${organization ? "\nOrganization: " + organization : ""}\n\n${message}`,
       }),
     });
     if (!r.ok) throw new Error(`Resend ${r.status}`);

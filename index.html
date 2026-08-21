@@ -204,6 +204,22 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .mail{display:inline-block;margin-top:var(--s32);font-family:var(--display);font-variation-settings:'wdth' 106;font-weight:500;font-size:clamp(19px,2.9vw,30px);letter-spacing:-.024em;color:var(--text);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:6px;transition:border-color .3s}
 .mail:hover{border-color:var(--text)}
 .inquiry .note{margin-top:var(--s24);font-size:15px;color:var(--faint);max-width:46ch}
+.inq-form{margin-top:var(--s48);max-width:520px;display:grid;gap:var(--s24)}
+.field{display:grid;gap:var(--s8)}
+.field label{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.field .opt{text-transform:none;font-weight:400;letter-spacing:0;font-size:10px;color:var(--faint);opacity:.75;margin-left:6px}
+.field input,.field textarea{width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.5;padding:var(--s8) 0;transition:border-color .3s}
+.field textarea{resize:vertical;min-height:140px}
+.field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--text)}
+.field input::placeholder,.field textarea::placeholder{color:var(--faint);opacity:.55}
+.send-btn{justify-self:start;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);background:none;border:1px solid var(--line2);padding:var(--s12) var(--s24);cursor:pointer;transition:background .25s,color .25s,border-color .25s,letter-spacing .4s var(--ease)}
+.send-btn:hover:not(:disabled){background:var(--text);color:var(--bg);border-color:var(--text);letter-spacing:.26em}
+.send-btn:disabled{opacity:.45;cursor:default}
+.form-status{font-size:14.5px;line-height:1.5;color:var(--muted);min-height:1.3em}
+.form-status a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line)}
+.inq-alt{margin-top:var(--s32);font-size:14px;color:var(--faint)}
+.inq-alt a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.inq-alt a:hover{color:var(--text);border-bottom-color:var(--text)}
 
 footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;color:var(--faint)}
 .foot-inner{max-width:1200px;margin:0 auto;padding:0 var(--s32);display:flex;justify-content:space-between;gap:var(--s16);flex-wrap:wrap}
@@ -393,8 +409,28 @@ html{scroll-behavior:auto}
   <div class="container">
     <p class="label reveal">Inquiries</p>
     <h2 id="contact-heading" class="reveal">We work with a small number of organizations <span class="wide">at a time.</span></h2>
-    <a class="mail reveal" href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
     <p class="note reveal">Engagements begin with a conversation, usually by introduction. Tell us the question you're sitting with.</p>
+    <form class="inq-form reveal" id="inq-form" novalidate>
+      <div class="field">
+        <label for="f-name">Name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="f-org">Organization <span class="opt">optional</span></label>
+        <input id="f-org" name="organization" type="text" autocomplete="organization">
+      </div>
+      <div class="field">
+        <label for="f-message">Your message or questions</label>
+        <textarea id="f-message" name="message" placeholder="Tell us what you're working on, or ask us anything." required></textarea>
+      </div>
+      <button class="send-btn" type="submit">Send inquiry</button>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="inq-alt reveal">Prefer to write directly? <a href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a></p>
   </div>
 </section>
 </main>
@@ -475,6 +511,31 @@ addEventListener('scroll',()=>{
 },{passive:true});
 addEventListener('resize',onScroll,{passive:true});
 onScroll();
+
+// Inquiry form — posts to /api/contact (Resend). Until that key is configured
+// the endpoint replies {ok:false}, so we drop back to a prefilled mailto and
+// the form is never a dead end.
+const inqForm=document.getElementById('inq-form');
+if(inqForm){
+  const statusEl=document.getElementById('form-status');
+  const btn=inqForm.querySelector('.send-btn');
+  const MAIL='evolve@noeticsynthesis.com';
+  const mailto=d=>'mailto:'+MAIL+'?subject='+encodeURIComponent('Inquiry — '+d.name+(d.organization?' · '+d.organization:''))+'&body='+encodeURIComponent(d.message+'\n\n— '+d.name+(d.organization?', '+d.organization:'')+'\n'+d.email);
+  inqForm.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const d={name:document.getElementById('f-name').value.trim(),email:document.getElementById('f-email').value.trim(),organization:document.getElementById('f-org').value.trim(),message:document.getElementById('f-message').value.trim()};
+    if(!d.name||!d.email||!d.message){statusEl.textContent='Please add your name, email, and a message.';return}
+    btn.disabled=true;statusEl.textContent='Sending…';
+    try{
+      const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+      const j=await r.json().catch(()=>({}));
+      if(j&&j.ok){inqForm.reset();statusEl.textContent='Thank you — your note is on its way. We read every one.'}
+      else{statusEl.innerHTML='Opening your email app… if nothing happens, write to <a href="mailto:'+MAIL+'">'+MAIL+'</a>.';location.href=mailto(d)}
+    }catch(err){
+      statusEl.innerHTML='Couldn’t send just now — please write to <a href="mailto:'+MAIL+'">'+MAIL+'</a>.';location.href=mailto(d);
+    }finally{btn.disabled=false}
+  });
+}
 </script>
 </body>
 </html>
