@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   }
 
   const key = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO || "hello@noeticsynthesis.com";
+  const to = process.env.CONTACT_TO || "evolve@noeticsynthesis.com";
   if (!key) {
     return res.status(200).json({ ok: false, fallback: "mailto" });
   }
