@@ -1,17 +1,18 @@
 # Noetic Synthesis
 
-> Noetic Synthesis builds agent-based systems that evolve how people question, imagine, forecast, and act. Human-AI co-evolution for people whose decisions carry weight. Based in San Diego, California.
+> Noetic Synthesis builds agent-based systems that evolve how people question, imagine, forecast, and act. Human-AI co-evolution for leaders whose decisions carry weight. Based in San Diego, California. "Noetic": of the mind, and how it comes to know.
 
 Noetic Synthesis is not a productivity or automation company. Most AI adoption is extractive — faster answers, less thinking. Noetic Synthesis works on the other side of the exchange: the questions people bring to AI, and what they do with the answers.
 
 ## The Noetic Innovation Cycle
 
-Four agents form one closed loop. A surface question goes in; a tested decision comes out.
+Five agents form one closed loop. A surface question goes in; a tested decision comes out. About ten minutes, six choice points.
 
-1. **Art of the Question** (Catalyst) — a five-step reflective sequence that surfaces the question underneath the question. Each step returns an insight and three deepening questions, ending in a synthesis.
-2. **Divergence Engine** (Divergence) — expands what is imaginable through speculative scenarios, then offers "reality fractures": counter-framings that challenge the user's hardest-won insight.
-3. **Causal Foresight** (Decision Fork) — takes a specific decision point and simulates multi-path ripple scenarios, weighting outcomes against ethical, personal, and strategic context.
-4. **What Now** (Execution) — converts insight into timeboxed experiments, each with an action and a reason, scoped to days rather than quarters.
+1. **Art of the Question** — six rounds of opening the question. Each round offers three or four divergent ways in (reframe, deepen, turn sideways, invert) and the user chooses the one that carries. It never answers; it only reshapes what is being asked.
+2. **What If** — builds five plausible, specific futures from the question that survived. The user picks the one worth carrying forward.
+3. **Divergence** — names the assumption the chosen future rests on and shows concretely why it is shakier than it looks. Ends on the exposed tension and refuses to resolve it.
+4. **Causal Foresight** — traces that fracture forward through first-, second-, and third-order consequences. A consequence chain only; no recommendations.
+5. **What Now** — the only stage allowed to recommend: a first move, a next move, and a checkpoint concrete enough to show within days whether it is working.
 
 The output of What Now becomes the next question; the cycle continues.
 
@@ -22,7 +23,7 @@ The output of What Now becomes the next question; the cycle continues.
 ## Offerings
 
 - [Workshops](https://noeticsynthesis.com/offerings.html): half-day to two-day immersions in which leadership teams run a live decision through the full cycle.
-- [Agent Access](https://noeticsynthesis.com/offerings.html): direct access to the four agents as an ongoing thinking practice, for one person or a team.
+- [Agent Access](https://noeticsynthesis.com/offerings.html): direct access to all five agents as an ongoing thinking practice, for one person or a team.
 - [Leadership Programs](https://noeticsynthesis.com/offerings.html): multi-week cohort programs training five capacities — adaptive curiosity, ethical foresight, imaginative synthesis, meta-cognition, and emotional integration — run inside a company or inside a curriculum.
 
 ## Contact

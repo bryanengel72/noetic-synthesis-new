@@ -85,17 +85,31 @@ nav.scrolled{border-bottom-color:var(--line)}
 .nav-links a:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
 .nav-cta{color:var(--text) !important;border-bottom:1px solid var(--text);border-radius:0 !important;padding:2px 0 3px !important;margin:0 var(--s12)}
 .nav-cta:hover{background:none !important}
-@media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+.nav-menu{display:none;width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;margin-left:var(--s12);transition:color .2s,border-color .2s}
+.nav-menu:hover{color:var(--text);border-color:var(--text)}
+.nav-menu svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.nav-menu .ic-x,nav.open .nav-menu .ic-bars{display:none}
+nav.open .nav-menu .ic-x{display:block}
+@media(max-width:760px){
+  .nav-menu{display:flex}
+  .nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:var(--s8) var(--s24) var(--s24);background:var(--bg);border-bottom:1px solid var(--line)}
+  nav.open .nav-links{display:flex}
+  .nav-links a{padding:var(--s12) 0;border-bottom:1px solid var(--line);border-radius:0;font-size:15px}
+  .nav-links a:hover{background:none}
+  .nav-links .nav-cta{margin:0;padding:var(--s12) 0 !important;border-bottom:1px solid var(--line) !important}
+  .theme-toggle{margin-top:var(--s16)}
+}
+@media(max-width:640px){.grain{display:none}}
 .theme-toggle{width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,border-color .2s;flex-shrink:0}
 .theme-toggle:hover{color:var(--text);border-color:var(--text)}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
 html[data-theme="light"] .icon-sun{display:none}
 html:not([data-theme="light"]) .icon-moon{display:none}
 
-.hero{position:relative;min-height:78svh;display:grid;grid-template-rows:1fr auto;padding:calc(var(--s96) + var(--s48)) var(--s32) var(--s32);max-width:1400px;margin:0 auto}
+.hero{position:relative;min-height:78svh;display:grid;grid-template-rows:1fr auto;padding:calc(var(--s96) + var(--s24)) var(--s32) var(--s32);max-width:1400px;margin:0 auto}
 @media(max-width:640px){.hero{padding:var(--s96) var(--s24) var(--s24)}}
 .hero h1{font-family:var(--display);font-variation-settings:'wdth' 118;font-weight:600;
-  font-size:clamp(38px,9.2vw,116px);line-height:.92;letter-spacing:-.032em;
+  font-size:clamp(38px,8vw,96px);line-height:.92;letter-spacing:-.032em;
   text-transform:uppercase;align-self:center;max-width:15ch}
 .hero h1 .wide{font-variation-settings:'wdth' 125}
 .line{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
@@ -104,13 +118,17 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .line:nth-child(2)>span{animation-delay:.27s}
 .line:nth-child(3)>span{animation-delay:.39s}
 @keyframes unmask{to{transform:translateY(0)}}
-.hrule{height:1px;background:var(--line);margin:var(--s48) 0 var(--s32);transform:scaleX(0);transform-origin:left;animation:draw 1.5s var(--ease) .72s forwards}
+.hrule{height:1px;background:var(--line);margin:var(--s32) 0 var(--s24);transform:scaleX(0);transform-origin:left;animation:draw 1.5s var(--ease) .72s forwards}
 @keyframes draw{to{transform:scaleX(1)}}
 .sub{display:flex;gap:var(--s48);align-items:flex-end;flex-wrap:wrap;opacity:0;animation:fade .9s ease .95s forwards}
 @keyframes fade{to{opacity:1}}
 .sub p{color:var(--muted);font-size:16.5px;line-height:1.6;max-width:46ch}
 .cta-link{flex-shrink:0;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);text-decoration:none;padding-bottom:var(--s8);border-bottom:1px solid var(--text);transition:letter-spacing .4s var(--ease);white-space:nowrap}
 .cta-link:hover{letter-spacing:.28em}
+.hero-actions{flex-shrink:0;display:grid;gap:var(--s12);justify-items:start}
+.hero-note{font-size:13px;color:var(--faint);letter-spacing:.01em}
+.cta-alt{font-size:14px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.cta-alt:hover{color:var(--text);border-bottom-color:var(--text)}
 @media(max-width:640px){.sub{gap:var(--s32)}.hrule{margin:var(--s32) 0 var(--s24)}}
 .asking{border-top:1px solid var(--line);padding-top:var(--s24);display:flex;gap:var(--s32);align-items:baseline;justify-content:space-between;opacity:0;animation:fade 1s ease 1.5s forwards}
 .asking-q{font-family:var(--sans);font-weight:400;font-size:clamp(16px,2.2vw,24px);line-height:1.32;letter-spacing:-.022em;text-align:right;transition:opacity .55s ease,filter .55s ease,transform .55s ease;max-width:26ch}
@@ -201,6 +219,9 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .pill:hover{color:var(--text)}
 .pill:hover::after{transform:scaleX(1)}
 .pill span{font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;color:var(--faint);display:block;letter-spacing:.2em;margin-bottom:var(--s8)}
+.pill p{font-family:var(--sans);font-weight:400;font-size:14px;line-height:1.5;letter-spacing:-.011em;text-transform:none;color:var(--faint);margin-top:var(--s8)}
+.try{border-bottom:1px solid var(--line)}
+.try-actions{margin-top:var(--s48);display:flex;gap:var(--s24);align-items:baseline;flex-wrap:wrap}
 @media(max-width:1040px){.pillars{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:720px){.pillars{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:460px){.pillars{grid-template-columns:1fr}.pill{padding-right:0}.pill::after{right:0}}
@@ -228,7 +249,11 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .inq-alt a:hover{color:var(--text);border-bottom-color:var(--text)}
 
 footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;color:var(--faint)}
-.foot-inner{max-width:1200px;margin:0 auto;padding:0 var(--s32);display:flex;justify-content:space-between;gap:var(--s16);flex-wrap:wrap}
+.foot-inner{max-width:1200px;margin:0 auto;padding:0 var(--s32);display:flex;justify-content:space-between;gap:var(--s24);flex-wrap:wrap}
+.foot-links{display:flex;gap:var(--s16);flex-wrap:wrap}
+.foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
+.foot-def{margin-top:var(--s4);opacity:.8}
 @media(max-width:640px){.foot-inner{padding:0 var(--s24)}}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .85s ease,transform .85s var(--ease)}
@@ -256,7 +281,7 @@ html{scroll-behavior:auto}
 <nav aria-label="Primary">
   <div class="nav-inner">
     <a href="#top" class="wordmark">Noetic Synthesis</a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#cycle">The Cycle</a>
       <a href="/council.html">The Council</a>
       <a href="#trace">In Action</a>
@@ -267,6 +292,10 @@ html{scroll-behavior:auto}
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
     </div>
+      <button class="nav-menu" id="nav-menu" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ic-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
   </div>
 </nav>
 
@@ -279,8 +308,12 @@ html{scroll-behavior:auto}
     </h1>
     <div class="hrule"></div>
     <div class="sub">
-      <p>AI keeps getting smarter. Most people just get faster. We build agent systems that work on the thinking itself — starting with the questions you bring.</p>
-      <a href="#contact" class="cta-link">Begin an inquiry</a>
+      <p>AI keeps getting smarter. Most people just get faster. We build AI agents that sharpen your question, attack your plan, and hand back a decision you can defend. For leaders whose calls carry weight.</p>
+      <div class="hero-actions">
+        <a href="/council.html" class="cta-link">Convene the Council</a>
+        <span class="hero-note">Free · no account · about a minute</span>
+        <a href="#contact" class="cta-alt">Or begin an inquiry</a>
+      </div>
     </div>
   </div>
   <div class="asking">
@@ -313,11 +346,11 @@ html{scroll-behavior:auto}
 <section class="premise" id="premise">
   <div class="container">
     <p class="label reveal">The Premise</p>
-    <h2 class="reveal">Their models will keep improving. Humans will not, <span class="wide">unless something changes.</span></h2>
+    <h2 class="reveal">The models will keep improving. The people using them will not, <span class="wide">unless something changes.</span></h2>
     <div class="premise-grid">
       <blockquote class="premise-quote reveal">The labs are building the intelligence. <strong>Someone has to build the humans.</strong></blockquote>
       <div class="premise-body reveal">
-        <p>Most AI adoption is extractive. Work gets quicker. Thinking gets thinner. You can watch it happen in any meeting where the first answer wins.</p>
+        <p>Most AI use is extractive: it takes the thinking out and hands back an answer. Work gets quicker. Thinking gets thinner. You can watch it happen in any meeting where the first answer wins.</p>
         <p>We work on the other side of the exchange: <b>the questions people bring to AI, and what they do with the answers.</b> That's a trainable skill, and almost nobody is training it.</p>
         <p>Built for people whose decisions carry weight.</p>
       </div>
@@ -329,40 +362,40 @@ html{scroll-behavior:auto}
   <div class="container">
     <p class="label reveal">The Noetic Innovation Cycle</p>
     <h2 id="cycle-heading" class="reveal">Five stages. <span class="wide">One loop.</span></h2>
-    <p class="lede reveal">Each stage hands its output to the next. A surface question goes in. A tested decision comes out.</p>
+    <p class="lede reveal">You bring one question you're actually sitting with. Five agents take it in turn: one reshapes it, one builds futures from it, one attacks the assumption underneath, one traces the consequences, and one turns what's left into a plan. About ten minutes and six choices along the way. You leave with a decision you can defend, and the next question it raised.</p>
     <div class="cycle-grid reveal stagger">
       <article class="agent-card">
-        <span class="label">01 · Catalyst</span>
+        <span class="label">01 · Six rounds</span>
         <h3>Art of the Question</h3>
         <p class="agent-tag">We shape our lives by the questions we dare to ask.</p>
         <p>Six rounds of opening the question. Each round offers three or four genuinely divergent ways in — reframe, deepen, turn sideways, invert — and you choose the one that carries. It never answers; it only reshapes what you are asking.</p>
       </article>
       <article class="agent-card">
-        <span class="label">02 · Futures</span>
+        <span class="label">02 · Five futures</span>
         <h3>What If</h3>
         <p class="agent-tag">Precision, not fantasy.</p>
         <p>Builds five plausible futures from the question that survived — coherent, specific extrapolations a reasonable person could defend, not wishes and not straw men. You pick the one worth carrying forward.</p>
       </article>
       <article class="agent-card">
-        <span class="label">03 · Fracture</span>
+        <span class="label">03 · One assumption</span>
         <h3>Divergence</h3>
         <p class="agent-tag">What if the opposite of your belief is also true?</p>
         <p>Names the assumption your chosen future is quietly resting on, then shows concretely why it is shakier than it looks. It ends on the exposed tension and refuses to resolve it.</p>
       </article>
       <article class="agent-card">
-        <span class="label">04 · Consequence</span>
+        <span class="label">04 · Three orders of consequence</span>
         <h3>Causal Foresight</h3>
         <p class="agent-tag">Micro-choice, macro-trajectory.</p>
         <p>Traces that fracture forward through first-, second-, and third-order consequences — including the ones you would rather not see. A consequence chain only. No recommendations in any disguise.</p>
       </article>
       <article class="agent-card">
-        <span class="label">05 · Execution</span>
+        <span class="label">05 · A plan you can test in days</span>
         <h3>What Now</h3>
         <p class="agent-tag">Insight without action is decoration.</p>
-        <p>The only stage allowed to recommend: a first move, a next move, and a checkpoint concrete enough to tell you within days whether it is working — built to operate inside the unresolved tension rather than pretend it is settled.</p>
+        <p>The only stage allowed to recommend: a first move, a next move, and a checkpoint concrete enough to tell you within days whether it is working — built to work while the tension from stage three is still live, instead of pretending it is settled.</p>
       </article>
     </div>
-    <p class="cycle-loop reveal">The output of What Now becomes the next question. The cycle continues. Facing one specific decision instead? <a href="/council.html">Convene the Council</a> — five perspectives, one shot, free.</p>
+    <p class="cycle-loop reveal">The output of What Now becomes the next question. The cycle continues.</p>
   </div>
 </section>
 
@@ -370,7 +403,7 @@ html{scroll-behavior:auto}
   <div class="container">
     <p class="label reveal">One Real Trace</p>
     <h2 id="trace-heading" class="reveal">From a revenue question to an experiment you can run <span class="wide">Thursday.</span></h2>
-    <p class="lede reveal">An early session through the cycle, unedited in substance.</p>
+    <p class="lede reveal">An early session, run before the Causal Foresight stage existed. Lightly edited for length.</p>
     <ol class="trace">
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">1</div>
@@ -388,7 +421,7 @@ html{scroll-behavior:auto}
         <div class="trace-dot" aria-hidden="true">3</div>
         <span class="label">Divergence</span>
         <p class="trace-q">"What if openness is expertise evolving into invisibility?"</p>
-        <p>The stage then turned the insight against itself. The more transparent leaders become, the more completely they disappear, leaving only pure function where personality once stood. The idea had to survive its own opposite.</p>
+        <p>The stage then turned the insight against itself. The more a leader defers, the less anyone can tell what they actually think, and openness starts to look like absence. The idea had to survive its own opposite.</p>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">4</div>
@@ -402,6 +435,17 @@ html{scroll-behavior:auto}
     </div>
   </div>
 </section>
+<section class="try" id="try" aria-labelledby="try-heading">
+  <div class="container">
+    <p class="label reveal">Try It</p>
+    <h2 id="try-heading" class="reveal">Bring a decision. <span class="wide">Five advisors argue it out.</span></h2>
+    <p class="lede reveal">The Council is the fastest way to feel the method. Five AI advisors, each on a different model, stress-test one decision across two rounds. One of them exists only to find what kills the plan. You see the debate, not just the verdict.</p>
+    <div class="try-actions reveal">
+      <a href="/council.html" class="cta-link">Convene the Council</a>
+      <span class="hero-note">Free · no account · about a minute</span>
+    </div>
+  </div>
+</section>
 
 <section id="approach" aria-labelledby="approach-heading">
   <div class="container">
@@ -409,11 +453,11 @@ html{scroll-behavior:auto}
     <h2 id="approach-heading" class="reveal">Five capacities the cycle trains.</h2>
     <p class="lede reveal">None of them show up on an IQ test. All of them show up in decisions.</p>
     <div class="pillars reveal stagger">
-      <div class="pill"><span>I</span>Adaptive Curiosity</div>
-      <div class="pill"><span>II</span>Ethical Foresight</div>
-      <div class="pill"><span>III</span>Imaginative Synthesis</div>
-      <div class="pill"><span>IV</span>Meta-Cognition</div>
-      <div class="pill"><span>V</span>Emotional Integration</div>
+      <div class="pill"><span>I</span>Adaptive Curiosity<p>Asking a better question when the first one stops working.</p></div>
+      <div class="pill"><span>II</span>Ethical Foresight<p>Seeing who bears the cost before the decision is made.</p></div>
+      <div class="pill"><span>III</span>Imaginative Synthesis<p>Holding two ideas that disagree and building a third.</p></div>
+      <div class="pill"><span>IV</span>Meta-Cognition<p>Noticing how you're thinking while you're thinking it.</p></div>
+      <div class="pill"><span>V</span>Emotional Integration<p>Letting what you feel about a decision inform it, not run it.</p></div>
     </div>
   </div>
 </section>
@@ -422,7 +466,7 @@ html{scroll-behavior:auto}
   <div class="container">
     <p class="label reveal">Inquiries</p>
     <h2 id="contact-heading" class="reveal">We work with a small number of organizations <span class="wide">at a time.</span></h2>
-    <p class="note reveal">Engagements begin with a conversation, usually by introduction. Tell us the question you're sitting with.</p>
+    <p class="note reveal">Engagements begin with a conversation. Tell us the question you're sitting with.</p>
     <form class="inq-form reveal" id="inq-form" novalidate>
       <div class="field">
         <label for="f-name">Name</label>
@@ -450,7 +494,15 @@ html{scroll-behavior:auto}
 
 <footer>
   <div class="foot-inner">
-    <div>Noetic Synthesis</div>
+    <div>
+      <div>Noetic Synthesis</div>
+      <div class="foot-def">Noetic: of the mind, and how it comes to know.</div>
+    </div>
+    <div class="foot-links" role="navigation" aria-label="Footer">
+      <a href="/council.html">The Council</a>
+      <a href="/offerings.html">Offerings</a>
+      <a href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
+    </div>
     <div>San Diego, California</div>
   </div>
 </footer>
@@ -502,6 +554,13 @@ if(qEl&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
 }
 
 const navEl=document.querySelector('nav');
+const navMenu=document.getElementById('nav-menu');
+if(navMenu){
+  const setOpen=o=>{navEl.classList.toggle('open',o);navMenu.setAttribute('aria-expanded',o);navMenu.setAttribute('aria-label',o?'Close menu':'Open menu')};
+  navMenu.addEventListener('click',()=>setOpen(!navEl.classList.contains('open')));
+  document.querySelectorAll('#nav-links a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+}
 const traceEl=document.querySelector('.trace');
 const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(traceEl&&still){traceEl.style.setProperty('--trace-p','1')}

@@ -74,7 +74,21 @@ nav.scrolled{border-bottom-color:var(--line)}
 .nav-links a:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
 .nav-cta{color:var(--text) !important;border-bottom:1px solid var(--text);border-radius:0 !important;padding:2px 0 3px !important;margin:0 var(--s12)}
 .nav-cta:hover{background:none !important}
-@media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+.nav-menu{display:none;width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;margin-left:var(--s12);transition:color .2s,border-color .2s}
+.nav-menu:hover{color:var(--text);border-color:var(--text)}
+.nav-menu svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.nav-menu .ic-x,nav.open .nav-menu .ic-bars{display:none}
+nav.open .nav-menu .ic-x{display:block}
+@media(max-width:760px){
+  .nav-menu{display:flex}
+  .nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:var(--s8) var(--s24) var(--s24);background:var(--bg);border-bottom:1px solid var(--line)}
+  nav.open .nav-links{display:flex}
+  .nav-links a{padding:var(--s12) 0;border-bottom:1px solid var(--line);border-radius:0;font-size:15px}
+  .nav-links a:hover{background:none}
+  .nav-links .nav-cta{margin:0;padding:var(--s12) 0 !important;border-bottom:1px solid var(--line) !important}
+  .theme-toggle{margin-top:var(--s16)}
+}
+@media(max-width:640px){.grain{display:none}}
 .theme-toggle{width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,border-color .2s;flex-shrink:0}
 .theme-toggle:hover{color:var(--text);border-color:var(--text)}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
@@ -166,6 +180,10 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .grain{animation:none}
 html{scroll-behavior:auto}
 }
+.foot-links{display:flex;gap:var(--s16);flex-wrap:wrap}
+.foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
+.foot-def{margin-top:var(--s4);opacity:.8}
 </style>
 </head>
 <body>
@@ -175,7 +193,7 @@ html{scroll-behavior:auto}
 <nav aria-label="Primary">
   <div class="nav-inner">
     <a href="/" class="wordmark">Noetic Synthesis</a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="/#cycle">The Cycle</a>
       <a href="#seats">The Seats</a>
       <a href="/offerings.html">Offerings</a>
@@ -185,6 +203,10 @@ html{scroll-behavior:auto}
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
     </div>
+      <button class="nav-menu" id="nav-menu" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ic-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
   </div>
 </nav>
 
@@ -319,7 +341,15 @@ html{scroll-behavior:auto}
 
 <footer>
   <div class="foot-inner">
-    <div>Noetic Synthesis</div>
+    <div>
+      <div>Noetic Synthesis</div>
+      <div class="foot-def">Noetic: of the mind, and how it comes to know.</div>
+    </div>
+    <div class="foot-links" role="navigation" aria-label="Footer">
+      <a href="/council.html">The Council</a>
+      <a href="/offerings.html">Offerings</a>
+      <a href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
+    </div>
     <div>San Diego, California</div>
   </div>
 </footer>
@@ -344,6 +374,13 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 document.querySelectorAll('.stagger').forEach(g=>{[...g.children].forEach((c,i)=>c.style.setProperty('--d',(i*0.09)+'s'))});
 
 const navEl=document.querySelector('nav');
+const navMenu=document.getElementById('nav-menu');
+if(navMenu){
+  const setOpen=o=>{navEl.classList.toggle('open',o);navMenu.setAttribute('aria-expanded',o);navMenu.setAttribute('aria-label',o?'Close menu':'Open menu')};
+  navMenu.addEventListener('click',()=>setOpen(!navEl.classList.contains('open')));
+  document.querySelectorAll('#nav-links a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+}
 addEventListener('scroll',()=>{navEl.classList.toggle('scrolled',scrollY>10)},{passive:true});
 navEl.classList.toggle('scrolled',scrollY>10);
 </script>
