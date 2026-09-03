@@ -130,6 +130,27 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .cta-alt{font-size:14px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
 .cta-alt:hover{color:var(--text);border-bottom-color:var(--text)}
 @media(max-width:640px){.sub{gap:var(--s32)}.hrule{margin:var(--s32) 0 var(--s24)}}
+/* Art of the Question, live */
+.ask{padding:var(--s96) 0;border-top:1px solid var(--line)}
+.ask h2{max-width:22ch}
+.ask .note{margin-top:var(--s16);font-size:15px;color:var(--faint);max-width:52ch}
+.ask-form{margin-top:var(--s48);max-width:640px;display:grid;gap:var(--s16)}
+.ask-form input{width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--sans);font-size:clamp(18px,2.2vw,24px);line-height:1.4;letter-spacing:-.018em;padding:var(--s12) 0;transition:border-color .3s}
+.ask-form input:focus{outline:none;border-bottom-color:var(--text)}
+.ask-form input::placeholder{color:var(--faint);opacity:.55}
+.ask-row{display:flex;gap:var(--s24);align-items:center;flex-wrap:wrap}
+.ask-btn{background:var(--text);color:var(--bg);border:none;font-family:var(--display);font-variation-settings:'wdth' 100;font-weight:600;font-size:14px;letter-spacing:.04em;padding:var(--s12) var(--s24);cursor:pointer;transition:opacity .2s}
+.ask-btn:disabled{opacity:.45;cursor:wait}
+.ask-status{font-size:13px;color:var(--faint);min-height:1.2em}
+.ask-out{margin-top:var(--s48);max-width:640px;display:none}
+.ask-out.show{display:block;animation:fade .6s ease forwards}
+.ask-insight{font-family:var(--sans);font-size:clamp(17px,2vw,21px);line-height:1.45;letter-spacing:-.016em;color:var(--text)}
+.ask-qs{list-style:none;margin:var(--s32) 0 0;padding:0;display:grid;gap:var(--s12)}
+.ask-qs button{all:unset;display:block;width:100%;box-sizing:border-box;cursor:pointer;font-family:var(--sans);font-size:16px;line-height:1.45;color:var(--muted);padding:var(--s12) 0;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s,padding-left .25s}
+.ask-qs button:hover,.ask-qs button:focus-visible{color:var(--text);border-bottom-color:var(--text);padding-left:var(--s8)}
+.ask-round{margin-top:var(--s24);font-size:13px;color:var(--faint)}
+.ask-round a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+
 .asking{border-top:1px solid var(--line);padding-top:var(--s24);display:flex;gap:var(--s32);align-items:baseline;justify-content:space-between;opacity:0;animation:fade 1s ease 1.5s forwards}
 .asking-q{font-family:var(--sans);font-weight:400;font-size:clamp(16px,2.2vw,24px);line-height:1.32;letter-spacing:-.022em;text-align:right;transition:opacity .55s ease,filter .55s ease,transform .55s ease;max-width:26ch}
 .asking-q.out{opacity:0;filter:blur(7px);transform:translateY(-7px)}
@@ -282,6 +303,7 @@ html{scroll-behavior:auto}
   <div class="nav-inner">
     <a href="#top" class="wordmark">Noetic Synthesis</a>
     <div class="nav-links" id="nav-links">
+      <a href="#ask">Ask</a>
       <a href="#cycle">The Cycle</a>
       <a href="/council.html">The Council</a>
       <a href="#trace">In Action</a>
@@ -343,6 +365,27 @@ html{scroll-behavior:auto}
 </div>
 
 <main>
+<section class="ask" id="ask" aria-labelledby="ask-heading">
+  <div class="container">
+    <p class="label reveal">Stage one, live</p>
+    <h2 id="ask-heading" class="reveal">Bring the question you're sitting with.</h2>
+    <p class="note reveal">This is the Art of the Question, the first agent in the cycle. It will not answer you. It reads the question underneath the one you typed and hands back three ways to go deeper. Pick one and it goes again, up to six rounds.</p>
+    <form class="ask-form reveal" id="ask-form" autocomplete="off">
+      <label class="label" for="ask-q">Your question</label>
+      <input type="text" id="ask-q" name="question" maxlength="500" placeholder="How do we increase revenue?" required>
+      <div class="ask-row">
+        <button type="submit" class="ask-btn" id="ask-btn">Open the question</button>
+        <span class="ask-status" id="ask-status" aria-live="polite"></span>
+      </div>
+    </form>
+    <div class="ask-out" id="ask-out" aria-live="polite">
+      <p class="ask-insight" id="ask-insight"></p>
+      <ul class="ask-qs" id="ask-qs"></ul>
+      <p class="ask-round" id="ask-round"></p>
+    </div>
+  </div>
+</section>
+
 <section class="premise" id="premise">
   <div class="container">
     <p class="label reveal">The Premise</p>
@@ -368,31 +411,31 @@ html{scroll-behavior:auto}
         <span class="label">01 · Six rounds</span>
         <h3>Art of the Question</h3>
         <p class="agent-tag">We shape our lives by the questions we dare to ask.</p>
-        <p>Six rounds of opening the question. Each round offers three or four genuinely divergent ways in — reframe, deepen, turn sideways, invert — and you choose the one that carries. It never answers; it only reshapes what you are asking.</p>
+        <p>Six rounds of opening the question. Each round offers three or four ways in: reframe it, deepen it, turn it sideways, invert it. You choose the one that carries. It never answers; it only reshapes what you are asking.</p>
       </article>
       <article class="agent-card">
         <span class="label">02 · Five futures</span>
         <h3>What If</h3>
-        <p class="agent-tag">Precision, not fantasy.</p>
-        <p>Builds five plausible futures from the question that survived — coherent, specific extrapolations a reasonable person could defend, not wishes and not straw men. You pick the one worth carrying forward.</p>
+        <p class="agent-tag">Take the question seriously. Where does it lead?</p>
+        <p>Builds five plausible futures from the question that survived. Each is specific enough that a reasonable person could defend it. No wishes, no straw men. You pick the one worth carrying forward.</p>
       </article>
       <article class="agent-card">
         <span class="label">03 · One assumption</span>
         <h3>Divergence</h3>
         <p class="agent-tag">What if the opposite of your belief is also true?</p>
-        <p>Names the assumption your chosen future is quietly resting on, then shows concretely why it is shakier than it looks. It ends on the exposed tension and refuses to resolve it.</p>
+        <p>Names the assumption your chosen future is quietly resting on, then shows why it is shakier than it looks. It ends on the exposed tension and refuses to resolve it.</p>
       </article>
       <article class="agent-card">
         <span class="label">04 · Three orders of consequence</span>
         <h3>Causal Foresight</h3>
         <p class="agent-tag">Micro-choice, macro-trajectory.</p>
-        <p>Traces that fracture forward through first-, second-, and third-order consequences — including the ones you would rather not see. A consequence chain only. No recommendations in any disguise.</p>
+        <p>Traces that fracture forward through first-, second-, and third-order consequences, including the ones you would rather not see. A consequence chain only. No recommendations in any disguise.</p>
       </article>
       <article class="agent-card">
         <span class="label">05 · A plan you can test in days</span>
         <h3>What Now</h3>
-        <p class="agent-tag">Insight without action is decoration.</p>
-        <p>The only stage allowed to recommend: a first move, a next move, and a checkpoint concrete enough to tell you within days whether it is working — built to work while the tension from stage three is still live, instead of pretending it is settled.</p>
+        <p class="agent-tag">What do you do on Thursday?</p>
+        <p>The only stage allowed to recommend: a first move, a next move, and a checkpoint that tells you within days whether it is working. It is built to run while the tension from stage three is still live, instead of pretending it is settled.</p>
       </article>
     </div>
     <p class="cycle-loop reveal">The output of What Now becomes the next question. The cycle continues.</p>
@@ -421,7 +464,7 @@ html{scroll-behavior:auto}
         <div class="trace-dot" aria-hidden="true">3</div>
         <span class="label">Divergence</span>
         <p class="trace-q">"What if openness is expertise evolving into invisibility?"</p>
-        <p>The stage then turned the insight against itself. The more a leader defers, the less anyone can tell what they actually think, and openness starts to look like absence. The idea had to survive its own opposite.</p>
+        <p>The stage then turned the insight against itself. The more a leader defers, the less anyone can tell what they think, and openness starts to look like absence. The idea had to survive its own opposite.</p>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">4</div>
@@ -439,7 +482,7 @@ html{scroll-behavior:auto}
   <div class="container">
     <p class="label reveal">Try It</p>
     <h2 id="try-heading" class="reveal">Bring a decision. <span class="wide">Five advisors argue it out.</span></h2>
-    <p class="lede reveal">The Council is the fastest way to feel the method. Five AI advisors, each on a different model, stress-test one decision across two rounds. One of them exists only to find what kills the plan. You see the debate, not just the verdict.</p>
+    <p class="lede reveal">The Council is the fastest way to feel the method. Five AI advisors, each on a different model, stress-test one decision across two rounds. One of them exists only to find what kills the plan. You watch the argument before you read the verdict.</p>
     <div class="try-actions reveal">
       <a href="/council.html" class="cta-link">Convene the Council</a>
       <span class="hero-note">Free · no account · about a minute</span>
@@ -583,6 +626,42 @@ addEventListener('scroll',()=>{
 },{passive:true});
 addEventListener('resize',onScroll,{passive:true});
 onScroll();
+
+// Art of the Question — posts to /api/ask. Six rounds max per visitor
+// session; the endpoint also rate-limits per IP.
+const askForm=document.getElementById('ask-form');
+if(askForm){
+  const qIn=document.getElementById('ask-q'),askBtn=document.getElementById('ask-btn'),askStatus=document.getElementById('ask-status');
+  const out=document.getElementById('ask-out'),ins=document.getElementById('ask-insight'),qs=document.getElementById('ask-qs'),roundEl=document.getElementById('ask-round');
+  const MAXR=6;let round=0;
+  const ask=async question=>{
+    question=question.trim().slice(0,500);
+    if(!question){askStatus.textContent='Type a question first.';return}
+    if(round>=MAXR){askStatus.textContent='Six rounds is the stage. Bring what you have to the Council, or start over.';return}
+    askBtn.disabled=true;askStatus.textContent='Reading the question underneath…';
+    try{
+      const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||!j.insight){askStatus.textContent=j.error||'The agent is unavailable right now.';return}
+      round++;
+      qIn.value=question;
+      ins.textContent=j.insight;
+      qs.innerHTML='';
+      (j.questions||[]).slice(0,3).forEach(q=>{
+        const li=document.createElement('li'),b=document.createElement('button');
+        b.type='button';b.textContent=q;b.addEventListener('click',()=>{ask(q);out.scrollIntoView({behavior:'smooth',block:'start'})});
+        li.appendChild(b);qs.appendChild(li);
+      });
+      roundEl.innerHTML='Round '+round+' of '+MAXR+'. '+(round<MAXR?'Choose the question that carries.':'That is the whole first stage. <a href="council.html">Take it to the Council</a>.');
+      out.classList.add('show');askStatus.textContent='';
+    }catch(err){askStatus.textContent='Couldn’t reach the agent. Try again in a moment.'}
+    finally{askBtn.disabled=false}
+  };
+  askForm.addEventListener('submit',e=>{e.preventDefault();ask(qIn.value)});
+  // The rotating hero line is a way in: click it and it lands in the box.
+  const heroQ=document.getElementById('q');
+  if(heroQ){heroQ.style.cursor='pointer';heroQ.title='Ask this one';heroQ.addEventListener('click',()=>{qIn.value=heroQ.textContent;document.getElementById('ask').scrollIntoView({behavior:'smooth'});qIn.focus()})}
+}
 
 // Inquiry form — posts to /api/contact (Resend). Until that key is configured
 // the endpoint replies {ok:false}, so we drop back to a prefilled mailto and
