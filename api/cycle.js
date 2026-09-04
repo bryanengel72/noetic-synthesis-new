@@ -209,6 +209,20 @@ Hard prohibition — you do NOT restate the insight. No summary of what was lear
   },
 };
 
+// ---------- Output checks ----------
+// Structured outputs guarantee the JSON shape, not that every string is
+// whole: a round occasionally comes back with one opening cut off mid-
+// sentence. Each stage gets a cheap sanity check, and the handler retries
+// once before giving up.
+const ends = (t, chars) => typeof t === "string" && chars.includes(t.trim().slice(-1));
+const CHECKS = {
+  aoq: (d) => Array.isArray(d.openings) && d.openings.length >= 3 && d.openings.every((o) => ends(o.question, "?")),
+  what_if: (d) => Array.isArray(d.futures) && d.futures.length >= 4 && d.futures.every((f) => f.label && ends(f.future, ".?!")),
+  divergence: (d) => ends(d.assumption, ".?!") && ends(d.destabilization, ".?!"),
+  foresight: (d) => Array.isArray(d.consequences) && d.consequences.length >= 4 && d.consequences.every((c) => ends(c.consequence, ".?!")),
+  what_now: (d) => ends(d.first_move, ".?!") && ends(d.next_move, ".?!") && ends(d.checkpoint, ".?!"),
+};
+
 // ---------- Handler ----------
 
 export default async function handler(req, res) {
@@ -232,26 +246,36 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: MAX_TOKENS,
-      system: stage.system,
-      output_config: {
-        effort: EFFORT,
-        format: { type: "json_schema", schema: stage.schema },
-      },
-      messages: [{ role: "user", content: userMessage }],
-    });
+    const check = CHECKS[req.body.stage] || (() => true);
+    let data = null;
+    for (let attempt = 0; attempt < 2 && !data; attempt++) {
+      const response = await client.messages.create({
+        model: MODEL,
+        max_tokens: MAX_TOKENS,
+        system: stage.system,
+        output_config: {
+          effort: EFFORT,
+          format: { type: "json_schema", schema: stage.schema },
+        },
+        messages: [{ role: "user", content: userMessage }],
+      });
 
-    if (response.stop_reason === "refusal") {
-      return res.status(422).json({ error: "The cycle declined to work with that — try rephrasing." });
+      if (response.stop_reason === "refusal") {
+        return res.status(422).json({ error: "The cycle declined to work with that — try rephrasing." });
+      }
+      if (response.stop_reason === "max_tokens") {
+        console.error("cycle truncated", { stage: req.body.stage });
+        return res.status(502).json({ error: "The stage ran long and was cut off — run it again." });
+      }
+      const text = response.content.find((b) => b.type === "text")?.text ?? "";
+      const parsed = JSON.parse(text);
+      if (check(parsed)) data = parsed;
+      else console.error("cycle output failed check, retrying", { stage: req.body.stage, attempt });
     }
-    if (response.stop_reason === "max_tokens") {
-      console.error("cycle truncated", { stage: req.body.stage });
-      return res.status(502).json({ error: "The stage ran long and was cut off — run it again." });
+    if (!data) {
+      return res.status(502).json({ error: "The stage came back incomplete twice — run it again." });
     }
-    const text = response.content.find((b) => b.type === "text")?.text ?? "";
-    return res.status(200).json(JSON.parse(text));
+    return res.status(200).json(data);
   } catch (err) {
     console.error("cycle error", { stage: req.body?.stage, err });
     return res.status(502).json({ error: "The cycle is unavailable right now — try again in a moment." });
