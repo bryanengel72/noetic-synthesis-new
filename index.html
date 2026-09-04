@@ -133,7 +133,7 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .hero-note{font-size:13px;color:var(--faint);letter-spacing:.01em}
 /* The bloom runs under the copy in places, so the small text carries a soft
    halo in the page colour and the note steps up one contrast level. */
-.hero .sub p,.hero .hero-note,.hero .cta-alt,.hero .cta-link,.hero .asking-q,.hero .asking .label{text-shadow:0 0 6px var(--bg),0 0 14px var(--bg),0 0 26px var(--bg)}
+.hero .sub p,.hero .hero-note,.hero .cta-alt,.hero .cta-link,.hero .asking-q,.hero .asking-go,.hero .asking .label{text-shadow:0 0 6px var(--bg),0 0 14px var(--bg),0 0 26px var(--bg)}
 .hero .hero-note{color:var(--muted)}
 .cta-alt{font-size:14px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
 .cta-alt:hover{color:var(--text);border-bottom-color:var(--text)}
@@ -209,9 +209,16 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 }
 
 .asking{border-top:1px solid var(--line);padding-top:var(--s24);display:flex;gap:var(--s32);align-items:baseline;justify-content:space-between;opacity:0;animation:fade 1s ease 1.5s forwards}
-.asking-q{font-family:var(--sans);font-weight:400;font-size:clamp(16px,2.2vw,24px);line-height:1.32;letter-spacing:-.022em;text-align:right;transition:opacity .55s ease,filter .55s ease,transform .55s ease;max-width:26ch}
-.asking-q.out{opacity:0;filter:blur(7px);transform:translateY(-7px)}
-@media(max-width:760px){.asking{flex-direction:column;gap:var(--s12);align-items:flex-start}.asking-q{text-align:left;max-width:100%}}
+.asking-field{display:grid;gap:var(--s12);justify-items:end;width:min(100%,460px)}
+.asking-q{display:block;width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--sans);font-weight:400;font-size:clamp(16px,2.2vw,24px);line-height:1.32;letter-spacing:-.022em;text-align:right;padding:0 0 var(--s8);resize:none;overflow:hidden;transition:border-color .3s}
+.asking-q:focus{outline:none;border-bottom-color:var(--text)}
+.asking-q::placeholder{color:var(--text);opacity:1;transition:opacity .55s ease,filter .55s ease,transform .55s ease}
+.asking-q:focus::placeholder{opacity:.35}
+.asking-q.out::placeholder{opacity:0;filter:blur(7px);transform:translateY(-7px)}
+.asking-row{display:flex;gap:var(--s24);align-items:baseline;justify-content:flex-end;flex-wrap:wrap}
+.asking-go{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);background:none;border:none;border-bottom:1px solid var(--text);padding:0 0 var(--s4);cursor:pointer;transition:letter-spacing .4s var(--ease)}
+.asking-go:hover{letter-spacing:.28em}
+@media(max-width:760px){.asking{flex-direction:column;gap:var(--s12);align-items:flex-start}.asking-field{justify-items:start;width:100%}.asking-q{text-align:left}.asking-row{justify-content:flex-start}}
 
 /* ===== HERO MEDIA =====
    Ink blooming in black water, full-bleed behind the hero. One clip serves
@@ -424,10 +431,16 @@ html{scroll-behavior:auto}
       </div>
     </div>
   </div>
-  <div class="asking">
-    <span class="label">Currently asking</span>
-    <p class="asking-q" id="q">What question is your strategy actually answering?</p>
-  </div>
+  <form class="asking" id="hero-ask" action="/cycle.html" method="get" autocomplete="off">
+    <label class="label" for="q">Bring a question</label>
+    <div class="asking-field">
+      <textarea class="asking-q" id="q" name="q" rows="2" maxlength="500" placeholder="What question is your strategy actually answering?" aria-describedby="q-hint"></textarea>
+      <div class="asking-row">
+        <span class="hero-note" id="q-hint">Runs it through the cycle · free · about ten minutes</span>
+        <button type="submit" class="asking-go">Run the cycle</button>
+      </div>
+    </div>
+  </form>
 </header>
 </div>
 
@@ -793,14 +806,23 @@ const QS=[
   "What does this problem look like to someone who isn't you?",
   "What are you refusing to ask?"
 ];
+// The hero's rotating question is the placeholder of a real input. Typing
+// stops the rotation; submitting sends the question into the cycle page.
 const qEl=document.getElementById('q');
 if(qEl&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   let i=0;
   setInterval(()=>{
+    if(qEl.value||document.activeElement===qEl)return;
     qEl.classList.add('out');
-    setTimeout(()=>{i=(i+1)%QS.length;qEl.textContent=QS[i];qEl.classList.remove('out')},560);
+    setTimeout(()=>{i=(i+1)%QS.length;qEl.placeholder=QS[i];qEl.classList.remove('out')},560);
   },4600);
 }
+const heroAsk=document.getElementById('hero-ask');
+if(heroAsk){qEl.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();heroAsk.requestSubmit()}});
+heroAsk.addEventListener('submit',e=>{
+  // An empty submit carries the question on screen, so the hero is never a dead end.
+  if(!qEl.value.trim()){e.preventDefault();location.href='/cycle.html?q='+encodeURIComponent(qEl.placeholder)}
+})}
 
 const navEl=document.querySelector('nav');
 const navMenu=document.getElementById('nav-menu');
@@ -880,9 +902,6 @@ if(askForm){
     finally{askBtn.disabled=false}
   };
   askForm.addEventListener('submit',e=>{e.preventDefault();ask(qIn.value)});
-  // The rotating hero line is a way in: click it and it lands in the box.
-  const heroQ=document.getElementById('q');
-  if(heroQ){heroQ.style.cursor='pointer';heroQ.title='Ask this one';heroQ.addEventListener('click',()=>{qIn.value=heroQ.textContent;document.getElementById('ask').scrollIntoView({behavior:'smooth'});qIn.focus()})}
   // The session record's closing question is a way in too.
   document.querySelectorAll('[data-ask]').forEach(b=>b.addEventListener('click',()=>{qIn.value=b.getAttribute('data-ask');document.getElementById('ask').scrollIntoView({behavior:'smooth'});qIn.focus()}));
 }

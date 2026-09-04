@@ -345,6 +345,13 @@ function screenEntry(){
   go.addEventListener('click',()=>startRound(ta.value.trim(),slot,go));
   row.append(go);
   stageEl.append(label,h,lede,fieldLabel,ta,counter,slot,row);
+  // A question can arrive in the URL (the homepage hero posts here).
+  const fromUrl=new URLSearchParams(location.search).get('q');
+  if(fromUrl&&fromUrl.trim()){
+    ta.value=fromUrl.trim().slice(0,500);
+    ta.dispatchEvent(new Event('input'));
+    history.replaceState(null,'',location.pathname);
+  }
   ta.focus();
 }
 
