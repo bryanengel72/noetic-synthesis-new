@@ -25,7 +25,7 @@ what is live; it's a dormant earlier direction.
 | `api/contact.js` | contact form handler (Resend, mailto fallback). Deployed but unreferenced by the site. |
 | `og.png` | 1200×630 social share card, referenced by `og:image` on both pages |
 | `generate-og-image.py` | regenerates `og.png` (needs Pillow) |
-| `hero.mp4`, `hero-poster.jpg` | the hero clip (8 s, 1080p, silent, ~1 MB) and its first-frame poster |
+| `hero-hevc.mp4`, `hero.mp4`, `hero-poster.jpg` | the hero clip twice (HEVC 1080p ~1 MB as Higgsfield delivered it; H.264 720p ~2 MB fallback made with macOS `avconvert -p PresetAppleM4V720pHD`) and the first-frame poster. Browsers take the first `<source>` they can decode. |
 | `generate-hero-band.py` | regenerates the retired SVG braid band. Kept in case the band comes back; nothing references it. |
 | `llms.txt`, `robots.txt`, `sitemap.xml` | crawler/AI-agent files |
 | `vercel.json`, `package.json` | deploy config |
@@ -56,7 +56,9 @@ How it's wired:
   screens the bloom is pinned high behind the headline and the ground is
   solid by the paragraph.
 
-To replace the clip, drop in a new `hero.mp4` and a matching
+To replace the clip, drop in a new `hero-hevc.mp4` and `hero.mp4` (H.264;
+Higgsfield delivers HEVC, which Chrome on Windows, Firefox and most Android
+browsers cannot play, so the H.264 fallback is not optional) and a matching
 `hero-poster.jpg` (1920 wide, same frame as the clip's first frame). Keep
 the bloom in the right third and the rest of the frame pure black or the
 blend modes stop working.

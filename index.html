@@ -127,6 +127,10 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .cta-link:hover{letter-spacing:.28em}
 .hero-actions{flex-shrink:0;display:grid;gap:var(--s12);justify-items:start}
 .hero-note{font-size:13px;color:var(--faint);letter-spacing:.01em}
+/* The bloom runs under the copy in places, so the small text carries a soft
+   halo in the page colour and the note steps up one contrast level. */
+.hero .sub p,.hero .hero-note,.hero .cta-alt,.hero .cta-link,.hero .asking-q,.hero .asking .label{text-shadow:0 0 6px var(--bg),0 0 14px var(--bg),0 0 26px var(--bg)}
+.hero .hero-note{color:var(--muted)}
 .cta-alt{font-size:14px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
 .cta-alt:hover{color:var(--text);border-bottom-color:var(--text)}
 @media(max-width:640px){.sub{gap:var(--s32)}.hrule{margin:var(--s32) 0 var(--s24)}}
@@ -165,17 +169,20 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .hero-stage{position:relative;isolation:isolate}
 .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .hero-media img,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:74% 50%;
+  /* Wide screens have no horizontal slack in the crop, so the clip is shifted
+     right instead; the open bloom otherwise drifts into the CTA column. */
+  left:9%;right:-9%;
   mix-blend-mode:screen;opacity:0;transition:opacity 1.4s ease}
 .hero-media.in img,.hero-media.in video{opacity:1}
 .hero-media.playing img{opacity:0}
 html[data-theme="light"] .hero-media img,html[data-theme="light"] .hero-media video{filter:invert(1);mix-blend-mode:multiply}
 .hero-media::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 55%,transparent) 38%,transparent 62%),
-             linear-gradient(180deg,transparent 78%,var(--bg) 100%)}
+  background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 22%,color-mix(in srgb,var(--bg) 72%,transparent) 46%,color-mix(in srgb,var(--bg) 30%,transparent) 60%,transparent 74%),
+             linear-gradient(180deg,transparent 58%,color-mix(in srgb,var(--bg) 70%,transparent) 82%,var(--bg) 100%)}
 /* Narrow screens: the crop can't push the bloom clear of the copy, so the
    bloom sits high behind the headline and the ground is solid by the time
    the paragraph starts. */
-@media(max-width:760px){.hero-media img,.hero-media video{object-position:70% 10%}
+@media(max-width:760px){.hero-media img,.hero-media video{object-position:70% 10%;left:0;right:0}
   .hero-media::after{background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--bg) 25%,transparent) 28%,color-mix(in srgb,var(--bg) 88%,transparent) 50%,var(--bg) 62%)}}
 
 section{padding:var(--s128) 0;position:relative}
@@ -328,7 +335,10 @@ html{scroll-behavior:auto}
 <div class="hero-stage">
 <div class="hero-media" aria-hidden="true">
   <img src="/hero-poster.jpg" alt="" width="1920" height="1071" fetchpriority="high" decoding="async">
-  <video muted playsinline preload="none" poster="/hero-poster.jpg" data-src="/hero.mp4"></video>
+  <video muted playsinline preload="none" poster="/hero-poster.jpg">
+    <source data-src="/hero-hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L120.90"'>
+    <source data-src="/hero.mp4" type="video/mp4">
+  </video>
 </div>
 <header class="hero" id="top">
   <div>
@@ -571,7 +581,11 @@ if(hm){
   const show=()=>hm.classList.add('in');
   if(img.complete){show()}else{img.addEventListener('load',show,{once:true});img.addEventListener('error',show,{once:true})}
   if(v&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&!(navigator.connection&&navigator.connection.saveData)){
-    v.src=v.dataset.src;
+    // Two encodes of the same clip: HEVC is a quarter the size and plays in
+    // Safari and Chrome on Apple hardware; H.264 is the fallback everywhere
+    // else. The browser picks the first source it can decode.
+    v.querySelectorAll('source').forEach(s=>{s.src=s.dataset.src});
+    v.load();
     v.addEventListener('playing',()=>hm.classList.add('playing'),{once:true});
     // Replays on return: when the hero scrolls fully out of view the clip
     // rewinds while nobody can see it, and plays again from the drop when
