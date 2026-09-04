@@ -209,14 +209,18 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 }
 
 .asking{border-top:1px solid var(--line);padding-top:var(--s24);display:flex;gap:var(--s32);align-items:baseline;justify-content:space-between;opacity:0;animation:fade 1s ease 1.5s forwards}
-.asking-field{display:grid;gap:var(--s12);justify-items:end;width:min(100%,460px)}
+.asking-field{display:grid;gap:var(--s12);justify-items:end;width:min(100%,480px)}
 .asking-q{display:block;width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--sans);font-weight:400;font-size:clamp(16px,2.2vw,24px);line-height:1.32;letter-spacing:-.022em;text-align:right;padding:0 0 var(--s8);resize:none;overflow:hidden;transition:border-color .3s}
 .asking-q:focus{outline:none;border-bottom-color:var(--text)}
 .asking-q::placeholder{color:var(--text);opacity:1;transition:opacity .55s ease,filter .55s ease,transform .55s ease}
 .asking-q:focus::placeholder{opacity:.35}
 .asking-q.out::placeholder{opacity:0;filter:blur(7px);transform:translateY(-7px)}
 .asking-row{display:flex;gap:var(--s24);align-items:baseline;justify-content:flex-end;flex-wrap:wrap}
-.asking-go{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);background:none;border:none;border-bottom:1px solid var(--text);padding:0 0 var(--s4);cursor:pointer;transition:letter-spacing .4s var(--ease)}
+.asking-go{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);background:none;border:none;border-bottom:1px solid var(--text);padding:0 0 var(--s4);cursor:pointer;transition:letter-spacing .4s var(--ease);white-space:nowrap;display:inline-flex;flex-direction:column;align-items:flex-end;text-align:right}
+/* Reserve the hovered width up front (a hidden copy at hover spacing), so the
+   spacing animation never reflows the row: reflow moved the button out from
+   under the cursor and made it jitter. */
+.asking-go::after{content:attr(data-label);letter-spacing:.28em;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
 .asking-go:hover{letter-spacing:.28em}
 @media(max-width:760px){.asking{flex-direction:column;gap:var(--s12);align-items:flex-start}.asking-field{justify-items:start;width:100%}.asking-q{text-align:left}.asking-row{justify-content:flex-start}}
 
@@ -428,7 +432,7 @@ html{scroll-behavior:auto}
       <p>AI keeps getting smarter. Most people just get faster. We build AI agents that sharpen your question, attack your plan, and hand back a decision you can defend. For leaders whose calls carry weight.</p>
       <div class="hero-actions">
         <a href="/council.html" class="cta-link">Convene the Council</a>
-        <span class="hero-note">Free · no account · about a minute</span>
+        <span class="hero-note">Free · no account · about two minutes</span>
         <a href="#contact" class="cta-alt">Or begin an inquiry</a>
       </div>
     </div>
@@ -439,7 +443,7 @@ html{scroll-behavior:auto}
       <textarea class="asking-q" id="q" name="q" rows="2" maxlength="500" placeholder="What question is your strategy actually answering?" aria-describedby="q-hint"></textarea>
       <div class="asking-row">
         <span class="hero-note" id="q-hint">Runs it through the cycle · free · about ten minutes</span>
-        <button type="submit" class="asking-go">Run the cycle</button>
+        <button type="submit" class="asking-go" data-label="Run the cycle">Run the cycle</button>
       </div>
     </div>
   </form>
@@ -672,7 +676,7 @@ html{scroll-behavior:auto}
     <p class="lede reveal">The Council is the fastest way to feel the method. Five AI advisors, each on a different model, stress-test one decision across two rounds. One of them exists only to find what kills the plan. You watch the argument before you read the verdict.</p>
     <div class="try-actions reveal">
       <a href="/council.html" class="cta-link">Convene the Council</a>
-      <span class="hero-note">Free · no account · about a minute</span>
+      <span class="hero-note">Free · no account · about two minutes</span>
     </div>
   </div>
 </section>
