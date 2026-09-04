@@ -23,9 +23,11 @@ what is live; it's a dormant earlier direction.
 | `offerings.html` | the offerings page |
 | `cycle.html` | the full Noetic Innovation Cycle, runnable in the browser — six AoQ rounds → What If → Divergence → Foresight → What Now, per `../noetic-cycle-prototype.md`. Live since 2026-09-03; ships together with `api/cycle.js`. |
 | `api/cycle.js` | the cycle's five-stage endpoint. All prompts live here server-side, one stage per request, structured outputs, per-IP rate limit (40/hr ≈ four runs). Live since 2026-09-03. |
+| `council.html` | The Council: five advisors on five model families, two rounds, a synthesis that ends on the questions they could not resolve (each links into `cycle.html?q=`). Rebuilt on-site 2026-09-04, replacing the MindStudio iframe; ships together with `api/council.js`. |
+| `api/council.js` | the Council's endpoint, via OpenRouter (`OPENROUTER_API_KEY`). Three phases per run (round1 / round2 / synthesis), five seats in parallel per round, a seat that fails shows "did not answer". Seat prompts are the MindStudio agent's verbatim (source: `../council-mindstudio-prompts.md`). Per-IP rate limit (30/hr ≈ ten runs). |
 | `api/ask.js` | Art of the Question endpoint behind the homepage Ask form. Six rounds: five of questions, then a synthesis. Live since 2026-09-03; per-IP rate limit (10/hr). |
 | `api/contact.js` | contact form handler (Resend, mailto fallback). Deployed but unreferenced by the site. |
-| `api/_ratelimit.js` | shared per-IP limiter used by `cycle.js`. Underscore-prefixed, so Vercel doesn't build it as a function. |
+| `api/_ratelimit.js` | shared per-IP limiter used by the model endpoints. Underscore-prefixed, so Vercel doesn't build it as a function. |
 | `og.png` | 1200×630 social share card, referenced by `og:image` on both pages |
 | `generate-og-image.py` | regenerates `og.png` (needs Pillow) |
 | `hero-hevc.mp4`, `hero.mp4`, `hero-poster.jpg` | the hero clip twice (HEVC 1080p ~1 MB as Higgsfield delivered it; H.264 720p ~2 MB fallback made with macOS `avconvert -p PresetAppleM4V720pHD`) and the first-frame poster. Browsers take the first `<source>` they can decode. |
@@ -83,9 +85,10 @@ existing project. Despite the name, it is the production project serving
 noeticsynthesis.com. Don't create a new Vercel project for this site, and don't
 assume that project contains the React code.
 
-Both model endpoints (`api/ask.js`, `api/cycle.js`) are live as of
+Both Claude endpoints (`api/ask.js`, `api/cycle.js`) are live as of
 2026-09-03. `ANTHROPIC_API_KEY` is set in the Vercel project's Production
-environment. `vercel.json` grants `api/*.js` a 60s `maxDuration` because
+environment. `api/council.js` needs `OPENROUTER_API_KEY` in the same place;
+until it is set the endpoint answers 503 and the Council page shows that. `vercel.json` grants `api/*.js` a 60s `maxDuration` because
 Opus calls exceed the default window. To take a billing surface out of
 production again, add its file to `.vercelignore` (`cycle.html` and
 `api/cycle.js` go together; the page is broken without its endpoint).
