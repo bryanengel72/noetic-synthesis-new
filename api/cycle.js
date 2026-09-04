@@ -9,12 +9,13 @@ import { allow, clientIp } from "./_ratelimit.js";
 
 const client = new Anthropic();
 
-// One model for every stage. The cost lever: "claude-sonnet-4-6" runs the
-// same prompts at ~60% less. Thinking is on by default on claude-opus-5 and
-// max_tokens caps thinking + response together (same convention as ask.js);
-// low effort keeps each of the run's ten calls quick — raise to "medium" if
-// the openings start feeling samey.
-const MODEL = "claude-opus-5";
+// One model for every stage. Sonnet 5 since 2026-09-03: a full run is ten
+// calls, and Sonnet runs the same prompts at 60% less per token than Opus
+// ("claude-opus-5", which the homepage Ask form still uses). Thinking is
+// adaptive by default; max_tokens caps thinking + response together. Low
+// effort keeps each call quick — raise to "medium" if the openings start
+// feeling samey.
+const MODEL = "claude-sonnet-5";
 const EFFORT = "low";
 const MAX_TOKENS = 4096;
 
