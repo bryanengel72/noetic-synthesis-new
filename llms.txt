@@ -2,6 +2,8 @@
 
 > Noetic Synthesis builds agent-based systems that evolve how people question, imagine, forecast, and act. Human-AI co-evolution for leaders whose decisions carry weight. Based in San Diego, California. "Noetic": of the mind, and how it comes to know.
 
+Founded by Julie Engel (integrative theorist, author, human-AI collaboration strategist) and Bryan Engel (AI agent builder; retired U.S. Air Force; 20+ years of federal IT program management; MBA and MS in Innovation and Technology; builds the agent systems).
+
 Noetic Synthesis is not a productivity or automation company. Most AI adoption is extractive — faster answers, less thinking. Noetic Synthesis works on the other side of the exchange: the questions people bring to AI, and what they do with the answers.
 
 ## The Noetic Innovation Cycle
