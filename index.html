@@ -158,6 +158,8 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .ask-qs button:hover,.ask-qs button:focus-visible{color:var(--text);border-bottom-color:var(--text);padding-left:var(--s8)}
 .ask-round{margin-top:var(--s24);font-size:13px;color:var(--faint)}
 .ask-round a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+.ask-syn{margin-top:var(--s32)}
+.ask-syn[hidden]{display:none}
 /* Session record: one real Art of the Question run, framed as an object laid on the page. Source: replay-source.md */
 .rec{max-width:680px;margin-top:var(--s64);border:1px solid var(--line2);background:var(--surface);box-shadow:0 1px 0 var(--line),0 24px 60px -30px rgba(0,0,0,.55)}
 .rec-head{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--s12) var(--s24);padding:var(--s16) 28px 14px;border-bottom:1px solid var(--line)}
@@ -430,7 +432,7 @@ html{scroll-behavior:auto}
   <div class="container">
     <p class="label reveal">Stage one, live</p>
     <h2 id="ask-heading" class="reveal">Bring the question you're sitting with.</h2>
-    <p class="note reveal">This is the Art of the Question, the first agent in the cycle. It will not answer you. It reads the question underneath the one you typed and hands back three ways to go deeper. Pick one and it goes again, up to six rounds.</p>
+    <p class="note reveal">This is the Art of the Question, the first agent in the cycle. It will not answer you. It reads the question underneath the one you typed and hands back three ways to go deeper. Pick one and it goes again. Five rounds of questions, then a synthesis and the question to carry forward.</p>
     <form class="ask-form reveal" id="ask-form" autocomplete="off">
       <label class="label" for="ask-q">Your question</label>
       <input type="text" id="ask-q" name="question" maxlength="500" placeholder="How do we increase revenue and still keep staff hired?" required>
@@ -442,6 +444,12 @@ html{scroll-behavior:auto}
     <div class="ask-out" id="ask-out" aria-live="polite">
       <p class="ask-insight" id="ask-insight"></p>
       <ul class="ask-qs" id="ask-qs"></ul>
+      <div class="ask-syn" id="ask-syn" hidden>
+        <h3 class="rec-title" id="ask-syn-title"></h3>
+        <p class="rec-syn" id="ask-syn-text"></p>
+        <button type="button" class="rec-askq" id="ask-syn-q"></button>
+        <p class="ask-round">Ask this one. It starts a new opening.</p>
+      </div>
       <p class="ask-round" id="ask-round"></p>
     </div>
 
@@ -826,26 +834,42 @@ const askForm=document.getElementById('ask-form');
 if(askForm){
   const qIn=document.getElementById('ask-q'),askBtn=document.getElementById('ask-btn'),askStatus=document.getElementById('ask-status');
   const out=document.getElementById('ask-out'),ins=document.getElementById('ask-insight'),qs=document.getElementById('ask-qs'),roundEl=document.getElementById('ask-round');
-  const MAXR=6;let round=0;
-  const ask=async question=>{
+  const syn=document.getElementById('ask-syn'),synT=document.getElementById('ask-syn-title'),synX=document.getElementById('ask-syn-text'),synQ=document.getElementById('ask-syn-q');
+  // Six rounds: five of questions, then the synthesis. The trail is the
+  // opening question plus each choice, sent back so every round builds on
+  // the last. Typing a fresh question into the box starts a new opening.
+  const MAXR=6;let round=0,trail=[];
+  const reset=()=>{round=0;trail=[]};
+  const ask=async(question,fromChoice)=>{
     question=question.trim().slice(0,500);
     if(!question){askStatus.textContent='Type a question first.';return}
-    if(round>=MAXR){askStatus.textContent='Six rounds is the stage. Bring what you have to the Council, or start over.';return}
-    askBtn.disabled=true;askStatus.textContent='Reading the question underneath…';
+    if(!fromChoice)reset();
+    askBtn.disabled=true;askStatus.textContent=round+1<MAXR?'Reading the question underneath…':'Writing the synthesis…';
     try{
-      const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+      const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question,trail,round:round+1})});
       const j=await r.json().catch(()=>({}));
-      if(!r.ok||!j.insight){askStatus.textContent=j.error||'The agent is unavailable right now.';return}
-      round++;
+      if(!r.ok||!(j.insight||j.synthesis)){askStatus.textContent=j.error||'The agent is unavailable right now.';return}
+      round++;trail.push(question);
       qIn.value=question;
-      ins.textContent=j.insight;
       qs.innerHTML='';
-      (j.questions||[]).slice(0,3).forEach(q=>{
-        const li=document.createElement('li'),b=document.createElement('button');
-        b.type='button';b.textContent=q;b.addEventListener('click',()=>{ask(q);out.scrollIntoView({behavior:'smooth',block:'start'})});
-        li.appendChild(b);qs.appendChild(li);
-      });
-      roundEl.innerHTML='Round '+round+' of '+MAXR+'. '+(round<MAXR?'Choose the question that carries.':'That is the whole first stage. <a href="council.html">Take it to the Council</a>.');
+      if(j.synthesis){
+        ins.textContent='';
+        synT.textContent=j.synthesis.title||'';
+        synX.textContent=j.synthesis.synthesis||'';
+        synQ.textContent=j.synthesis.question||'';
+        synQ.onclick=()=>{qIn.value=synQ.textContent;reset();document.getElementById('ask').scrollIntoView({behavior:'smooth'});qIn.focus()};
+        syn.hidden=false;
+        roundEl.innerHTML='Round '+MAXR+' of '+MAXR+'. That is the whole first stage. <a href="council.html">Take it to the Council</a>.';
+      }else{
+        syn.hidden=true;
+        ins.textContent=j.insight;
+        (j.questions||[]).slice(0,3).forEach(q=>{
+          const li=document.createElement('li'),b=document.createElement('button');
+          b.type='button';b.textContent=q;b.addEventListener('click',()=>{ask(q,true);out.scrollIntoView({behavior:'smooth',block:'start'})});
+          li.appendChild(b);qs.appendChild(li);
+        });
+        roundEl.textContent='Round '+round+' of '+MAXR+'. '+(round+1<MAXR?'Choose the question that carries.':'Choose once more and the agent writes the synthesis.');
+      }
       out.classList.add('show');askStatus.textContent='';
     }catch(err){askStatus.textContent='Couldn’t reach the agent. Try again in a moment.'}
     finally{askBtn.disabled=false}
