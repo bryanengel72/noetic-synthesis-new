@@ -1,6 +1,4 @@
-# Model-billing surfaces stay in the repo but out of production until they
-# ship — they bill Opus tokens. Delete the pair of lines for what you're
-# shipping. cycle.html and api/cycle.js go live TOGETHER (the page is broken
-# without its endpoint). api/ask.js shipped 2026-09-03 once the key was set.
-api/cycle.js
-cycle.html
+# Cost guard. Model-billing surfaces listed here stay in the repo but out of
+# production. Nothing is listed right now: api/ask.js shipped and the cycle
+# (cycle.html + api/cycle.js, which go live TOGETHER) shipped on 2026-09-03.
+# To pull one back, add its file(s) below and push.

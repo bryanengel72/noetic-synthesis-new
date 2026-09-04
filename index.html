@@ -275,6 +275,10 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .agent-card p{color:var(--muted);font-size:15px;letter-spacing:-.011em}
 .agent-card .label{display:block;margin-bottom:var(--s16)}
 .cycle-loop{margin-top:var(--s48);color:var(--faint);font-size:15px}
+.cycle-run{margin-top:var(--s32);display:flex;gap:var(--s24);align-items:baseline;flex-wrap:wrap}
+.cycle-run-link{font-family:var(--display);font-variation-settings:'wdth' 100;font-weight:600;font-size:14px;letter-spacing:.04em;color:var(--bg);background:var(--text);padding:var(--s12) var(--s24);text-decoration:none;transition:opacity .2s}
+.cycle-run-link:hover{opacity:.85}
+.cycle-run-note{font-size:14px;color:var(--faint);max-width:44ch}
 .cycle-loop a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
 .cycle-loop a:hover{color:var(--text);border-bottom-color:var(--text)}
 
@@ -594,6 +598,7 @@ html{scroll-behavior:auto}
       </article>
     </div>
     <p class="cycle-loop reveal">The output of What Now becomes the next question. The cycle continues.</p>
+    <p class="cycle-run reveal"><a class="cycle-run-link" href="cycle.html">Run the cycle</a><span class="cycle-run-note">Free, no account, about ten minutes. Six rounds, five futures, one fracture, its consequences, and a plan.</span></p>
   </div>
 </section>
 

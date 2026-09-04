@@ -18,6 +18,8 @@ Five agents form one closed loop. A surface question goes in; a tested decision 
 
 The output of What Now becomes the next question; the cycle continues.
 
+The cycle is runnable in the browser, free and without an account, at [Run the Cycle](https://www.noeticsynthesis.com/cycle.html). About ten minutes. The first stage alone runs on the homepage.
+
 ## The Council
 
 [The Council](https://www.noeticsynthesis.com/council.html) is a free decision stress-test: five AI advisors, each running on a different model family, deliberate on one decision across two rounds. Four seats — Systems (interconnections and feedback loops), Risk & Ethics (unintended consequences and who bears the cost), Implementation (feasibility and sequence), Innovation (unconventional alternatives) — plus a dedicated Red Team adversary whose only job is to find how the plan fails. After independent first positions, the advisors cross-examine each other, then a synthesis shows where they converged, where they irreconcilably split, and the concern nobody answered. The Council tests a decision; the Noetic Innovation Cycle evolves a question — each hands off to the other.

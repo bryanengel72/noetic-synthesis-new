@@ -21,8 +21,11 @@ what is live; it's a dormant earlier direction.
 | --- | --- |
 | `index.html` | the live page. The hero plays `hero.mp4` full-bleed behind the headline (see *The hero clip* below). The SVG braid band that used to close the hero is gone. |
 | `offerings.html` | the offerings page |
-| `api/ask.js` | Art of the Question endpoint — **excluded from deployment** via `.vercelignore` until the public demo ships, because it bills Opus tokens and nothing on the site calls it. It has a per-IP rate limiter for when it comes back. |
+| `cycle.html` | the full Noetic Innovation Cycle, runnable in the browser — six AoQ rounds → What If → Divergence → Foresight → What Now, per `../noetic-cycle-prototype.md`. Live since 2026-09-03; ships together with `api/cycle.js`. |
+| `api/cycle.js` | the cycle's five-stage endpoint. All prompts live here server-side, one stage per request, structured outputs, per-IP rate limit (40/hr ≈ four runs). Live since 2026-09-03. |
+| `api/ask.js` | Art of the Question endpoint behind the homepage Ask form. Six rounds: five of questions, then a synthesis. Live since 2026-09-03; per-IP rate limit (10/hr). |
 | `api/contact.js` | contact form handler (Resend, mailto fallback). Deployed but unreferenced by the site. |
+| `api/_ratelimit.js` | shared per-IP limiter used by `cycle.js`. Underscore-prefixed, so Vercel doesn't build it as a function. |
 | `og.png` | 1200×630 social share card, referenced by `og:image` on both pages |
 | `generate-og-image.py` | regenerates `og.png` (needs Pillow) |
 | `hero-hevc.mp4`, `hero.mp4`, `hero-poster.jpg` | the hero clip twice (HEVC 1080p ~1 MB as Higgsfield delivered it; H.264 720p ~2 MB fallback made with macOS `avconvert -p PresetAppleM4V720pHD`) and the first-frame poster. Browsers take the first `<source>` they can decode. |
@@ -80,6 +83,9 @@ existing project. Despite the name, it is the production project serving
 noeticsynthesis.com. Don't create a new Vercel project for this site, and don't
 assume that project contains the React code.
 
-To re-enable the ask endpoint: remove the `api/ask.js` line from
-`.vercelignore` and make sure `ANTHROPIC_API_KEY` is set in the Vercel
-project's environment variables.
+Both model endpoints (`api/ask.js`, `api/cycle.js`) are live as of
+2026-09-03. `ANTHROPIC_API_KEY` is set in the Vercel project's Production
+environment. `vercel.json` grants `api/*.js` a 60s `maxDuration` because
+Opus calls exceed the default window. To take a billing surface out of
+production again, add its file to `.vercelignore` (`cycle.html` and
+`api/cycle.js` go together; the page is broken without its endpoint).
