@@ -19,29 +19,45 @@ what is live; it's a dormant earlier direction.
 
 | file | what it is |
 | --- | --- |
-| `index.html` | the live page. The hero closes on an inline SVG braid band (formerly a separate `index-braid.html`; the band was merged in and the CloudFront hero photo it replaced is gone from production) |
+| `index.html` | the live page. The hero plays `hero.mp4` full-bleed behind the headline (see *The hero clip* below). The SVG braid band that used to close the hero is gone. |
 | `offerings.html` | the offerings page |
 | `api/ask.js` | Art of the Question endpoint — **excluded from deployment** via `.vercelignore` until the public demo ships, because it bills Opus tokens and nothing on the site calls it. It has a per-IP rate limiter for when it comes back. |
 | `api/contact.js` | contact form handler (Resend, mailto fallback). Deployed but unreferenced by the site. |
 | `og.png` | 1200×630 social share card, referenced by `og:image` on both pages |
 | `generate-og-image.py` | regenerates `og.png` (needs Pillow) |
-| `generate-hero-band.py` | regenerates the SVG braid band artwork |
+| `hero.mp4`, `hero-poster.jpg` | the hero clip (8 s, 1080p, silent, ~1 MB) and its first-frame poster |
+| `generate-hero-band.py` | regenerates the retired SVG braid band. Kept in case the band comes back; nothing references it. |
 | `llms.txt`, `robots.txt`, `sitemap.xml` | crawler/AI-agent files |
 | `vercel.json`, `package.json` | deploy config |
 
-## The hero band
+## The hero clip
 
-The braid: one channel in, many paths through, one out. ~6 KB inline SVG,
-strokes inherit `currentColor` so it themes with the page, sharp at any width.
+Pale ink blooming in black water, generated in Higgsfield (Cinema Studio
+2.5 still at 2K, animated with Seedance 2.5 from that still as the start
+frame, locked-off camera, 8 s, no audio). The clip opens from a tight drop
+and plays once, holding on the open bloom; it does not loop. Prompts are in the site
+enhancement notes; the still and both clip variants are in the Higgsfield
+generation history under the account.
 
-To regenerate or reshape:
+How it's wired:
 
-```bash
-python3 generate-hero-band.py
-```
+- `.hero-stage` wraps the header; `.hero-media` sits behind it with the
+  poster `<img>` and a `<video>` that has no `src` in the HTML.
+- The script sets `src` and plays only when `prefers-reduced-motion` is not
+  set and Save-Data is off, so those readers get the poster and never
+  download the mp4. The poster stays visible until the clip is actually
+  playing, so there is no flash on swap.
+- One clip serves both themes. Dark uses `mix-blend-mode: screen`, which
+  drops the clip's black to the page ground. Light adds `filter: invert(1)`
+  with `multiply`, so the ink reads as black on paper.
+- A left-to-right gradient keeps the copy on clean ground; on narrow
+  screens the bloom is pinned high behind the headline and the ground is
+  solid by the paragraph.
 
-Change `seed` in `braid()` for a different braid; `depth` controls how many
-times channels subdivide.
+To replace the clip, drop in a new `hero.mp4` and a matching
+`hero-poster.jpg` (1920 wide, same frame as the clip's first frame). Keep
+the bloom in the right third and the rest of the frame pure black or the
+blend modes stop working.
 
 ## Deploying
 
