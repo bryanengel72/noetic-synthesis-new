@@ -306,6 +306,8 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .trace-note{margin-top:var(--s64);max-width:780px;border-left:1px solid var(--text);padding:var(--s4) 0 var(--s4) var(--s32)}
 .trace-note p{color:var(--muted);font-size:16px}
 .trace-note b{color:var(--text);font-weight:600}
+.trace-sect .lede a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.trace-sect .lede a:hover{color:var(--text);border-bottom-color:var(--text)}
 
 .pillars{display:grid;grid-template-columns:repeat(5,1fr);column-gap:var(--s32);margin-top:var(--s48);border-top:1px solid var(--line)}
 .pill{font-family:var(--display);font-variation-settings:'wdth' 110;font-weight:500;font-size:16px;
@@ -619,35 +621,47 @@ html{scroll-behavior:auto}
   <div class="container">
     <p class="label reveal">One Real Trace</p>
     <h2 id="trace-heading" class="reveal">From a revenue question to an experiment you can run <span class="wide">Thursday.</span></h2>
-    <p class="lede reveal">An early session, run before the Causal Foresight stage existed. Lightly edited for length.</p>
+    <p class="lede reveal">A full run of the cycle on this site, 3 September 2026, on the same question the session record above starts from. Each round's choice was made by one fixed rule, the option closest to the business, so nobody steered it by hand. Every quoted line is the agent's, unedited. <a href="trace-source.json">The whole run</a> is public.</p>
     <ol class="trace">
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">1</div>
         <span class="label">Art of the Question</span>
-        <p class="trace-q">"How do we increase revenue?"</p>
-        <p>Six rounds of opening surfaced the question underneath: how do we balance our own expertise against truly hearing what customers need? The revenue problem was a listening problem wearing a spreadsheet.</p>
+        <p class="trace-q">"What would it cost to write that promise down and post it where revenue decisions get made?"</p>
+        <p>Six rounds. Round one inverted the question: "What if revenue and headcount aren&#x27;t actually competing for the same resource at all?" By round four it was asking whether keeping staff hired is really about staff, or a proxy for a promise the organization made to itself. Round six asked what it would cost to post that promise where revenue decisions get made.</p>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">2</div>
         <span class="label">What If</span>
-        <p class="trace-q">"What if humble, open leadership became an industry norm?"</p>
-        <p>The insight expanded outward: from one leader's habit, to organizational culture, to a ripple across industry norms about expertise and openness.</p>
+        <p class="trace-q">"The promise becomes a filter, revenue slows then compounds."</p>
+        <p>Leadership drafts the promise—something like &#x27;we do not trade people for quarterly wins&#x27;—and posts it in the room where pricing and layoffs get decided. Some fast, margin-thin deals get declined; short-term revenue dips for two quarters. But retained institutional knowledge lets the team win slower, stickier contracts that a leaner competitor couldn&#x27;t service, and revenue recovers on a sturdier base by year two.</p>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">3</div>
         <span class="label">Divergence</span>
-        <p class="trace-q">"What if openness is expertise evolving into invisibility?"</p>
-        <p>The stage then turned the insight against itself. The more a leader defers, the less anyone can tell what they think, and openness starts to look like absence. The idea had to survive its own opposite.</p>
+        <p class="trace-q">"That the promise, once written and posted, will actually govern the room the way it&#x27;s imagined to — that leadership under quarterly pressure will treat a sentence on a wall as binding rather than aspirational."</p>
+        <p>Promises posted in rooms compete with numbers that arrive quarterly, and numbers have a way of feeling more real than sentences. The two-quarter dip isn&#x27;t an abstraction on a timeline — it&#x27;s a board meeting, a nervous investor, a CFO asking whether principle is affordable this specific month. Nothing in the scenario explains what stops the same leadership that drafted the promise from quietly revising it, or reading it narrowly, once the dip stops being hypothetical and starts being their own signature on a bad quarter.</p>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">4</div>
+        <span class="label">Causal Foresight</span>
+        <p class="trace-q">"The promise was written for clear cases, not clever ones."</p>
+        <p>Six consequences, two per order. First order: A mid-tier manager, pressured to hit a quarterly number, finds a deal that technically doesn&#x27;t &#x27;trade people for wins&#x27; but functionally does — reclassifying a layoff as &#x27;restructuring&#x27; or a margin-thin deal as &#x27;strategic&#x27; — and no one in the room stops it, because the promise was written for clear cases, not clever ones. Third order: The promise, having been bent once under pressure and not visibly punished for it, becomes a template other departments imitate — each writing its own wall-mounted principle that sounds binding but is understood internally as negotiable, quietly changing what &#x27;commitment&#x27; means across the company&#x27;s culture.</p>
+      </li>
+      <li class="trace-step reveal">
+        <div class="trace-dot" aria-hidden="true">5</div>
         <span class="label">What Now</span>
-        <p class="trace-q">Three timeboxed experiments, starting within 72 hours.</p>
-        <p>Among them: identify a leadership quality that feels overexposed in your organization and propose downplaying it at the next strategy meeting. It directly tests whether transparency dilutes effectiveness, before you bet the culture on it.</p>
+        <p class="trace-q">"Write the promise together with two or three specific past deals attached."</p>
+        <p>The first move in full: This week, before posting anything, write the promise together with two or three specific past deals attached — name the exact margin-thin contract or layoff decision each clause would have blocked, so the sentence has teeth from case law, not just intention. The next move: Designate one named person outside the revenue chain (not the CFO, not sales) who must sign off whenever a deal is labeled &#x27;strategic&#x27; or a role change labeled &#x27;restructuring&#x27; — someone whose job depends on catching the reclassification, not approving the number. The checkpoint: Within two weeks, test it on a live deal already in the pipeline: if it passes the promise&#x27;s filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you&#x27;ll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives.</p>
+      </li>
+      <li class="trace-step reveal">
+        <div class="trace-dot" aria-hidden="true">6</div>
+        <span class="label">The next question</span>
+        <p class="trace-q">"Not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something."</p>
+        <p>The checkpoint went back into round one of the Art of the Question, unedited, and this is what came out. The agent's full reading: You&#x27;ve designed an elegant test, but notice what it&#x27;s really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you&#x27;re watching for is a social act, not a procedural one. One of the three ways in it offered: "Who in the organization currently has both the standing and the incentive to say &quot;this deal fails the filter&quot; out loud, and what happens to them afterward?" The loop continues.</p>
       </li>
     </ol>
     <div class="trace-note reveal">
-      <p><b>Why this matters:</b> the revenue question was masking a question about how leaders make the decisions that drive revenue. Instead of implementing "listen to customers more" on faith, the cycle stress-tested that approach first.</p>
+      <p><b>Why this matters:</b> the revenue question never got answered. It got replaced by a better one, about a promise the organization keeps to itself, and then stress-tested against the quarter in which that promise costs money. The plan that came out does not ask anyone to trust the promise. It says how to test it on a live deal within two weeks, and how you will know.</p>
     </div>
   </div>
 </section>

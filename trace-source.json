@@ -1,0 +1,220 @@
+{
+  "seed": "How do we increase revenue and still keep staff hired?",
+  "date": "2026-09-03",
+  "rule": "At each round the opening with the most business words (revenue, staff, headcount, customers, payroll, hiring, cost, margin, price, company, team, clients, sales, profit) is chosen; ties go to the earliest. Same rule for the future. Later stages offer no choice. Any stage whose text came back cut off was re-requested.",
+  "rounds": [
+    {
+      "round": 1,
+      "question_in": "How do we increase revenue and still keep staff hired?",
+      "openings": [
+        {
+          "question": "What if revenue and headcount aren't actually competing for the same resource at all?",
+          "move": "invert"
+        },
+        {
+          "question": "What does 'keeping staff hired' really mean to you—loyalty, stability, or something else entirely?",
+          "move": "deepen"
+        },
+        {
+          "question": "Whose problem is this, ours or the people whose jobs depend on it?",
+          "move": "sideways"
+        },
+        {
+          "question": "What would it look like to ask how the business survives, rather than how it grows?",
+          "move": "reframe"
+        }
+      ],
+      "chosen": 0
+    },
+    {
+      "round": 2,
+      "question_in": "What if revenue and headcount aren't actually competing for the same resource at all?",
+      "openings": [
+        {
+          "question": "What resource do we actually believe is scarce here, and have we ever tested that belief?",
+          "move": "deepen"
+        },
+        {
+          "question": "Who benefits from framing revenue and headcount as being in tension in the first place?",
+          "move": "sideways"
+        },
+        {
+          "question": "What would it look like if keeping staff hired were itself the strategy for increasing revenue?",
+          "move": "invert"
+        },
+        {
+          "question": "Is this really a question about resources, or about what we owe the people who already work here?",
+          "move": "reframe"
+        }
+      ],
+      "chosen": 2
+    },
+    {
+      "round": 3,
+      "question_in": "What would it look like if keeping staff hired were itself the strategy for increasing revenue?",
+      "openings": [
+        {
+          "question": "What are we assuming revenue even measures, and who decided that?",
+          "move": "reframe"
+        },
+        {
+          "question": "If staff were the last thing cut rather than the first, what else in the business would have to change to make that possible?",
+          "move": "invert"
+        },
+        {
+          "question": "What does 'keeping staff hired' actually protect that the revenue conversation never mentions?",
+          "move": "deepen"
+        },
+        {
+          "question": "How would this question change if the people whose jobs are at stake were the ones asking it?",
+          "move": "sideways"
+        }
+      ],
+      "chosen": 2
+    },
+    {
+      "round": 4,
+      "question_in": "What does 'keeping staff hired' actually protect that the revenue conversation never mentions?",
+      "openings": [
+        {
+          "question": "Who exactly is doing the protecting when staff stay hired, and from what?",
+          "move": "deepen"
+        },
+        {
+          "question": "What if the thing being protected isn't the staff at all but the people who decided to hire them?",
+          "move": "invert"
+        },
+        {
+          "question": "How would this look different if we asked what firing someone actually costs the ones who remain?",
+          "move": "sideways"
+        },
+        {
+          "question": "Is 'keeping staff hired' really about staff, or is it a proxy for some promise the organization made to itself?",
+          "move": "reframe"
+        }
+      ],
+      "chosen": 3
+    },
+    {
+      "round": 5,
+      "question_in": "Is 'keeping staff hired' really about staff, or is it a proxy for some promise the organization made to itself?",
+      "openings": [
+        {
+          "question": "What promise would remain unbroken even if every current staff member eventually left?",
+          "move": "deepen"
+        },
+        {
+          "question": "Who inside the organization would have to admit failure if that promise were ever renegotiated?",
+          "move": "sideways"
+        },
+        {
+          "question": "What if the organization has no self to make promises to, only individuals borrowing its name?",
+          "move": "invert"
+        },
+        {
+          "question": "Is revenue itself perhaps a proxy for some other promise nobody has named yet?",
+          "move": "reframe"
+        }
+      ],
+      "chosen": 0
+    },
+    {
+      "round": 6,
+      "question_in": "What promise would remain unbroken even if every current staff member eventually left?",
+      "openings": [
+        {
+          "question": "Who besides the organization itself is a party to that promise?",
+          "move": "deepen"
+        },
+        {
+          "question": "What would it cost to write that promise down and post it where revenue decisions get made?",
+          "move": "sideways"
+        },
+        {
+          "question": "Is a promise that survives everyone's departure actually still about people at all?",
+          "move": "invert"
+        },
+        {
+          "question": "What if the organization has never made such a promise, only assumed one?",
+          "move": "reframe"
+        }
+      ],
+      "chosen": 1
+    }
+  ],
+  "survivor": "What would it cost to write that promise down and post it where revenue decisions get made?",
+  "what_if": {
+    "futures": [
+      {
+        "label": "The promise becomes a filter, revenue slows then compounds",
+        "future": "Leadership drafts the promise—something like 'we do not trade people for quarterly wins'—and posts it in the room where pricing and layoffs get decided. Some fast, margin-thin deals get declined; short-term revenue dips for two quarters. But retained institutional knowledge lets the team win slower, stickier contracts that a leaner competitor couldn't service, and revenue recovers on a sturdier base by year two."
+      },
+      {
+        "label": "The written promise is quietly ignored under pressure",
+        "future": "The promise gets posted, everyone nods, and then the first hard quarter arrives and a familiar excuse—'this is different'—reopens layoffs anyway. The cost of writing it down turns out to be reputational: staff now read every future assurance as decoration, and trust erodes faster than if no promise had been made at all."
+      },
+      {
+        "label": "The promise forces a redefinition of what revenue decisions even are",
+        "future": "Once posted, the promise reveals that 'revenue decisions' were never a discrete category — they were embedded in hiring, product, and sales calls no one flagged as such. The organization ends up building a lightweight review step for any decision touching headcount, which slows things administratively but makes the promise structurally real rather than aspirational."
+      },
+      {
+        "label": "The cost turns out to be financial, not cultural",
+        "future": "Writing the promise down and honoring it requires building a cash buffer or credit line explicitly earmarked for staffing continuity — a real, budgeted cost that finance has to approve. This makes the promise legible in dollar terms for the first time, which paradoxically makes it easier to defend in future revenue arguments, since it's now a line item rather than a value."
+      },
+      {
+        "label": "The promise splits the organization into two camps",
+        "future": "Some leaders treat the posted promise as sacred and start vetoing deals that pressure headcount, while others see it as sentimental overhead that ties the company's hands against competitors. The unresolved tension surfaces at the board level, forcing an explicit choice about whether the promise is a constraint on strategy or a description of one — a decision the company had previously avoided making."
+      }
+    ],
+    "chosen": 0
+  },
+  "divergence": {
+    "assumption": "That the promise, once written and posted, will actually govern the room the way it's imagined to — that leadership under quarterly pressure will treat a sentence on a wall as binding rather than aspirational.",
+    "destabilization": "Promises posted in rooms compete with numbers that arrive quarterly, and numbers have a way of feeling more real than sentences. The two-quarter dip isn't an abstraction on a timeline — it's a board meeting, a nervous investor, a CFO asking whether principle is affordable this specific month. Nothing in the scenario explains what stops the same leadership that drafted the promise from quietly revising it, or reading it narrowly, once the dip stops being hypothetical and starts being their own signature on a bad quarter."
+  },
+  "foresight": {
+    "consequences": [
+      {
+        "order": "first",
+        "consequence": "The two-quarter revenue dip arrives as forecasted, and in the first board meeting after it, someone asks whether the declined margin-thin deals were 'worth it' — putting the promise itself on trial before it's even a year old."
+      },
+      {
+        "order": "first",
+        "consequence": "A mid-tier manager, pressured to hit a quarterly number, finds a deal that technically doesn't 'trade people for wins' but functionally does — reclassifying a layoff as 'restructuring' or a margin-thin deal as 'strategic' — and no one in the room stops it, because the promise was written for clear cases, not clever ones."
+      },
+      {
+        "order": "second",
+        "consequence": "Once one exception is quietly made and survives without visible harm, the promise's authority erodes precitly, so subsequent invocations of it in pricing meetings carry less weight — staff who watched the exception happen start treating the posted sentence as decoration rather than doctrine."
+      },
+      {
+        "order": "second",
+        "consequence": "The employees whose jobs the promise was meant to protect notice the gap between the wall and the room, and the intended effect — loyalty and retained institutional knowledge — partially reverses, as the most marketable staff quietly start looking elsewhere, reading the promise as leadership's PR rather than their shield."
+      },
+      {
+        "order": "third",
+        "consequence": "By year two, when revenue does recover on the sturdier client base the strategy predicted, the causal story gets rewritten in hindsight — leadership credits the recovery to 'discipline' and 'the promise,' obscuring that it survived mainly because no crisis forced a real test of it, which leaves the organization structurally unprepared for the next quarter that does."
+      },
+      {
+        "order": "third",
+        "consequence": "The promise, having been bent once under pressure and not visibly punished for it, becomes a template other departments imitate — each writing its own wall-mounted principle that sounds binding but is understood internally as negotiable, quietly changing what 'commitment' means across the company's culture."
+      }
+    ]
+  },
+  "what_now": {
+    "first_move": "This week, before posting anything, write the promise together with two or three specific past deals attached — name the exact margin-thin contract or layoff decision each clause would have blocked, so the sentence has teeth from case law, not just intention.",
+    "next_move": "Designate one named person outside the revenue chain (not the CFO, not sales) who must sign off whenever a deal is labeled 'strategic' or a role change labeled 'restructuring' — someone whose job depends on catching the reclassification, not approving the number.",
+    "checkpoint": "Within two weeks, test it on a live deal already in the pipeline: if it passes the promise's filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you'll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives."
+  },
+  "next_loop": {
+    "question": "Within two weeks, test it on a live deal already in the pipeline: if it passes the promise's filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you'll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives.",
+    "ask_round_1": {
+      "round": 1,
+      "insight": "You've designed an elegant test, but notice what it's really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you're watching for is a social act, not a procedural one.",
+      "questions": [
+        "If someone does rename the terms to slide the deal through, what will you have to conclude about the relationship rather than the rule?",
+        "Who in the organization currently has both the standing and the incentive to say \"this deal fails the filter\" out loud, and what happens to them afterward?",
+        "What would it change if you announced the test in advance, versus running it while everyone behaves as though nothing is being watched?"
+      ]
+    }
+  }
+}
