@@ -573,7 +573,13 @@ if(hm){
   if(v&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&!(navigator.connection&&navigator.connection.saveData)){
     v.src=v.dataset.src;
     v.addEventListener('playing',()=>hm.classList.add('playing'),{once:true});
-    v.play().catch(()=>{});
+    // Replays on return: when the hero scrolls fully out of view the clip
+    // rewinds while nobody can see it, and plays again from the drop when
+    // the hero comes back. Paused off-screen, so it costs nothing there.
+    new IntersectionObserver(es=>{es.forEach(e=>{
+      if(e.isIntersecting){v.play().catch(()=>{})}
+      else{v.pause();try{v.currentTime=0}catch(_){}}
+    })},{threshold:0}).observe(hm);
   }
 }
 document.querySelectorAll('.stagger').forEach(g=>{[...g.children].forEach((c,i)=>c.style.setProperty('--d',(i*0.09)+'s'))});

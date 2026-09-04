@@ -35,7 +35,9 @@ what is live; it's a dormant earlier direction.
 Pale ink blooming in black water, generated in Higgsfield (Cinema Studio
 2.5 still at 2K, animated with Seedance 2.5 from that still as the start
 frame, locked-off camera, 8 s, no audio). The clip opens from a tight drop
-and plays once, holding on the open bloom; it does not loop. Prompts are in the site
+and plays once, holding on the open bloom; it does not loop. It rewinds
+while the hero is scrolled out of view and plays again when the hero
+comes back. Prompts are in the site
 enhancement notes; the still and both clip variants are in the Higgsfield
 generation history under the account.
 
