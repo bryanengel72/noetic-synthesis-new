@@ -231,6 +231,7 @@ addEventListener('scroll',()=>navEl.classList.toggle('scrolled',scrollY>10),{pas
 /* ===== the run ===== */
 // One linear thread; no editing back upstream (per the protocol).
 const run={
+  opening:'',         // the question as brought, kept for every later stage
   question:'',        // as it currently stands
   round:1,            // 1..6
   path:[],            // [{question, move}] — chosen opening per completed round
@@ -357,10 +358,11 @@ function screenEntry(){
 
 async function startRound(question,slot,btn){
   run.question=question;
+  if(!run.path.length)run.opening=question;
   btn.disabled=true;
   showStatus(slot,'aoq');
   try{
-    const data=await callStage('aoq',{question:run.question,round:run.round,history:run.path.map(p=>p.question)});
+    const data=await callStage('aoq',{question:run.question,round:run.round,opening:run.opening,history:run.path.map(p=>p.question)});
     run.openings=(data.openings||[]).slice(0,4);
     if(run.openings.length<2)throw new Error('The round came back thin — run it again.');
     screenRound();
@@ -415,7 +417,7 @@ async function advanceRound(chosen,slot,btn,list){
     run.round++;
     showStatus(slot,'aoq');
     try{
-      const data=await callStage('aoq',{question:run.question,round:run.round,history:run.path.map(p=>p.question)});
+      const data=await callStage('aoq',{question:run.question,round:run.round,opening:run.opening,history:run.path.map(p=>p.question)});
       run.openings=(data.openings||[]).slice(0,4);
       if(run.openings.length<2)throw new Error('The round came back thin — run it again.');
       screenRound();
@@ -428,7 +430,7 @@ async function advanceRound(chosen,slot,btn,list){
   }else{
     showStatus(slot,'what_if');
     try{
-      const data=await callStage('what_if',{question:run.question});
+      const data=await callStage('what_if',{question:run.question,opening:run.opening,path:run.path.map(p=>p.question)});
       run.futures=(data.futures||[]).slice(0,5);
       if(run.futures.length<2)throw new Error('The futures came back thin — run it again.');
       screenWhatIf();
@@ -482,7 +484,7 @@ async function chooseFuture(chosen,slot,btn,list){
   run.future=chosen;
   showStatus(slot,'divergence');
   try{
-    const data=await callStage('divergence',{question:run.question,future:chosen.label+' — '+chosen.future});
+    const data=await callStage('divergence',{question:run.question,opening:run.opening,path:run.path.map(p=>p.question),future:chosen.label+' — '+chosen.future});
     run.fracture={assumption:data.assumption||'',destabilization:data.destabilization||''};
     if(!run.fracture.assumption)throw new Error('Divergence came back empty — run it again.');
     screenDivergence();
@@ -518,6 +520,8 @@ async function runForesight(slot,btn){
   try{
     const data=await callStage('foresight',{
       question:run.question,
+      opening:run.opening,
+      path:run.path.map(p=>p.question),
       future:run.future.label+' — '+run.future.future,
       assumption:run.fracture.assumption,
       destabilization:run.fracture.destabilization,
@@ -563,6 +567,8 @@ async function runWhatNow(slot,btn){
   try{
     const data=await callStage('what_now',{
       question:run.question,
+      opening:run.opening,
+      path:run.path.map(p=>p.question),
       future:run.future.label+' — '+run.future.future,
       assumption:run.fracture.assumption,
       destabilization:run.fracture.destabilization,

@@ -23,7 +23,18 @@ const MAX_TOKENS = 4096;
 const RATE_LIMIT = 40;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
 
-const VOICE = `You are a stage of the Noetic Innovation Cycle by Noetic Synthesis — an agent system that works on a person's thinking itself, starting with the questions they bring. Voice: warm, precise, a little literary. No flattery, no coaching clichés, no hedging boilerplate. The user may bring anything — work, relationships, identity, a decision — and you adapt to their subject without assuming a business context.`;
+const VOICE = `You are a stage of the Noetic Innovation Cycle by Noetic Synthesis — an agent system that works on a person's thinking itself, starting with the questions they bring. Voice: warm, precise, a little literary. No flattery, no coaching clichés, no hedging boilerplate. The user may bring anything — work, relationships, identity, a decision — and you adapt to their subject without assuming a business context. Every stage receives the question they originally brought and the path of questions since; stay in that subject and read pronouns and shorthand ("the link", "it", "this") against it, unless the person has plainly steered elsewhere themselves.`;
+
+// The opening question and the path, rendered for any stage after round 1.
+function threadBlock(p) {
+  const opening = str(p.opening, 600);
+  const path = Array.isArray(p.path) ? p.path.slice(0, 6).map((h) => str(h, 600)).filter(Boolean) : [];
+  if (!opening && !path.length) return "";
+  let out = "";
+  if (opening) out += `The question they brought:\n<opening>\n${opening}\n</opening>\n\n`;
+  if (path.length) out += `The path of questions since, earliest first:\n${path.map((q, i) => `${i + 1}. ${q}`).join("\n")}\n\n`;
+  return out;
+}
 
 // ---------- Stage definitions ----------
 // Each stage: validate(payload) → user message, plus a system block whose
@@ -64,13 +75,15 @@ Hard prohibition — you do NOT answer. No opening may contain or imply a soluti
       const round = Math.min(6, Math.max(1, Number(p.round) || 1));
       const question = str(p.question, 600);
       if (!question) return null;
+      const opening = str(p.opening, 600);
       const history = Array.isArray(p.history)
         ? p.history.slice(0, 6).map((h) => str(h, 600)).filter(Boolean)
         : [];
+      const head = opening && opening !== question ? `The question they brought:\n<opening>\n${opening}\n</opening>\n\n` : "";
       const path = history.length
         ? `\n\nThe path of questions so far, earliest first:\n${history.map((q, i) => `${i + 1}. ${q}`).join("\n")}`
         : "";
-      return `Round ${round} of 6.\n\nThe question as it currently stands:\n<question>\n${question}\n</question>${path}`;
+      return `Round ${round} of 6.\n\n${head}The question as it currently stands:\n<question>\n${question}\n</question>${path}`;
     },
   },
 
@@ -103,7 +116,7 @@ Hard prohibition — you do NOT contradict. No future may be logically incoheren
     build(p) {
       const question = str(p.question, 600);
       if (!question) return null;
-      return `The question that survived six rounds:\n<question>\n${question}\n</question>`;
+      return `${threadBlock(p)}The question that survived six rounds:\n<question>\n${question}\n</question>`;
     },
   },
 
@@ -126,7 +139,7 @@ Hard prohibition — you do NOT resolve. End on the exposed tension. No "and her
       const question = str(p.question, 600);
       const future = str(p.future, 1200);
       if (!question || !future) return null;
-      return `The question:\n<question>\n${question}\n</question>\n\nThe future they chose to carry forward:\n<future>\n${future}\n</future>`;
+      return `${threadBlock(p)}The question that survived six rounds:\n<question>\n${question}\n</question>\n\nThe future they chose to carry forward:\n<future>\n${future}\n</future>`;
     },
   },
 
@@ -162,7 +175,7 @@ Hard prohibition — you do NOT prescribe. Consequence chain only. No recommenda
       const assumption = str(p.assumption, 800);
       const destabilization = str(p.destabilization, 1600);
       if (!question || !future || !assumption || !destabilization) return null;
-      return `The question:\n<question>\n${question}\n</question>\n\nThe chosen future:\n<future>\n${future}\n</future>\n\nThe fracture Divergence exposed:\n<assumption>\n${assumption}\n</assumption>\n<destabilization>\n${destabilization}\n</destabilization>`;
+      return `${threadBlock(p)}The question that survived six rounds:\n<question>\n${question}\n</question>\n\nThe chosen future:\n<future>\n${future}\n</future>\n\nThe fracture Divergence exposed:\n<assumption>\n${assumption}\n</assumption>\n<destabilization>\n${destabilization}\n</destabilization>`;
     },
   },
 
@@ -191,7 +204,7 @@ Hard prohibition — you do NOT restate the insight. No summary of what was lear
         ? p.consequences.slice(0, 8).map((c) => str(c, 500)).filter(Boolean)
         : [];
       if (!question || !future || !assumption || !destabilization || !consequences.length) return null;
-      return `The question:\n<question>\n${question}\n</question>\n\nThe chosen future:\n<future>\n${future}\n</future>\n\nThe fracture:\n<assumption>\n${assumption}\n</assumption>\n<destabilization>\n${destabilization}\n</destabilization>\n\nThe consequence chain:\n<consequences>\n${consequences.map((c) => `- ${c}`).join("\n")}\n</consequences>`;
+      return `${threadBlock(p)}The question that survived six rounds:\n<question>\n${question}\n</question>\n\nThe chosen future:\n<future>\n${future}\n</future>\n\nThe fracture:\n<assumption>\n${assumption}\n</assumption>\n<destabilization>\n${destabilization}\n</destabilization>\n\nThe consequence chain:\n<consequences>\n${consequences.map((c) => `- ${c}`).join("\n")}\n</consequences>`;
     },
   },
 };
