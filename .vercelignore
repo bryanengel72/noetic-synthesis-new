@@ -1,4 +1,6 @@
-# The Art of the Question endpoint stays in the repo but out of production
-# until the public demo ships — it bills Opus tokens and nothing on the site
-# calls it. Delete this line to deploy it again.
-api/ask.js
+# Model-billing surfaces stay in the repo but out of production until they
+# ship — they bill Opus tokens. Delete the pair of lines for what you're
+# shipping. cycle.html and api/cycle.js go live TOGETHER (the page is broken
+# without its endpoint). api/ask.js shipped 2026-09-03 once the key was set.
+api/cycle.js
+cycle.html
