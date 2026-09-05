@@ -2,7 +2,7 @@
 <!--
   Essay template. Copy to insights/<slug>.html and replace every {{TOKEN}}.
   Tokens: TITLE, TITLE_HTML (title with optional <span class="wide">…</span>), DEK, SLUG, DATE_ISO (YYYY-MM-DD),
-  DATE_TEXT (Month D, YYYY), AUTHOR, AUTHOR_FIRST, AUTHOR_URL, AUTHOR_BIO, MINUTES, WORDS, SERIES (e.g. "Insights series · Part 2 of 6"), BODY, FOOTNOTES.
+  DATE_TEXT (Month D, YYYY), AUTHOR, AUTHOR_FIRST, AUTHOR_URL, AUTHOR_BIO, MINUTES, WORDS, BODY, FOOTNOTES.
   Then add a card for it in insights/index.html (copy the first <a class="card">, newest first; pick a new data-cover number), and add it to sitemap.xml and llms.txt.
   This file is listed in .vercelignore and never deploys.
 -->
@@ -13,7 +13,7 @@
 <title>{{TITLE}} | Noetic Synthesis</title>
 <meta name="description" content="{{DEK}}">
 <link rel="canonical" href="https://www.noeticsynthesis.com/insights/{{SLUG}}.html">
-<meta name="theme-color" content="#f7f5f0">
+<meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='38' font-weight='700' fill='%23f2f2f0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.noeticsynthesis.com/insights/{{SLUG}}.html">
@@ -27,7 +27,7 @@
 <meta property="article:author" content="{{AUTHOR}}">
 <meta name="twitter:card" content="summary_large_image">
 <script>
-(function(){var t=localStorage.getItem('ns-theme')||'light';if(t==='light'){document.documentElement.setAttribute('data-theme','light')}})();
+(function(){var t=localStorage.getItem('ns-theme')||'dark';if(t==='light'){document.documentElement.setAttribute('data-theme','light')}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -215,7 +215,6 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
         <span>By <strong>{{AUTHOR}}</strong></span>
         <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time>
         <span>{{MINUTES}} min read</span>
-        <span>{{SERIES}}</span>
       </div>
     </div>
   </div>
