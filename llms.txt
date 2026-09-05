@@ -29,6 +29,7 @@ The cycle is runnable in the browser, free and without an account, at [Run the C
 [Insights](https://www.noeticsynthesis.com/insights/) is a six-part essay series by founder Julie Engel on why returns from AI depend on how organizations think, meant to be read in order. Each essay ends by pointing to the tool it argues for.
 
 1. [Your AI isn't failing. Your thinking is.](https://www.noeticsynthesis.com/insights/your-ai-isnt-failing-your-thinking-is.html) (Part 1, September 2026): AI amplifies whatever thinking already exists; most companies measure operational savings rather than decision quality; frontier models asked why AI ROI disappoints all point back at the organization, not the technology. The next competitive advantage is organizational intelligence, not better AI.
+2. [Why I stopped looking for better answers and started asking better questions](https://www.noeticsynthesis.com/insights/why-i-stopped-looking-for-better-answers.html) (Part 2, September 2026): after more than a decade as a marriage and family therapist, Julie Engel saw the same patterns across unrelated problems, left clinical practice, and studied across neuroscience, biology, systems thinking, AI, evolution, and complexity science to find the connections. Noetic Synthesis grew from that search.
 
 ## Offerings
 
