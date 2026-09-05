@@ -180,6 +180,10 @@ a.card:hover .card-go{transform:translate(2px,-2px)}
 .reader-body .prose sup{font-size:.62em;line-height:0;vertical-align:baseline;position:relative;top:-.55em;margin-left:1px}
 .reader-body .prose sup a{border:none;color:var(--faint);padding:0 2px}
 .reader-body .prose sup a:hover{color:var(--text)}
+.reader-body .prose table{width:100%;border-collapse:collapse;margin:0 0 var(--s32);font-size:16px;line-height:1.45;letter-spacing:-.011em}
+.reader-body .prose th,.reader-body .prose td{text-align:left;vertical-align:top;padding:var(--s12) var(--s16) var(--s12) 0;border-top:1px solid var(--line)}
+.reader-body .prose th{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);border-top:none;padding-top:0}
+.reader-body .prose td{color:var(--text)}
 .reader-body .prose hr{border:none;border-top:1px solid var(--line);margin:var(--s48) 0}
 .reader-body .prose em{font-style:italic}
 
@@ -254,7 +258,7 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 <section class="shelf" aria-labelledby="shelf-heading">
   <div class="container">
     <div class="shelf-head">
-      <p class="shelf-intro reveal" id="shelf-heading">A six-part series by Julie Engel, read in order. <span>Open one to read it here, or scroll for the rest.</span></p>
+      <p class="shelf-intro reveal" id="shelf-heading">A six-part series by Julie Engel, read in order. <span>Open one to read it here, or scroll through the rest.</span></p>
       <div class="rail-nav" aria-hidden="true">
         <button class="rail-btn" id="rail-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
         <button class="rail-btn" id="rail-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
@@ -333,20 +337,20 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
             <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </span>
         </a>
-        <div class="card soon reveal" role="listitem" data-cover="7" aria-label="Part 6 of 6, in progress">
-          <span class="card-kind">Part 6 of 6 · In progress</span>
+        <a class="card reveal" role="listitem" href="/insights/the-decision-ai-cannot-make-for-you.html" data-cover="17">
+          <span class="card-kind" data-live>Part 6 of 6</span>
           <span class="card-stage">
             <span class="cover">
               <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>No. 06</span><b>N</b></span>
-              <h3>Next in the series</h3>
+              <h3>The decision AI cannot make for you</h3>
               <span class="cover-art"></span>
             </span>
           </span>
           <span class="card-foot">
-            <p><span class="meta">Julie Engel · Coming soon</span>Six essays, read in order. The next one is on its way.</p>
-            <span class="card-go"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></span>
+            <p><span class="meta">Julie Engel · September 2026 · 10 min</span>What six human variables reveal about the limits of machine judgment.</p>
+            <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </span>
-        </div>
+        </a>
       </div>
     </div>
   </div>
