@@ -419,17 +419,35 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .asking-q{transition:none}
 html{scroll-behavior:auto}
 }
+
+/* A clear first step and a compact introduction to the two experiences. */
+.cta-link.cta-primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:14px 22px;background:var(--text);color:var(--bg);border:1px solid var(--text);text-decoration:none}
+.cta-link.cta-primary:hover{background:var(--bg);color:var(--text)}
+.cta-primary:focus-visible,.example-details>summary:focus-visible{outline:2px solid var(--text);outline-offset:5px}
+.experience-intro{border-top:1px solid var(--line);margin-top:32px;padding-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px 32px}
+.experience-intro p{font-size:16px;line-height:1.6;color:var(--muted);max-width:48ch}
+.experience-intro strong{display:block;color:var(--text);font-weight:600}
+.experience-intro>.hero-note{grid-column:1/-1}
+.example-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin:32px 0}
+.example-summary article{border-top:1px solid var(--line);padding-top:20px}
+.example-summary article>p:last-child{font-size:18px;line-height:1.6;margin-top:12px;color:var(--text)}
+.example-details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}
+.example-details>summary{cursor:pointer;font-size:16px;font-weight:600;min-height:44px;align-content:center}
+.example-details[open]>summary{margin-bottom:24px}
+.example-details .trace-step,.example-details .turn-in,.example-details .turn-out{opacity:1;transform:none}
+.example-details .turn-rule{transform:none}
+.hero .cta-link.cta-primary{text-shadow:none}
+@media(max-width:640px){.experience-intro,.example-summary{grid-template-columns:1fr}.example-summary{gap:24px}.cta-link.cta-primary{width:100%;box-sizing:border-box}}
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
-<a class="skip-link" href="#premise">Skip to content</a>
+<a class="skip-link" href="#trace">Skip to content</a>
 
 <nav aria-label="Primary">
   <div class="nav-inner">
     <a href="#top" class="wordmark">Noetic Synthesis</a>
     <div class="nav-links" id="nav-links">
-      <a href="#ask">Ask</a>
       <a href="#cycle">The Cycle</a>
       <a href="/council.html">The Council</a>
       <a href="#trace">In Action</a>
@@ -468,137 +486,89 @@ html{scroll-behavior:auto}
     <div class="sub">
       <p>AI keeps getting smarter. Most people just get faster. We build AI agents that sharpen your question, attack your plan, and hand back a decision you can defend. For leaders whose calls carry weight.</p>
       <div class="hero-actions">
-        <a href="/council.html" class="cta-link">Convene the Council</a>
+        <a href="/council.html" class="cta-link cta-primary">Convene the Council</a>
         <span class="hero-note">Free · no account · about two minutes</span>
-        <a href="#contact" class="cta-alt">Or begin an inquiry</a>
+        <a href="/cycle.html" class="cta-alt">Explore the Cycle · about ten minutes</a>
       </div>
     </div>
   </div>
-  <form class="asking" id="hero-ask" action="/cycle.html" method="get" autocomplete="off">
-    <label class="label" for="q">Bring a question</label>
-    <div class="asking-field">
-      <textarea class="asking-q" id="q" name="q" rows="2" maxlength="500" placeholder="What question is your strategy actually answering?" aria-describedby="q-hint"></textarea>
-      <div class="asking-row">
-        <span class="hero-note" id="q-hint">Runs it through the cycle · free · about ten minutes</span>
-        <button type="submit" class="asking-go" data-label="Run the cycle">Run the cycle</button>
-      </div>
-    </div>
-  </form>
+  <div class="experience-intro" id="ask">
+    <p><strong>The Council tests a decision.</strong> Five AI advisors stress-test your plan.</p>
+    <p><strong>The Cycle evolves a question.</strong> Five stages lead to an experiment you can run.</p>
+    <span class="hero-note">Both are free. No account needed.</span>
+  </div>
 </header>
 </div>
 
 <main>
-<section class="ask" id="ask" aria-labelledby="ask-heading">
+<section class="trace-sect" id="trace" aria-labelledby="trace-heading">
   <div class="container">
-    <p class="label reveal">Stage one, live</p>
-    <h2 id="ask-heading" class="reveal">Bring the question you're sitting with.</h2>
-    <p class="note reveal">This is the Art of the Question, the first agent in the cycle. It will not answer you. It reads the question underneath the one you typed and hands back three ways to go deeper. Pick one and it goes again. Five rounds of questions, then a synthesis and the question to carry forward.</p>
-    <form class="ask-form reveal" id="ask-form" autocomplete="off">
-      <label class="label" for="ask-q">Your question</label>
-      <input type="text" id="ask-q" name="question" maxlength="500" placeholder="How do we increase revenue and still keep staff hired?" required>
-      <div class="ask-row">
-        <button type="submit" class="ask-btn" id="ask-btn">Open the question</button>
-        <span class="ask-status" id="ask-status" aria-live="polite"></span>
-      </div>
-    </form>
-    <div class="ask-out" id="ask-out" aria-live="polite">
-      <p class="ask-insight" id="ask-insight"></p>
-      <ul class="ask-qs" id="ask-qs"></ul>
-      <div class="ask-syn" id="ask-syn" hidden>
-        <h3 class="rec-title" id="ask-syn-title"></h3>
-        <p class="rec-syn" id="ask-syn-text"></p>
-        <button type="button" class="rec-askq" id="ask-syn-q"></button>
-        <p class="ask-round">Ask this one. It starts a new opening.</p>
-      </div>
-      <p class="ask-round" id="ask-round"></p>
+    <p class="label reveal">One Real Trace</p>
+    <h2 id="trace-heading" class="reveal">From a revenue question to an experiment you can run <span class="wide">Thursday.</span></h2>
+    <div class="example-summary">
+      <article><p class="label">The original question</p><p>How do we increase revenue and still keep staff hired?</p></article>
+      <article><p class="label">The assumption uncovered</p><p>A promise to protect staff will guide decisions even when quarterly pressure makes it costly.</p></article>
+      <article><p class="label">The practical experiment</p><p>Write the promise against real past deals. Name an independent reviewer. Test it on a live deal within two weeks.</p></article>
     </div>
-
-    <!-- One real run of the agent, captured 2026-09-03. Every quoted line is the agent's; see replay-source.md. -->
-    <div class="rec reveal" role="group" aria-label="Session record">
-      <div class="rec-head">
-        <div><span class="k">Session record</span><span class="v">Art of the Question</span></div>
-        <div><span class="k">Date</span><span class="v">3 September 2026</span></div>
-        <div><span class="k">Mode</span><span class="v">Deep, six rounds</span></div>
-        <div><span class="k">Text</span><span class="v">The agent's, unedited</span></div>
-      </div>
-      <div class="rec-body">
-        <p class="rec-seed">How do we increase revenue and still keep staff hired?</p>
-        <p class="rec-key">The question brought in. Full weight below marks the question that was chosen each round.</p>
-
-        <div class="rec-rail">
-          <ol class="rec-rounds">
-            <li class="rec-rnd">
-              <div class="rec-dot" aria-hidden="true">1</div>
-              <span class="label">Rounds 1 and 2 · Take your time, then Going deeper</span>
-              <p class="rec-agent">Choose which question resonates with you to go to the next round.</p>
-              <ul class="rec-qs">
-                <li class="pick">What are the underlying beliefs we hold about the connection between increasing revenue and the necessity of adjusting our staffing levels?</li>
-                <li>When we consider keeping staff hired, what deeper values or principles are we aiming to uphold, beyond the immediate business needs?</li>
-                <li>If we approached revenue growth not as a separate goal but as something intrinsically linked to the thriving of our team, how might our strategies shift?</li>
-              </ul>
-              <p class="rec-note">The agent offered the same three questions in round 2. The same one carried.</p>
-            </li>
-          </ol>
-
-          <details class="rec-more">
-            <summary><span class="o">Show rounds 3 to 5</span><span class="c">Hide rounds 3 to 5</span></summary>
-            <ol class="rec-rounds">
-              <li class="rec-rnd">
-                <div class="rec-dot" aria-hidden="true">3</div>
-                <span class="label">Round 3 · Questioning assumptions</span>
-                <p class="rec-agent">What patterns or assumptions shape your thinking?</p>
-                <ul class="rec-qs">
-                  <li class="pick">What underlying belief about success or progress might be automatically linking higher revenue with the absolute necessity of increasing headcount, rather than exploring alternative efficiencies?</li>
-                  <li>When you consider the 'necessity' of adjusting staffing with revenue, what story are you telling yourself about the role of individual contribution versus systemic growth, and what does 'enough' growth look like in that narrative?</li>
-                  <li>If the belief is that increasing revenue inherently requires more staff, what unspoken assumption about organizational capacity or your own leadership ability prevents you from envisioning a model where revenue grows <em>without</em> a linear staff increase?</li>
-                </ul>
-              </li>
-              <li class="rec-rnd">
-                <div class="rec-dot" aria-hidden="true">4</div>
-                <span class="label">Round 4 · Exploring consequences</span>
-                <p class="rec-agent">What are the deeper implications and interconnections?</p>
-                <ul class="rec-qs">
-                  <li class="pick">Building on the idea that progress can be automatically linked to adding more, how might this pattern manifest in your close relationships, where you might unconsciously expect a connection to require more <em>effort</em> or <em>external input</em> to feel successful, rather than exploring deeper emotional resonance or existing connection?</li>
-                  <li>In your personal growth journey, when you perceive a need for change or self-improvement, does this same automatic tendency appear, leading you to collect more strategies, knowledge, or self-discipline techniques, potentially overlooking the emotional roots of self-acceptance or inherent worth that might already be present?</li>
-                  <li>Considering how ingrained beliefs about success and progress shape our values, how might this pattern of equating growth with quantitative expansion extend to your family dynamics or your definition of a life well-lived, and what deeper emotional needs does this way of seeking fulfillment serve?</li>
-                </ul>
-              </li>
-              <li class="rec-rnd">
-                <div class="rec-dot" aria-hidden="true">5</div>
-                <span class="label">Round 5 · Synthesizing insights</span>
-                <p class="rec-agent">What clarity and integration have you discovered?</p>
-                <ul class="rec-qs">
-                  <li class="pick">Reflecting on the pattern identified in relationships in Round 4 – the tendency to expect 'more' for progress – how do you now perceive the persistent echoes of this same unconscious drive shaping your understanding of success and growth across all domains of your life?</li>
-                  <li>Having explored the unconscious linkage of progress with 'adding more,' what deeper emotional capacity for authentic connection and internal resonance have you discovered as you've consciously leaned into valuing existing connections, and what does this reveal about your path to fulfillment?</li>
-                  <li>As you prepare to synthesize this profound journey, what wisdom has synthesized within you about the nature of sustainable flourishing, one that transcends external accumulation and anchors itself in the integrated depth of your inner world and your authentic connections with others?</li>
-                </ul>
-              </li>
-            </ol>
-          </details>
-
-          <ol class="rec-rounds">
-            <li class="rec-rnd">
-              <div class="rec-dot" aria-hidden="true">6</div>
-              <span class="label">Round 6 · Synthesis</span>
-              <h3 class="rec-title">From Adding More to Deepening What Exists</h3>
-              <p class="rec-syn">Your opening question about increasing revenue while keeping staff hired revealed an underlying assumption: that growth requires addition. Across your reflections, you've traced this pattern from business strategy into relationships and across all domains of life. You noticed how 'more' became your default mental model for progress. This awareness—recognizing that the brain automatically links expansion with success—creates space to ask a different question: what if deepening existing capacity and connection could generate the growth you're seeking?</p>
-              <button type="button" class="rec-askq" data-ask="What am I not seeing about what already exists?">What am I not seeing about what already exists?</button>
-              <p class="ask-round">Ask this one. It lands in the box above.</p>
-            </li>
-          </ol>
-        </div>
-
-        <div class="rec-next">
-          <span class="label">Where it went next</span>
-          <div class="rec-next-row"><div class="k">What If</div><div class="v">What if competitors aggressively hire during this period, only to discover that their larger payroll structure becomes a liability when market conditions shift, while your lean-but-deep model adapts faster?</div></div>
-          <div class="rec-next-row"><div class="k">Divergence</div><div class="v">The shift to 'deepening' may simply be an internal form of addition, creating more complex existing structures rather than escaping the 'more equals progress' loop.</div></div>
-          <p class="ask-round">The run was not captured past this point. <a href="council.html">Take the question to the Council</a> to carry it through.</p>
-        </div>
-      </div>
-      <div class="rec-foot"><span>Captured from the agent as it ran</span><span>Foresight and What Now not recorded</span></div>
+    <details class="example-details">
+      <summary>Read the full example</summary>
+    <p class="lede">A full run of the Cycle on this site, 3 September 2026. Each round's choice was made by one fixed rule, the option closest to the business, so nobody steered it by hand. Every quoted line is the agent's, unedited. <a href="trace-source.json">The whole run</a> is public.</p>
+    <ol class="trace">
+      <li class="trace-step">
+        <div class="trace-dot" aria-hidden="true">1</div>
+        <span class="label">Art of the Question</span>
+        <p class="trace-q">"What would it cost to write that promise down and post it where revenue decisions get made?"</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-1">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-1"><div class="trace-body-in"><ol class="ladder" data-ladder aria-label="The six rounds, the question that carried each time"></ol>        <p>Six rounds. Round one inverted the question: "What if revenue and headcount aren&#x27;t actually competing for the same resource at all?" By round four it was asking whether keeping staff hired is really about staff, or a proxy for a promise the organization made to itself. Round six asked what it would cost to post that promise where revenue decisions get made.</p></div></div>
+      </li>
+      <li class="trace-step">
+        <div class="trace-dot" aria-hidden="true">2</div>
+        <span class="label">What If</span>
+        <p class="trace-q">"The promise becomes a filter, revenue slows then compounds."</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-2">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-2"><div class="trace-body-in">        <p>Leadership drafts the promise—something like &#x27;we do not trade people for quarterly wins&#x27;—and posts it in the room where pricing and layoffs get decided. Some fast, margin-thin deals get declined; short-term revenue dips for two quarters. But retained institutional knowledge lets the team win slower, stickier contracts that a leaner competitor couldn&#x27;t service, and revenue recovers on a sturdier base by year two.</p></div></div>
+      </li>
+      <li class="trace-step">
+        <div class="trace-dot" aria-hidden="true">3</div>
+        <span class="label">Divergence</span>
+        <p class="trace-q">"That the promise, once written and posted, will actually govern the room the way it&#x27;s imagined to — that leadership under quarterly pressure will treat a sentence on a wall as binding rather than aspirational."</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-3">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-3"><div class="trace-body-in">        <p>Promises posted in rooms compete with numbers that arrive quarterly, and numbers have a way of feeling more real than sentences. The two-quarter dip isn&#x27;t an abstraction on a timeline — it&#x27;s a board meeting, a nervous investor, a CFO asking whether principle is affordable this specific month. Nothing in the scenario explains what stops the same leadership that drafted the promise from quietly revising it, or reading it narrowly, once the dip stops being hypothetical and starts being their own signature on a bad quarter.</p></div></div>
+      </li>
+      <li class="trace-step">
+        <div class="trace-dot" aria-hidden="true">4</div>
+        <span class="label">Causal Foresight</span>
+        <p class="trace-q">"The promise was written for clear cases, not clever ones."</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-4">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-4"><div class="trace-body-in">        <p>Six consequences, two per order. First order: A mid-tier manager, pressured to hit a quarterly number, finds a deal that technically doesn&#x27;t &#x27;trade people for wins&#x27; but functionally does — reclassifying a layoff as &#x27;restructuring&#x27; or a margin-thin deal as &#x27;strategic&#x27; — and no one in the room stops it, because the promise was written for clear cases, not clever ones. Third order: The promise, having been bent once under pressure and not visibly punished for it, becomes a template other departments imitate — each writing its own wall-mounted principle that sounds binding but is understood internally as negotiable, quietly changing what &#x27;commitment&#x27; means across the company&#x27;s culture.</p></div></div>
+      </li>
+      <li class="trace-step">
+        <div class="trace-dot" aria-hidden="true">5</div>
+        <span class="label">What Now</span>
+        <p class="trace-q">"Write the promise together with two or three specific past deals attached."</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-5">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-5"><div class="trace-body-in">        <p>The first move in full: This week, before posting anything, write the promise together with two or three specific past deals attached — name the exact margin-thin contract or layoff decision each clause would have blocked, so the sentence has teeth from case law, not just intention. The next move: Designate one named person outside the revenue chain (not the CFO, not sales) who must sign off whenever a deal is labeled &#x27;strategic&#x27; or a role change labeled &#x27;restructuring&#x27; — someone whose job depends on catching the reclassification, not approving the number. The checkpoint: Within two weeks, test it on a live deal already in the pipeline: if it passes the promise&#x27;s filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you&#x27;ll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives.</p></div></div>
+      </li>
+      <li class="trace-step">
+        <div class="trace-dot" aria-hidden="true">6</div>
+        <span class="label">The next question</span>
+        <p class="trace-q">"Not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something."</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-6">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-6"><div class="trace-body-in">        <p>The checkpoint went back into round one of the Art of the Question, unedited, and this is what came out. The agent's full reading: You&#x27;ve designed an elegant test, but notice what it&#x27;s really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you&#x27;re watching for is a social act, not a procedural one. One of the three ways in it offered: "Who in the organization currently has both the standing and the incentive to say &quot;this deal fails the filter&quot; out loud, and what happens to them afterward?" The loop continues.</p></div></div>
+      </li>
+    </ol>
+    <div class="trace-turn">
+      <div class="turn-in"><span class="label">Came in</span><p class="tq">How do we increase revenue and still keep staff hired?</p></div>
+      <div class="turn-rule" aria-hidden="true"></div>
+      <div class="turn-out"><span class="label">Went out, ten minutes later</span><p class="tq">Who in the organization has both the standing and the incentive to say &ldquo;this deal fails the filter&rdquo; out loud, and what happens to them afterward?</p></div>
     </div>
+    <div class="trace-note">
+      <p><b>Why this matters:</b> the revenue question never got answered. It got replaced by a better one, about a promise the organization keeps to itself, and then stress-tested against the quarter in which that promise costs money. The plan that came out does not ask anyone to trust the promise. It says how to test it on a live deal within two weeks, and how you will know.</p>
+    </div>
+    </details>
   </div>
 </section>
+
 
 <section class="premise" id="premise">
   <div class="container">
@@ -658,72 +628,14 @@ html{scroll-behavior:auto}
   </div>
 </section>
 
-<section class="trace-sect" id="trace" aria-labelledby="trace-heading">
-  <div class="container">
-    <p class="label reveal">One Real Trace</p>
-    <h2 id="trace-heading" class="reveal">From a revenue question to an experiment you can run <span class="wide">Thursday.</span></h2>
-    <p class="lede reveal">A full run of the cycle on this site, 3 September 2026, on the same question the session record above starts from. Each round's choice was made by one fixed rule, the option closest to the business, so nobody steered it by hand. Every quoted line is the agent's, unedited. <a href="trace-source.json">The whole run</a> is public.</p>
-    <ol class="trace">
-      <li class="trace-step reveal">
-        <div class="trace-dot" aria-hidden="true">1</div>
-        <span class="label">Art of the Question</span>
-        <p class="trace-q">"What would it cost to write that promise down and post it where revenue decisions get made?"</p>
-        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-1">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-1"><div class="trace-body-in"><ol class="ladder" data-ladder aria-label="The six rounds, the question that carried each time"></ol>        <p>Six rounds. Round one inverted the question: "What if revenue and headcount aren&#x27;t actually competing for the same resource at all?" By round four it was asking whether keeping staff hired is really about staff, or a proxy for a promise the organization made to itself. Round six asked what it would cost to post that promise where revenue decisions get made.</p></div></div>
-      </li>
-      <li class="trace-step reveal">
-        <div class="trace-dot" aria-hidden="true">2</div>
-        <span class="label">What If</span>
-        <p class="trace-q">"The promise becomes a filter, revenue slows then compounds."</p>
-        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-2">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-2"><div class="trace-body-in">        <p>Leadership drafts the promise—something like &#x27;we do not trade people for quarterly wins&#x27;—and posts it in the room where pricing and layoffs get decided. Some fast, margin-thin deals get declined; short-term revenue dips for two quarters. But retained institutional knowledge lets the team win slower, stickier contracts that a leaner competitor couldn&#x27;t service, and revenue recovers on a sturdier base by year two.</p></div></div>
-      </li>
-      <li class="trace-step reveal">
-        <div class="trace-dot" aria-hidden="true">3</div>
-        <span class="label">Divergence</span>
-        <p class="trace-q">"That the promise, once written and posted, will actually govern the room the way it&#x27;s imagined to — that leadership under quarterly pressure will treat a sentence on a wall as binding rather than aspirational."</p>
-        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-3">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-3"><div class="trace-body-in">        <p>Promises posted in rooms compete with numbers that arrive quarterly, and numbers have a way of feeling more real than sentences. The two-quarter dip isn&#x27;t an abstraction on a timeline — it&#x27;s a board meeting, a nervous investor, a CFO asking whether principle is affordable this specific month. Nothing in the scenario explains what stops the same leadership that drafted the promise from quietly revising it, or reading it narrowly, once the dip stops being hypothetical and starts being their own signature on a bad quarter.</p></div></div>
-      </li>
-      <li class="trace-step reveal">
-        <div class="trace-dot" aria-hidden="true">4</div>
-        <span class="label">Causal Foresight</span>
-        <p class="trace-q">"The promise was written for clear cases, not clever ones."</p>
-        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-4">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-4"><div class="trace-body-in">        <p>Six consequences, two per order. First order: A mid-tier manager, pressured to hit a quarterly number, finds a deal that technically doesn&#x27;t &#x27;trade people for wins&#x27; but functionally does — reclassifying a layoff as &#x27;restructuring&#x27; or a margin-thin deal as &#x27;strategic&#x27; — and no one in the room stops it, because the promise was written for clear cases, not clever ones. Third order: The promise, having been bent once under pressure and not visibly punished for it, becomes a template other departments imitate — each writing its own wall-mounted principle that sounds binding but is understood internally as negotiable, quietly changing what &#x27;commitment&#x27; means across the company&#x27;s culture.</p></div></div>
-      </li>
-      <li class="trace-step reveal">
-        <div class="trace-dot" aria-hidden="true">5</div>
-        <span class="label">What Now</span>
-        <p class="trace-q">"Write the promise together with two or three specific past deals attached."</p>
-        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-5">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-5"><div class="trace-body-in">        <p>The first move in full: This week, before posting anything, write the promise together with two or three specific past deals attached — name the exact margin-thin contract or layoff decision each clause would have blocked, so the sentence has teeth from case law, not just intention. The next move: Designate one named person outside the revenue chain (not the CFO, not sales) who must sign off whenever a deal is labeled &#x27;strategic&#x27; or a role change labeled &#x27;restructuring&#x27; — someone whose job depends on catching the reclassification, not approving the number. The checkpoint: Within two weeks, test it on a live deal already in the pipeline: if it passes the promise&#x27;s filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you&#x27;ll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives.</p></div></div>
-      </li>
-      <li class="trace-step reveal">
-        <div class="trace-dot" aria-hidden="true">6</div>
-        <span class="label">The next question</span>
-        <p class="trace-q">"Not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something."</p>
-        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-6">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-6"><div class="trace-body-in">        <p>The checkpoint went back into round one of the Art of the Question, unedited, and this is what came out. The agent's full reading: You&#x27;ve designed an elegant test, but notice what it&#x27;s really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you&#x27;re watching for is a social act, not a procedural one. One of the three ways in it offered: "Who in the organization currently has both the standing and the incentive to say &quot;this deal fails the filter&quot; out loud, and what happens to them afterward?" The loop continues.</p></div></div>
-      </li>
-    </ol>
-    <div class="trace-turn reveal">
-      <div class="turn-in"><span class="label">Came in</span><p class="tq">How do we increase revenue and still keep staff hired?</p></div>
-      <div class="turn-rule" aria-hidden="true"></div>
-      <div class="turn-out"><span class="label">Went out, ten minutes later</span><p class="tq">Who in the organization has both the standing and the incentive to say &ldquo;this deal fails the filter&rdquo; out loud, and what happens to them afterward?</p></div>
-    </div>
-    <div class="trace-note reveal">
-      <p><b>Why this matters:</b> the revenue question never got answered. It got replaced by a better one, about a promise the organization keeps to itself, and then stress-tested against the quarter in which that promise costs money. The plan that came out does not ask anyone to trust the promise. It says how to test it on a live deal within two weeks, and how you will know.</p>
-    </div>
-  </div>
-</section>
+
 <section class="try" id="try" aria-labelledby="try-heading">
   <div class="container">
     <p class="label reveal">Try It</p>
     <h2 id="try-heading" class="reveal">Bring a decision. <span class="wide">Five advisors argue it out.</span></h2>
     <p class="lede reveal">The Council is the fastest way to feel the method. Five AI advisors, each on a different model, stress-test one decision across two rounds. One of them exists only to find what kills the plan. You watch the argument before you read the verdict.</p>
     <div class="try-actions reveal">
-      <a href="/council.html" class="cta-link">Convene the Council</a>
+      <a href="/council.html" class="cta-link cta-primary">Convene the Council</a>
       <span class="hero-note">Free · no account · about two minutes</span>
     </div>
   </div>
@@ -877,31 +789,6 @@ if(trace){
   }));
 }
 
-const QS=[
-  "What question is your strategy actually answering?",
-  "What would you do if the opposite were also true?",
-  "Which decision are you postponing by staying busy?",
-  "What does this problem look like to someone who isn't you?",
-  "What are you refusing to ask?"
-];
-// The hero's rotating question is the placeholder of a real input. Typing
-// stops the rotation; submitting sends the question into the cycle page.
-const qEl=document.getElementById('q');
-if(qEl&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  let i=0;
-  setInterval(()=>{
-    if(qEl.value||document.activeElement===qEl)return;
-    qEl.classList.add('out');
-    setTimeout(()=>{i=(i+1)%QS.length;qEl.placeholder=QS[i];qEl.classList.remove('out')},560);
-  },4600);
-}
-const heroAsk=document.getElementById('hero-ask');
-if(heroAsk){qEl.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();heroAsk.requestSubmit()}});
-heroAsk.addEventListener('submit',e=>{
-  // An empty submit carries the question on screen, so the hero is never a dead end.
-  if(!qEl.value.trim()){e.preventDefault();location.href='/cycle.html?q='+encodeURIComponent(qEl.placeholder)}
-})}
-
 const navEl=document.querySelector('nav');
 const navMenu=document.getElementById('nav-menu');
 if(navMenu){
@@ -932,57 +819,6 @@ addEventListener('scroll',()=>{
 },{passive:true});
 addEventListener('resize',onScroll,{passive:true});
 onScroll();
-
-// Art of the Question — posts to /api/ask. Six rounds max per visitor
-// session; the endpoint also rate-limits per IP.
-const askForm=document.getElementById('ask-form');
-if(askForm){
-  const qIn=document.getElementById('ask-q'),askBtn=document.getElementById('ask-btn'),askStatus=document.getElementById('ask-status');
-  const out=document.getElementById('ask-out'),ins=document.getElementById('ask-insight'),qs=document.getElementById('ask-qs'),roundEl=document.getElementById('ask-round');
-  const syn=document.getElementById('ask-syn'),synT=document.getElementById('ask-syn-title'),synX=document.getElementById('ask-syn-text'),synQ=document.getElementById('ask-syn-q');
-  // Six rounds: five of questions, then the synthesis. The trail is the
-  // opening question plus each choice, sent back so every round builds on
-  // the last. Typing a fresh question into the box starts a new opening.
-  const MAXR=6;let round=0,trail=[];
-  const reset=()=>{round=0;trail=[]};
-  const ask=async(question,fromChoice)=>{
-    question=question.trim().slice(0,500);
-    if(!question){askStatus.textContent='Type a question first.';return}
-    if(!fromChoice)reset();
-    askBtn.disabled=true;askStatus.textContent=round+1<MAXR?'Reading the question underneath…':'Writing the synthesis…';
-    try{
-      const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question,trail,round:round+1})});
-      const j=await r.json().catch(()=>({}));
-      if(!r.ok||!(j.insight||j.synthesis)){askStatus.textContent=j.error||'The agent is unavailable right now.';return}
-      round++;trail.push(question);
-      qIn.value=question;
-      qs.innerHTML='';
-      if(j.synthesis){
-        ins.textContent='';
-        synT.textContent=j.synthesis.title||'';
-        synX.textContent=j.synthesis.synthesis||'';
-        synQ.textContent=j.synthesis.question||'';
-        synQ.onclick=()=>{qIn.value=synQ.textContent;reset();document.getElementById('ask').scrollIntoView({behavior:'smooth'});qIn.focus()};
-        syn.hidden=false;
-        roundEl.innerHTML='Round '+MAXR+' of '+MAXR+'. That is the whole first stage. <a href="council.html">Take it to the Council</a>.';
-      }else{
-        syn.hidden=true;
-        ins.textContent=j.insight;
-        (j.questions||[]).slice(0,3).forEach(q=>{
-          const li=document.createElement('li'),b=document.createElement('button');
-          b.type='button';b.textContent=q;b.addEventListener('click',()=>{ask(q,true);out.scrollIntoView({behavior:'smooth',block:'start'})});
-          li.appendChild(b);qs.appendChild(li);
-        });
-        roundEl.textContent='Round '+round+' of '+MAXR+'. '+(round+1<MAXR?'Choose the question that carries.':'Choose once more and the agent writes the synthesis.');
-      }
-      out.classList.add('show');askStatus.textContent='';
-    }catch(err){askStatus.textContent='Couldn’t reach the agent. Try again in a moment.'}
-    finally{askBtn.disabled=false}
-  };
-  askForm.addEventListener('submit',e=>{e.preventDefault();ask(qIn.value)});
-  // The session record's closing question is a way in too.
-  document.querySelectorAll('[data-ask]').forEach(b=>b.addEventListener('click',()=>{qIn.value=b.getAttribute('data-ask');document.getElementById('ask').scrollIntoView({behavior:'smooth'});qIn.focus()}));
-}
 
 // Inquiry form — posts to /api/contact (Resend). Until that key is configured
 // the endpoint replies {ok:false}, so we drop back to a prefilled mailto and
