@@ -311,6 +311,41 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .trace-note{margin-top:var(--s64);max-width:780px;border-left:1px solid var(--text);padding:var(--s4) 0 var(--s4) var(--s32)}
 .trace-note p{color:var(--muted);font-size:16px}
 .trace-note b{color:var(--text);font-weight:600}
+/* Collapsed trace: the quoted line is the spine, the agent's reading unfolds on demand. */
+.trace-step .trace-q{font-size:clamp(20px,2.3vw,27px);color:var(--text);line-height:1.25;letter-spacing:-.022em;max-width:34ch;margin-bottom:var(--s16)}
+.trace-more{display:inline-flex;align-items:center;gap:var(--s8);background:none;border:0;padding:0;cursor:pointer;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);transition:color .2s}
+.trace-more:hover{color:var(--text)}
+.trace-more svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;transition:transform .4s var(--ease)}
+.trace-step.open .trace-more{color:var(--text)}
+.trace-step.open .trace-more svg{transform:rotate(45deg)}
+.trace-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
+.trace-step.open .trace-body{grid-template-rows:1fr}
+.trace-body-in{overflow:hidden;min-height:0}
+.trace-body-in>p{margin-top:var(--s16)}
+.trace-body-in>p:first-child{margin-top:var(--s24)}
+.ladder{list-style:none;margin-top:var(--s16);border-top:1px solid var(--line)}
+.ladder:empty{display:none}
+.ladder li{display:grid;grid-template-columns:28px 88px 1fr;gap:var(--s12);align-items:baseline;padding:var(--s12) 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--muted);letter-spacing:-.011em}
+.ladder li:last-child{color:var(--text)}
+.ladder .ln{font-family:var(--display);font-variation-settings:'wdth' 92;font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--faint)}
+.ladder .mv{font-family:var(--display);font-variation-settings:'wdth' 92;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+@media(max-width:560px){.ladder li{grid-template-columns:28px 1fr}.ladder .mv{grid-column:2;margin-top:-6px}}
+/* The turn: what came in, what went out. */
+.trace-turn{margin-top:var(--s96);display:grid;grid-template-columns:1fr 1px 1.25fr;gap:0 var(--s48);align-items:start;max-width:1000px}
+.trace-turn .label{display:block;margin-bottom:var(--s16)}
+.trace-turn .tq{font-family:var(--display);font-variation-settings:'wdth' 108;font-weight:500;letter-spacing:-.025em;line-height:1.2}
+.turn-in .tq{font-size:clamp(20px,2.2vw,26px);color:var(--muted)}
+.turn-out .tq{font-size:clamp(24px,3vw,36px);color:var(--text)}
+.turn-rule{width:1px;align-self:stretch;background:var(--text);transform:scaleY(0);transform-origin:top}
+.turn-in,.turn-out{opacity:0;transform:translateY(14px)}
+.trace-turn.reveal{opacity:1;transform:none;transition:none}
+.trace-turn.in .turn-in{animation:turn-up .8s var(--ease) forwards}
+.trace-turn.in .turn-rule{animation:turn-rule .9s var(--ease) .35s forwards}
+.trace-turn.in .turn-out{animation:turn-up .8s var(--ease) .75s forwards}
+@keyframes turn-up{to{opacity:1;transform:none}}
+@keyframes turn-rule{to{transform:scaleY(1)}}
+@media(max-width:720px){.trace-turn{grid-template-columns:1fr;gap:var(--s24)}.turn-rule{width:100%;height:1px;transform:scaleX(0);transform-origin:left}@keyframes turn-rule{to{transform:scaleX(1)}}}
+@media(prefers-reduced-motion:reduce){.turn-in,.turn-out{opacity:1;transform:none;animation:none}.turn-rule{transform:none;animation:none}.trace-body,.trace-more svg{transition:none}}
 .trace-sect .lede a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
 .trace-sect .lede a:hover{color:var(--text);border-bottom-color:var(--text)}
 
@@ -633,39 +668,50 @@ html{scroll-behavior:auto}
         <div class="trace-dot" aria-hidden="true">1</div>
         <span class="label">Art of the Question</span>
         <p class="trace-q">"What would it cost to write that promise down and post it where revenue decisions get made?"</p>
-        <p>Six rounds. Round one inverted the question: "What if revenue and headcount aren&#x27;t actually competing for the same resource at all?" By round four it was asking whether keeping staff hired is really about staff, or a proxy for a promise the organization made to itself. Round six asked what it would cost to post that promise where revenue decisions get made.</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-1">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-1"><div class="trace-body-in"><ol class="ladder" data-ladder aria-label="The six rounds, the question that carried each time"></ol>        <p>Six rounds. Round one inverted the question: "What if revenue and headcount aren&#x27;t actually competing for the same resource at all?" By round four it was asking whether keeping staff hired is really about staff, or a proxy for a promise the organization made to itself. Round six asked what it would cost to post that promise where revenue decisions get made.</p></div></div>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">2</div>
         <span class="label">What If</span>
         <p class="trace-q">"The promise becomes a filter, revenue slows then compounds."</p>
-        <p>Leadership drafts the promise—something like &#x27;we do not trade people for quarterly wins&#x27;—and posts it in the room where pricing and layoffs get decided. Some fast, margin-thin deals get declined; short-term revenue dips for two quarters. But retained institutional knowledge lets the team win slower, stickier contracts that a leaner competitor couldn&#x27;t service, and revenue recovers on a sturdier base by year two.</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-2">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-2"><div class="trace-body-in">        <p>Leadership drafts the promise—something like &#x27;we do not trade people for quarterly wins&#x27;—and posts it in the room where pricing and layoffs get decided. Some fast, margin-thin deals get declined; short-term revenue dips for two quarters. But retained institutional knowledge lets the team win slower, stickier contracts that a leaner competitor couldn&#x27;t service, and revenue recovers on a sturdier base by year two.</p></div></div>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">3</div>
         <span class="label">Divergence</span>
         <p class="trace-q">"That the promise, once written and posted, will actually govern the room the way it&#x27;s imagined to — that leadership under quarterly pressure will treat a sentence on a wall as binding rather than aspirational."</p>
-        <p>Promises posted in rooms compete with numbers that arrive quarterly, and numbers have a way of feeling more real than sentences. The two-quarter dip isn&#x27;t an abstraction on a timeline — it&#x27;s a board meeting, a nervous investor, a CFO asking whether principle is affordable this specific month. Nothing in the scenario explains what stops the same leadership that drafted the promise from quietly revising it, or reading it narrowly, once the dip stops being hypothetical and starts being their own signature on a bad quarter.</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-3">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-3"><div class="trace-body-in">        <p>Promises posted in rooms compete with numbers that arrive quarterly, and numbers have a way of feeling more real than sentences. The two-quarter dip isn&#x27;t an abstraction on a timeline — it&#x27;s a board meeting, a nervous investor, a CFO asking whether principle is affordable this specific month. Nothing in the scenario explains what stops the same leadership that drafted the promise from quietly revising it, or reading it narrowly, once the dip stops being hypothetical and starts being their own signature on a bad quarter.</p></div></div>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">4</div>
         <span class="label">Causal Foresight</span>
         <p class="trace-q">"The promise was written for clear cases, not clever ones."</p>
-        <p>Six consequences, two per order. First order: A mid-tier manager, pressured to hit a quarterly number, finds a deal that technically doesn&#x27;t &#x27;trade people for wins&#x27; but functionally does — reclassifying a layoff as &#x27;restructuring&#x27; or a margin-thin deal as &#x27;strategic&#x27; — and no one in the room stops it, because the promise was written for clear cases, not clever ones. Third order: The promise, having been bent once under pressure and not visibly punished for it, becomes a template other departments imitate — each writing its own wall-mounted principle that sounds binding but is understood internally as negotiable, quietly changing what &#x27;commitment&#x27; means across the company&#x27;s culture.</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-4">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-4"><div class="trace-body-in">        <p>Six consequences, two per order. First order: A mid-tier manager, pressured to hit a quarterly number, finds a deal that technically doesn&#x27;t &#x27;trade people for wins&#x27; but functionally does — reclassifying a layoff as &#x27;restructuring&#x27; or a margin-thin deal as &#x27;strategic&#x27; — and no one in the room stops it, because the promise was written for clear cases, not clever ones. Third order: The promise, having been bent once under pressure and not visibly punished for it, becomes a template other departments imitate — each writing its own wall-mounted principle that sounds binding but is understood internally as negotiable, quietly changing what &#x27;commitment&#x27; means across the company&#x27;s culture.</p></div></div>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">5</div>
         <span class="label">What Now</span>
         <p class="trace-q">"Write the promise together with two or three specific past deals attached."</p>
-        <p>The first move in full: This week, before posting anything, write the promise together with two or three specific past deals attached — name the exact margin-thin contract or layoff decision each clause would have blocked, so the sentence has teeth from case law, not just intention. The next move: Designate one named person outside the revenue chain (not the CFO, not sales) who must sign off whenever a deal is labeled &#x27;strategic&#x27; or a role change labeled &#x27;restructuring&#x27; — someone whose job depends on catching the reclassification, not approving the number. The checkpoint: Within two weeks, test it on a live deal already in the pipeline: if it passes the promise&#x27;s filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you&#x27;ll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives.</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-5">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-5"><div class="trace-body-in">        <p>The first move in full: This week, before posting anything, write the promise together with two or three specific past deals attached — name the exact margin-thin contract or layoff decision each clause would have blocked, so the sentence has teeth from case law, not just intention. The next move: Designate one named person outside the revenue chain (not the CFO, not sales) who must sign off whenever a deal is labeled &#x27;strategic&#x27; or a role change labeled &#x27;restructuring&#x27; — someone whose job depends on catching the reclassification, not approving the number. The checkpoint: Within two weeks, test it on a live deal already in the pipeline: if it passes the promise&#x27;s filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you&#x27;ll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives.</p></div></div>
       </li>
       <li class="trace-step reveal">
         <div class="trace-dot" aria-hidden="true">6</div>
         <span class="label">The next question</span>
         <p class="trace-q">"Not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something."</p>
-        <p>The checkpoint went back into round one of the Art of the Question, unedited, and this is what came out. The agent's full reading: You&#x27;ve designed an elegant test, but notice what it&#x27;s really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you&#x27;re watching for is a social act, not a procedural one. One of the three ways in it offered: "Who in the organization currently has both the standing and the incentive to say &quot;this deal fails the filter&quot; out loud, and what happens to them afterward?" The loop continues.</p>
+        <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-6">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
+        <div class="trace-body" id="trace-body-6"><div class="trace-body-in">        <p>The checkpoint went back into round one of the Art of the Question, unedited, and this is what came out. The agent's full reading: You&#x27;ve designed an elegant test, but notice what it&#x27;s really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you&#x27;re watching for is a social act, not a procedural one. One of the three ways in it offered: "Who in the organization currently has both the standing and the incentive to say &quot;this deal fails the filter&quot; out loud, and what happens to them afterward?" The loop continues.</p></div></div>
       </li>
     </ol>
+    <div class="trace-turn reveal">
+      <div class="turn-in"><span class="label">Came in</span><p class="tq">How do we increase revenue and still keep staff hired?</p></div>
+      <div class="turn-rule" aria-hidden="true"></div>
+      <div class="turn-out"><span class="label">Went out, ten minutes later</span><p class="tq">Who in the organization has both the standing and the incentive to say &ldquo;this deal fails the filter&rdquo; out loud, and what happens to them afterward?</p></div>
+    </div>
     <div class="trace-note reveal">
       <p><b>Why this matters:</b> the revenue question never got answered. It got replaced by a better one, about a promise the organization keeps to itself, and then stress-tested against the quarter in which that promise costs money. The plan that came out does not ask anyone to trust the promise. It says how to test it on a live deal within two weeks, and how you will know.</p>
     </div>
@@ -818,6 +864,17 @@ const trace=document.querySelector('.trace');
 if(trace){
   new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){trace.classList.add('drawn');o.disconnect()}})},{threshold:0.1}).observe(trace);
   document.querySelectorAll('.trace-step').forEach(s=>io.observe(s));
+  // One reading open at a time. The six-round ladder is built from the public run file the first time step one opens.
+  let ladderLoaded=false;
+  trace.querySelectorAll('.trace-more').forEach(btn=>btn.addEventListener('click',()=>{
+    const step=btn.closest('.trace-step'),open=!step.classList.contains('open');
+    trace.querySelectorAll('.trace-step.open').forEach(o=>{if(o!==step){o.classList.remove('open');o.querySelector('.trace-more').setAttribute('aria-expanded','false')}});
+    step.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));
+    const ol=step.querySelector('[data-ladder]');
+    if(open&&ol&&!ladderLoaded){ladderLoaded=true;fetch('trace-source.json').then(r=>r.json()).then(d=>{
+      ol.innerHTML=d.rounds.map(r=>{const o=r.openings[r.chosen];return '<li><span class="ln">0'+r.round+'</span><span class="mv">'+o.move+'</span><span>'+o.question.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span></li>'}).join('');
+    }).catch(()=>{ladderLoaded=false})}
+  }));
 }
 
 const QS=[
