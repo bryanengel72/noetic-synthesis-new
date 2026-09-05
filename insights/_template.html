@@ -2,7 +2,7 @@
 <!--
   Essay template. Copy to insights/<slug>.html and replace every {{TOKEN}}.
   Tokens: TITLE, TITLE_HTML (title with optional <span class="wide">…</span>), DEK, SLUG, DATE_ISO (YYYY-MM-DD),
-  DATE_TEXT (Month D, YYYY), AUTHOR, AUTHOR_FIRST, AUTHOR_URL, AUTHOR_BIO, MINUTES, WORDS, BODY, FOOTNOTES.
+  DATE_TEXT (Month D, YYYY), AUTHOR, AUTHOR_FIRST, AUTHOR_URL, AUTHOR_BIO, MINUTES, WORDS, SERIES (e.g. "Insights series · Part 2 of 6"), BODY, FOOTNOTES.
   Then add a card for it in insights/index.html (copy the first <a class="card">, newest first; pick a new data-cover number), and add it to sitemap.xml and llms.txt.
   This file is listed in .vercelignore and never deploys.
 -->
@@ -211,6 +211,7 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
         <span>By <strong>{{AUTHOR}}</strong></span>
         <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time>
         <span>{{MINUTES}} min read</span>
+        <span>{{SERIES}}</span>
       </div>
     </div>
   </div>

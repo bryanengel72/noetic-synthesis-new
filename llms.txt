@@ -26,9 +26,9 @@ The cycle is runnable in the browser, free and without an account, at [Run the C
 
 ## Insights
 
-[Insights](https://www.noeticsynthesis.com/insights/) is the essay section: long-form pieces by the founders on how people question, imagine, forecast, and act when AI is in the room, with citations. Each essay ends by pointing to the tool it argues for.
+[Insights](https://www.noeticsynthesis.com/insights/) is a six-part essay series by founder Julie Engel on why returns from AI depend on how organizations think, meant to be read in order. Each essay ends by pointing to the tool it argues for.
 
-- [The answer is the cheap part](https://www.noeticsynthesis.com/insights/sample-essay.html) (Bryan Engel, September 2026): most AI adoption is measured by how fast it answers; almost none of it is measured by what happens to the question. Sample essay, to be replaced by the first published piece.
+1. [Your AI isn't failing. Your thinking is.](https://www.noeticsynthesis.com/insights/your-ai-isnt-failing-your-thinking-is.html) (Part 1, September 2026): AI amplifies whatever thinking already exists; most companies measure operational savings rather than decision quality; frontier models asked why AI ROI disappoints all point back at the organization, not the technology. The next competitive advantage is organizational intelligence, not better AI.
 
 ## Offerings
 
