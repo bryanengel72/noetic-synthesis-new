@@ -2,3 +2,6 @@
 # production. Nothing is listed right now: api/ask.js shipped and the cycle
 # (cycle.html + api/cycle.js, which go live TOGETHER) shipped on 2026-09-03.
 # To pull one back, add its file(s) below and push.
+
+# Not a page: the essay template with {{TOKEN}} placeholders.
+insights/_template.html

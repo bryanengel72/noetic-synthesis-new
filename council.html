@@ -73,8 +73,9 @@ nav.scrolled{border-bottom-color:var(--line)}
 .wordmark{font-family:var(--display);font-variation-settings:'wdth' 104;font-weight:700;font-size:14px;
   letter-spacing:.05em;text-transform:uppercase;color:var(--text);text-decoration:none}
 .nav-links{display:flex;gap:var(--s8);align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:400;padding:var(--s8) var(--s12);border-radius:6px;transition:color .15s,background .15s}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:400;padding:var(--s8) var(--s12);border-radius:6px;white-space:nowrap;transition:color .15s,background .15s}
 .nav-links a:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
+.nav-links a[aria-current="page"]{color:var(--text)}
 .nav-cta{color:var(--text) !important;border-bottom:1px solid var(--text);border-radius:0 !important;padding:2px 0 3px !important;margin:0 var(--s12)}
 .nav-cta:hover{background:none !important}
 .nav-menu{display:none;width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;margin-left:var(--s12);transition:color .2s,border-color .2s}
@@ -82,7 +83,7 @@ nav.scrolled{border-bottom-color:var(--line)}
 .nav-menu svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
 .nav-menu .ic-x,nav.open .nav-menu .ic-bars{display:none}
 nav.open .nav-menu .ic-x{display:block}
-@media(max-width:760px){
+@media(max-width:980px){
   .nav-menu{display:flex}
   .nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:var(--s8) var(--s24) var(--s24);background:var(--bg);border-bottom:1px solid var(--line)}
   nav.open .nav-links{display:flex}
@@ -242,9 +243,12 @@ html{scroll-behavior:auto}
     <a href="/" class="wordmark">Noetic Synthesis</a>
     <div class="nav-links" id="nav-links">
       <a href="/#cycle">The Cycle</a>
-      <a href="#seats">The Seats</a>
+      <a href="/council.html" aria-current="page">The Council</a>
+      <a href="/#trace">In Action</a>
+      <a href="/insights/">Insights</a>
       <a href="/offerings.html">Offerings</a>
-      <a href="#run" class="nav-cta">Convene the Council</a>
+      <a href="/#people">Who We Are</a>
+      <a href="/#contact" class="nav-cta">Inquiries</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -388,6 +392,7 @@ html{scroll-behavior:auto}
     </div>
     <div class="foot-links" role="navigation" aria-label="Footer">
       <a href="/council.html">The Council</a>
+      <a href="/insights/">Insights</a>
       <a href="/offerings.html">Offerings</a>
       <a href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
     </div>

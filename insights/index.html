@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offerings | Noetic Synthesis</title>
-<meta name="description" content="Three ways to work with the Noetic Innovation Cycle: leadership workshops, direct agent access, and multi-week leadership programs. San Diego, engagements worldwide.">
-<link rel="canonical" href="https://www.noeticsynthesis.com/offerings.html">
+<title>Insights | Noetic Synthesis</title>
+<meta name="description" content="Essays from Noetic Synthesis on how people question, imagine, forecast, and act when AI is in the room. Long-form thinking from Julie Engel and Bryan Engel.">
+<link rel="canonical" href="https://www.noeticsynthesis.com/insights/">
 <meta name="theme-color" content="#f7f5f0">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='38' font-weight='700' fill='%23f2f2f0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://www.noeticsynthesis.com/offerings.html">
+<meta property="og:url" content="https://www.noeticsynthesis.com/insights/">
 <meta property="og:site_name" content="Noetic Synthesis">
-<meta property="og:title" content="Offerings | Noetic Synthesis">
-<meta property="og:description" content="Workshops, agent access, and leadership programs — three ways the Noetic Innovation Cycle enters an organization.">
+<meta property="og:title" content="Insights | Noetic Synthesis">
+<meta property="og:description" content="Essays on how people question, imagine, forecast, and act when AI is in the room.">
 <meta property="og:image" content="https://www.noeticsynthesis.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,15 +26,12 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "OfferCatalog",
-  "name": "Noetic Synthesis Offerings",
-  "url": "https://www.noeticsynthesis.com/offerings.html",
-  "provider": { "@type": "Organization", "@id": "https://www.noeticsynthesis.com/#org", "name": "Noetic Synthesis" },
-  "itemListElement": [
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Workshops", "description": "Half-day to two-day immersions in which leadership teams run a live strategic decision through the full Noetic Innovation Cycle.", "serviceType": "Leadership workshop" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Agent Access", "description": "Direct access to the five agents of the Noetic Innovation Cycle — Art of the Question, What If, Divergence, Causal Foresight, and What Now — as an ongoing thinking practice, for one person or a team.", "serviceType": "AI thinking-partner access" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Leadership Programs", "description": "Multi-week cohort programs training five capacities as durable leadership habits, run inside a company or inside a curriculum.", "serviceType": "Leadership development program" } }
-  ]
+  "@type": "CollectionPage",
+  "name": "Insights",
+  "url": "https://www.noeticsynthesis.com/insights/",
+  "description": "Essays from Noetic Synthesis on how people question, imagine, forecast, and act when AI is in the room.",
+  "isPartOf": { "@type": "WebSite", "url": "https://www.noeticsynthesis.com/", "name": "Noetic Synthesis" },
+  "publisher": { "@type": "Organization", "@id": "https://www.noeticsynthesis.com/#org", "name": "Noetic Synthesis" }
 }
 </script>
 <style>
@@ -99,25 +96,32 @@ h1{font-family:var(--display);font-variation-settings:'wdth' 116;font-weight:600
   text-transform:uppercase;max-width:17ch;margin-top:var(--s24)}
 .lede{margin-top:var(--s24);font-size:17px;color:var(--muted);max-width:52ch}
 section{padding:var(--s96) 0}
-.offer{padding:var(--s64) 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:180px 1fr;gap:var(--s48);position:relative}
-.offer:last-child{border-bottom:none}
-@media(max-width:760px){.offer{grid-template-columns:1fr;gap:var(--s16);padding:var(--s48) 0}}
-.offer h2{font-family:var(--display);font-variation-settings:'wdth' 113;font-weight:600;
-  font-size:26px;letter-spacing:-.014em;text-transform:uppercase;margin-bottom:var(--s8);
+
+.essay{padding:var(--s48) 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:180px 1fr;gap:var(--s48);position:relative}
+.essay:first-child{padding-top:0}
+.essay:last-child{border-bottom:none}
+@media(max-width:760px){.essay{grid-template-columns:1fr;gap:var(--s12);padding:var(--s32) 0}.essay:first-child{padding-top:0}}
+.essay-meta{color:var(--faint);font-size:13px;line-height:1.5}
+.essay-meta time{display:block;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:var(--s8)}
+.essay h2{font-family:var(--display);font-variation-settings:'wdth' 113;font-weight:600;
+  font-size:clamp(22px,2.6vw,30px);letter-spacing:-.016em;line-height:1.08;text-transform:uppercase;margin-bottom:var(--s12);
   transition:transform .4s var(--ease)}
-.offer:hover h2{transform:translateX(10px)}
-.offer::before{content:'';position:absolute;left:-24px;top:var(--s64);bottom:var(--s64);width:2px;background:var(--text);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease)}
-.offer:hover::before{transform:scaleY(1)}
-@media(max-width:760px){.offer::before{left:-12px}}
-.offer .tag{color:var(--faint);margin-bottom:var(--s16);font-size:15px;letter-spacing:-.011em}
-.offer p{color:var(--muted);max-width:56ch;font-size:15px;letter-spacing:-.011em}
-.offer ul{margin-top:var(--s16);list-style:none;color:var(--muted);font-size:15px}
-.offer li{padding:var(--s8) 0 var(--s8) var(--s24);position:relative;border-top:1px solid var(--line)}
-.offer li::before{content:'—';position:absolute;left:0;color:var(--faint)}
+.essay h2 a{color:var(--text);text-decoration:none}
+.essay:hover h2{transform:translateX(10px)}
+.essay::before{content:'';position:absolute;left:-24px;top:var(--s48);bottom:var(--s48);width:2px;background:var(--text);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease)}
+.essay:first-child::before{top:0}
+.essay:hover::before{transform:scaleY(1)}
+@media(max-width:760px){.essay::before{left:-12px;top:var(--s32);bottom:var(--s32)}.essay:first-child::before{top:0}}
+.essay p{color:var(--muted);max-width:58ch;font-size:16px;letter-spacing:-.011em}
+.essay .more{display:inline-block;margin-top:var(--s16);font-size:14px;color:var(--text);text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px;transition:border-color .2s}
+.essay .more:hover{border-color:var(--text)}
+.note{margin-top:var(--s48);padding-top:var(--s24);border-top:1px solid var(--line);color:var(--faint);font-size:14px;max-width:58ch}
+
 .cta{padding:var(--s128) 0;text-align:center;border-top:1px solid var(--line)}
 .cta h2{font-family:var(--display);font-variation-settings:'wdth' 114;font-weight:600;
   font-size:clamp(23px,3.3vw,38px);max-width:24ch;margin:0 auto;line-height:1.06;
   letter-spacing:-.028em;text-transform:uppercase}
+.cta p{margin-top:var(--s16);color:var(--muted);max-width:48ch;margin-left:auto;margin-right:auto}
 .mail{display:inline-block;margin-top:var(--s32);font-family:var(--display);font-variation-settings:'wdth' 106;font-weight:500;font-size:clamp(18px,2.6vw,26px);letter-spacing:-.024em;color:var(--text);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:6px;transition:border-color .3s}
 .mail:hover{border-color:var(--text)}
 footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;color:var(--faint)}
@@ -125,7 +129,7 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 @media(max-width:640px){.foot-inner{padding:0 var(--s24)}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s var(--ease)}
 .reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.grain{animation:none}.offer h2,.offer::before{transition:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.grain{animation:none}.essay h2,.essay::before{transition:none}html{scroll-behavior:auto}}
 .foot-links{display:flex;gap:var(--s16);flex-wrap:wrap}
 .foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
@@ -141,8 +145,8 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
       <a href="/#cycle">The Cycle</a>
       <a href="/council.html">The Council</a>
       <a href="/#trace">In Action</a>
-      <a href="/insights/">Insights</a>
-      <a href="/offerings.html" aria-current="page">Offerings</a>
+      <a href="/insights/" aria-current="page">Insights</a>
+      <a href="/offerings.html">Offerings</a>
       <a href="/#people">Who We Are</a>
       <a href="/#contact" class="nav-cta">Inquiries</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
@@ -158,57 +162,34 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 </nav>
 <header class="page">
   <div class="container">
-    <p class="label">Offerings</p>
-    <h1>Three ways the cycle <span class="wide">enters</span> an organization.</h1>
-    <p class="lede">Every engagement starts with one of these.</p>
+    <p class="label">Insights</p>
+    <h1>The thinking <span class="wide">behind</span> the tools.</h1>
+    <p class="lede">Essays on how people question, imagine, forecast, and act when AI is in the room. Written by the founders, cited where it counts, and long enough to make the argument.</p>
   </div>
 </header>
 <main>
 <section>
   <div class="container">
-    <article class="offer reveal">
-      <p class="label">No. 01</p>
+    <!-- Newest essay first. Each entry: date, author, title, one-line dek, reading time. -->
+    <article class="essay reveal">
+      <div class="essay-meta">
+        <time datetime="2026-09-04">September 2026</time>
+        Bryan Engel<br>6 min read
+      </div>
       <div>
-        <h2>Workshops</h2>
-        <p class="tag">Half-day to two-day immersions.</p>
-        <p>A leadership team brings one live decision and runs it through the full cycle. They leave with the outcome and the method — built for offsites, strategy resets, and the weeks before a big call.</p>
-        <ul>
-          <li>One real strategic question, worked end to end</li>
-          <li>The five capacities, practiced rather than presented</li>
-          <li>Experiments scoped to start within 72 hours</li>
-        </ul>
+        <h2><a href="/insights/sample-essay.html">The answer is the cheap part</a></h2>
+        <p>Most AI adoption is measured by how fast it answers. Almost none of it is measured by what happens to the question. A sample essay, standing in until the first real piece lands.</p>
+        <a class="more" href="/insights/sample-essay.html">Read the essay</a>
       </div>
     </article>
-    <article class="offer reveal">
-      <p class="label">No. 02</p>
-      <div>
-        <h2>Agent Access</h2>
-        <p class="tag">The cycle, on demand.</p>
-        <p>Direct access to all five agents for teams who want the cycle as an ongoing practice. The agents keep your history of inquiry, so the questions get sharper the longer you work with them.</p>
-        <ul>
-          <li>Held by one person, or opened to a team</li>
-          <li>Agents that remember what you've already worked through</li>
-        </ul>
-      </div>
-    </article>
-    <article class="offer reveal">
-      <p class="label">No. 03</p>
-      <div>
-        <h2>Leadership Programs</h2>
-        <p class="tag">A curriculum, not a keynote.</p>
-        <p>Multi-week cohort programs that train the five capacities as durable habits, with the agents as practice partners between sessions.</p>
-        <ul>
-          <li>Cohort-based, six to twelve weeks</li>
-          <li>Run inside a company, or inside a curriculum</li>
-        </ul>
-      </div>
-    </article>
+    <p class="note reveal">More essays are in progress. Each one links to the tool it argues for, so the reasoning and the practice sit side by side.</p>
   </div>
 </section>
 <section class="cta">
   <div class="container">
-    <h2>Engagements begin with a conversation.</h2>
-    <a class="mail" href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
+    <h2>Read enough. Try it on a real question.</h2>
+    <p>The cycle is free, takes about ten minutes, and needs no account.</p>
+    <a class="mail" href="/cycle.html">Run the cycle</a>
   </div>
 </section>
 </main>
