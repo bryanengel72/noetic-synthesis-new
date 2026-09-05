@@ -128,8 +128,8 @@ a.card:hover .cover{transform:translateY(-6px);box-shadow:0 28px 50px -20px rgba
 .cover-top{display:flex;justify-content:space-between;align-items:center;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:7px;letter-spacing:.04em;color:#6b6b62;text-transform:uppercase}
 .cover-top b{font-family:var(--display);font-variation-settings:'wdth' 104;font-weight:700;font-size:9px;color:#14140f;letter-spacing:.05em}
 .cover h3{font-family:var(--display);font-variation-settings:'wdth' 110;font-weight:600;font-size:clamp(13px,1.35vw,17px);line-height:1.08;letter-spacing:-.02em;text-transform:uppercase;margin:auto 0 12px;padding-top:26px}
-.cover-art{width:100%;aspect-ratio:1/1;display:block}
-.cover-art svg{width:100%;height:100%;display:block}
+.cover-art{width:100%;aspect-ratio:1/1;display:block;background:#fdfcf9 url(/hero-poster.jpg) no-repeat;background-size:var(--ink-size,300%);background-position:var(--ink-pos,70% 55%);filter:invert(1) grayscale(1) contrast(1.08);mix-blend-mode:multiply;transition:background-size 1.2s var(--ease)}
+a.card:hover .cover-art{background-size:calc(var(--ink-size,300%) * 1.06)}
 .card-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s16);padding:var(--s16);border-top:1px solid var(--line)}
 .card-foot p{font-size:14px;line-height:1.45;color:var(--muted);letter-spacing:-.011em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card-foot .meta{display:block;font-size:12px;color:var(--faint);margin-bottom:var(--s4)}
@@ -141,9 +141,22 @@ a.card:hover .card-go{transform:translate(2px,-2px)}
 .card.soon .card-go{background:none;border:1px dashed var(--line2);color:var(--faint)}
 
 /* Reader overlay */
-.reader{border:none;padding:0;margin:0;width:100vw;height:100vh;max-width:none;max-height:none;background:var(--bg);color:var(--text);overflow:hidden}
-.reader::backdrop{background:rgba(0,0,0,.55)}
+.reader{border:none;padding:0;margin:0;width:100vw;height:100vh;max-width:none;max-height:none;background:transparent;color:var(--text);overflow:hidden}
+.reader::backdrop{background:transparent}
 .reader[open]{display:flex;flex-direction:column}
+.reader-veil{position:absolute;inset:0;background:var(--bg);opacity:0;transition:opacity .32s ease-out}
+.reader-bar,.reader-scroll{position:relative;opacity:0;transition:opacity .4s ease .38s}
+.reader.in .reader-veil,.reader.in .reader-bar,.reader.in .reader-scroll{opacity:1}
+.reader.out .reader-bar,.reader.out .reader-scroll{opacity:0;transition-delay:0s;transition-duration:.25s}
+.reader.out .reader-veil{opacity:0;transition-delay:.28s}
+.reader.instant .reader-veil,.reader.instant .reader-bar,.reader.instant .reader-scroll{transition:none}
+.reader-progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--text);transition:width .12s linear}
+.cover.flip{position:fixed;z-index:3;margin:0;pointer-events:none;will-change:transform;transform-origin:0 0;transition:none}
+.reader-next-essay{display:block;margin-top:var(--s64);padding:var(--s32);border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .3s}
+.reader-next-essay:hover{border-color:var(--text)}
+.reader-next-essay .label{margin-bottom:var(--s12)}
+.reader-next-essay strong{display:block;font-family:var(--display);font-variation-settings:'wdth' 113;font-weight:600;font-size:clamp(20px,2.6vw,28px);line-height:1.08;letter-spacing:-.016em;text-transform:uppercase;margin-bottom:var(--s8)}
+.reader-next-essay .dek2{color:var(--muted);font-size:15px;letter-spacing:-.011em}
 .reader-bar{display:flex;align-items:center;justify-content:space-between;gap:var(--s16);padding:var(--s12) var(--s32);border-bottom:1px solid var(--line);flex-shrink:0;background:var(--bg)}
 @media(max-width:640px){.reader-bar{padding:var(--s12) var(--s24)}}
 .reader-bar .label{margin:0}
@@ -216,7 +229,8 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 @media(max-width:640px){.foot-inner{padding:0 var(--s24)}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s var(--ease)}
 .reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.grain{animation:none}.cover,.card-go{transition:none}html{scroll-behavior:auto}}
+.rail .card.reveal{transition-delay:calc(var(--i,0) * 90ms)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.rail .card.reveal{transition-delay:0s}.grain{animation:none}.cover,.cover-art,.card-go{transition:none}.reader-veil,.reader-bar,.reader-scroll{transition:none}html{scroll-behavior:auto}}
 .foot-links{display:flex;gap:var(--s16);flex-wrap:wrap}
 .foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
@@ -265,15 +279,15 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
       </div>
     </div>
     <div class="rail-wrap">
-      <!-- Newest essay on the left. A real essay is an <a class="card"> pointing at its page; data-cover seeds the cover art. -->
+      <!-- Newest essay on the left. A real essay is an <a class="card"> pointing at its page; the inline --ink-size/--ink-pos on .cover-art pick a crop of hero-poster.jpg. -->
       <div class="rail" id="rail" role="list">
-        <a class="card reveal" role="listitem" href="/insights/your-ai-isnt-failing-your-thinking-is.html" data-cover="3">
+        <a class="card reveal" role="listitem" href="/insights/your-ai-isnt-failing-your-thinking-is.html">
           <span class="card-kind" data-live>Essay</span>
           <span class="card-stage">
             <span class="cover">
               <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>noeticsynthesis.com</span><b>N</b></span>
               <h3>Your AI isn't failing. Your thinking is.</h3>
-              <span class="cover-art"></span>
+              <span class="cover-art" style="--ink-size:300%;--ink-pos:70% 56%"></span>
             </span>
           </span>
           <span class="card-foot">
@@ -281,13 +295,13 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
             <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </span>
         </a>
-        <a class="card reveal" role="listitem" href="/insights/why-i-stopped-looking-for-better-answers.html" data-cover="5">
+        <a class="card reveal" role="listitem" href="/insights/why-i-stopped-looking-for-better-answers.html">
           <span class="card-kind" data-live>Essay</span>
           <span class="card-stage">
             <span class="cover">
               <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>noeticsynthesis.com</span><b>N</b></span>
               <h3>Why I stopped looking for better answers and started asking better questions</h3>
-              <span class="cover-art"></span>
+              <span class="cover-art" style="--ink-size:620%;--ink-pos:71% 12%"></span>
             </span>
           </span>
           <span class="card-foot">
@@ -295,13 +309,13 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
             <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </span>
         </a>
-        <a class="card reveal" role="listitem" href="/insights/what-ai-is-in-terms-of-how-we-think.html" data-cover="9">
+        <a class="card reveal" role="listitem" href="/insights/what-ai-is-in-terms-of-how-we-think.html">
           <span class="card-kind" data-live>Essay</span>
           <span class="card-stage">
             <span class="cover">
               <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>noeticsynthesis.com</span><b>N</b></span>
               <h3>What AI is, in terms of how we think</h3>
-              <span class="cover-art"></span>
+              <span class="cover-art" style="--ink-size:520%;--ink-pos:64% 50%"></span>
             </span>
           </span>
           <span class="card-foot">
@@ -309,13 +323,13 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
             <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </span>
         </a>
-        <a class="card reveal" role="listitem" href="/insights/the-competency-reflex.html" data-cover="11">
+        <a class="card reveal" role="listitem" href="/insights/the-competency-reflex.html">
           <span class="card-kind" data-live>Essay</span>
           <span class="card-stage">
             <span class="cover">
               <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>noeticsynthesis.com</span><b>N</b></span>
               <h3>The Competency Reflex</h3>
-              <span class="cover-art"></span>
+              <span class="cover-art" style="--ink-size:420%;--ink-pos:69% 72%"></span>
             </span>
           </span>
           <span class="card-foot">
@@ -323,13 +337,13 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
             <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </span>
         </a>
-        <a class="card reveal" role="listitem" href="/insights/navigational-intelligence.html" data-cover="14">
+        <a class="card reveal" role="listitem" href="/insights/navigational-intelligence.html">
           <span class="card-kind" data-live>Essay</span>
           <span class="card-stage">
             <span class="cover">
               <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>noeticsynthesis.com</span><b>N</b></span>
               <h3>Navigational Intelligence</h3>
-              <span class="cover-art"></span>
+              <span class="cover-art" style="--ink-size:900%;--ink-pos:71% 6%"></span>
             </span>
           </span>
           <span class="card-foot">
@@ -337,13 +351,13 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
             <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </span>
         </a>
-        <a class="card reveal" role="listitem" href="/insights/the-decision-ai-cannot-make-for-you.html" data-cover="17">
+        <a class="card reveal" role="listitem" href="/insights/the-decision-ai-cannot-make-for-you.html">
           <span class="card-kind" data-live>Essay</span>
           <span class="card-stage">
             <span class="cover">
               <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>noeticsynthesis.com</span><b>N</b></span>
               <h3>The decision AI cannot make for you</h3>
-              <span class="cover-art"></span>
+              <span class="cover-art" style="--ink-size:190%;--ink-pos:88% 52%"></span>
             </span>
           </span>
           <span class="card-foot">
@@ -356,12 +370,14 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
   </div>
 </section>
 <dialog class="reader" id="reader" aria-labelledby="reader-title">
+  <div class="reader-veil" aria-hidden="true"></div>
   <div class="reader-bar">
     <p class="label">Insights</p>
     <div class="reader-actions">
       <a class="reader-link" id="reader-page" href="#">Open as its own page</a>
       <button class="reader-close" id="reader-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
+    <div class="reader-progress" id="reader-progress" aria-hidden="true"></div>
   </div>
   <div class="reader-scroll" id="reader-scroll">
     <div class="reader-body" id="reader-body"><p class="status">Loading…</p></div>
@@ -394,19 +410,6 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* Cover art: a deterministic dot field seeded by data-cover, so every essay gets its own cover with no image file. */
-const PALETTE=['#c8552b','#1f3a5f','#5d6b3a','#14140f','#8a4d2f','#3d5a80'];
-document.querySelectorAll('.card').forEach(card=>{
-  const seed=parseInt(card.dataset.cover||'1',10);let x=seed*9301+49297;const rnd=()=>{x=(x*9301+49297)%233280;return x/233280};
-  const N=14,cell=100/N,bg=PALETTE[seed%PALETTE.length];let r='';
-  for(let i=0;i<N;i++)for(let j=0;j<N;j++){
-    const d=Math.hypot(i-N/2+.5,j-N/2+.5)/(N/2);const p=Math.max(0,1-d*(0.9+rnd()*.4));
-    if(rnd()<p*p){const sz=cell*(0.55+rnd()*.5);r+=`<rect x="${(i*cell).toFixed(2)}" y="${(j*cell).toFixed(2)}" width="${sz.toFixed(2)}" height="${sz.toFixed(2)}"/>`}
-  }
-  const art=card.querySelector('.cover-art');
-  if(art)art.innerHTML=`<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="${bg}"/><g fill="${card.classList.contains('soon')?'#f1efe8':'#fdfcf9'}" opacity=".92">${r}</g></svg>`;
-});
-
 /* Rail: arrows, keyboard, drag-to-scroll */
 const rail=document.getElementById('rail'),prev=document.getElementById('rail-prev'),next=document.getElementById('rail-next');
 const step=()=>{const c=rail.querySelector('.card');return c?c.getBoundingClientRect().width+4:400};
@@ -421,37 +424,76 @@ rail.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.
 const endDrag=()=>{if(!drag)return;const moved=drag.moved;drag=null;rail.classList.remove('dragging');if(moved){rail.addEventListener('click',e=>e.preventDefault(),{capture:true,once:true})}};
 rail.addEventListener('pointerup',endDrag);rail.addEventListener('pointerleave',endDrag);
 
-/* Reader: open an essay in place, loaded from its own page. URL carries ?read=slug so it can be shared and Back closes it. */
-const reader=document.getElementById('reader'),body=document.getElementById('reader-body'),pageLink=document.getElementById('reader-page'),scroller=document.getElementById('reader-scroll');
-const cache={};
-async function openEssay(href,push){
+/* Reader: open an essay in place, loaded from its own page. URL carries ?read=slug so it can be shared and Back closes it.
+   Opening animates the card's paper cover up into the page; closing sends it back. Skipped under reduced motion. */
+const reader=document.getElementById('reader'),body=document.getElementById('reader-body'),pageLink=document.getElementById('reader-page'),scroller=document.getElementById('reader-scroll'),progress=document.getElementById('reader-progress');
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ESSAYS=[...document.querySelectorAll('a.card')].map((a,i)=>{a.style.setProperty('--i',i);return{href:a.getAttribute('href'),title:a.querySelector('h3').textContent.trim(),dek:a.querySelector('.card-foot p').lastChild.textContent.trim()}});
+const cache={};let current=null,depth=0;
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const settle=(anim,ms)=>Promise.race([anim.finished.catch(()=>{}),wait(ms)]);
+function coverTarget(r){const tw=Math.min(380,innerWidth*.62),th=tw*r.height/r.width;return{tl:(innerWidth-tw)/2,tt:Math.max(64,(innerHeight-th)/2-24),sx:tw/r.width,sy:th/r.height}}
+function cloneCover(cover,r){const c=cover.cloneNode(true);c.classList.add('flip');Object.assign(c.style,{left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'});reader.appendChild(c);return c}
+async function flipOpen(card){
+  const cover=card.querySelector('.cover'),r=cover.getBoundingClientRect(),c=cloneCover(cover,r),t=coverTarget(r);
+  const end=`translate(${t.tl-r.left}px,${t.tt-r.top}px) scale(${t.sx},${t.sy})`;
+  await settle(c.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:end,opacity:1,offset:.72},{transform:end,opacity:0}],{duration:820,easing:'cubic-bezier(.16,1,.3,1)',fill:'forwards'}),1000);
+  c.remove();
+}
+async function flipClose(card){
+  card.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
+  const cover=card.querySelector('.cover'),r=cover.getBoundingClientRect(),t=coverTarget(r),c=cloneCover(cover,r);
+  const start=`translate(${t.tl-r.left}px,${t.tt-r.top}px) scale(${t.sx},${t.sy})`;
+  await settle(c.animate([{transform:start,opacity:0},{transform:start,opacity:1,offset:.25},{transform:'translate(0,0) scale(1)',opacity:1}],{duration:620,easing:'cubic-bezier(.16,1,.3,1)',fill:'forwards'}),800);
+  c.remove();
+}
+async function openEssay(href,push,card){
   if(!reader.showModal)return location.assign(href);
   const slug=href.split('/').pop().replace(/\.html$/,'');
-  pageLink.href=href;body.innerHTML='<p class="status">Loading…</p>';
-  if(!reader.open)reader.showModal();scroller.scrollTop=0;document.documentElement.style.overflow='hidden';
-  if(push)history.pushState({read:slug},'',`?read=${slug}`);
+  const wasOpen=reader.open;current=href;pageLink.href=href;
+  if(push){history.pushState({read:slug},'',`?read=${slug}`);depth++}
+  if(!wasOpen){
+    reader.classList.remove('out');reader.showModal();document.documentElement.style.overflow='hidden';
+    const animate=card&&!RM;reader.classList.toggle('instant',!animate);
+    body.innerHTML='';requestAnimationFrame(()=>reader.classList.add('in'));setTimeout(()=>reader.classList.add('in'),40);
+    if(animate)await flipOpen(card);
+  }else{
+    await settle(body.animate([{opacity:1},{opacity:0}],{duration:180,fill:'forwards'}),300);
+  }
+  scroller.scrollTop=0;progress.style.width='0';
   try{
     if(!cache[href]){
       const html=await(await fetch(href)).text();const doc=new DOMParser().parseFromString(html,'text/html');
       const head=doc.querySelector('header.page .prose-wrap'),prose=doc.querySelector('article.prose .prose-wrap');
       if(!head||!prose)throw new Error('shape');
       const h=head.querySelector('h1');if(h)h.id='reader-title';
-      cache[href]=head.innerHTML+'<div class="prose">'+prose.innerHTML+'</div>'+
-        '<div class="reader-next"><a href="/cycle.html">Run the cycle</a><a href="/council.html">Convene the Council</a><a href="'+href+'">Open this essay as its own page</a></div>';
-      document.title=(doc.title||'Insights');
+      const i=ESSAYS.findIndex(e=>e.href===href),next=i>=0&&ESSAYS.length>1?ESSAYS[(i+1)%ESSAYS.length]:null;
+      cache[href]={title:doc.title||'Insights',html:head.innerHTML+'<div class="prose">'+prose.innerHTML+'</div>'+
+        (next?'<a class="reader-next-essay" href="'+next.href+'" data-next><span class="label">Next essay</span><strong>'+next.title+'</strong><span class="dek2">'+next.dek+'</span></a>':'')+
+        '<div class="reader-next"><a href="/cycle.html">Run the cycle</a><a href="/council.html">Convene the Council</a><a href="'+href+'">Open this essay as its own page</a></div>'};
     }
-    body.innerHTML=cache[href];
+    if(current!==href)return;
+    body.innerHTML=cache[href].html;document.title=cache[href].title;
   }catch(err){body.innerHTML='<p class="status">Could not load the essay here. <a href="'+href+'">Open it as its own page</a>.</p>'}
+  body.getAnimations().forEach(a=>a.cancel());
+  if(wasOpen)body.animate([{opacity:0},{opacity:1}],{duration:260});
 }
-function closeReader(pop){
-  if(!reader.open)return;reader.close();document.documentElement.style.overflow='';document.title='Insights | Noetic Synthesis';
-  if(!pop&&history.state&&history.state.read)history.back();
+async function closeReader(pop){
+  if(!reader.open||reader.classList.contains('out'))return;
+  const card=current&&document.querySelector('a.card[href="'+current+'"]');
+  reader.classList.add('out');reader.classList.remove('in');
+  if(card&&!RM){await flipClose(card)}else if(!RM){await wait(420)}
+  reader.close();reader.classList.remove('out','instant');document.documentElement.style.overflow='';document.title='Insights | Noetic Synthesis';current=null;
+  const d=depth;depth=0;
+  if(!pop){if(d>0)history.go(-d);else if(location.search.includes('read='))history.replaceState({},'',location.pathname)}
 }
-document.querySelectorAll('a.card').forEach(a=>a.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.button===1)return;e.preventDefault();openEssay(a.getAttribute('href'),true)}));
+scroller.addEventListener('scroll',()=>{const m=scroller.scrollHeight-scroller.clientHeight;progress.style.width=(m>0?Math.min(100,scroller.scrollTop/m*100):0)+'%'},{passive:true});
+body.addEventListener('click',e=>{const a=e.target.closest('a[data-next]');if(a&&!(e.metaKey||e.ctrlKey||e.shiftKey)){e.preventDefault();openEssay(a.getAttribute('href'),true)}});
+document.querySelectorAll('a.card').forEach(a=>a.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.button===1)return;e.preventDefault();openEssay(a.getAttribute('href'),true,a)}));
 document.getElementById('reader-close').addEventListener('click',()=>closeReader(false));
 reader.addEventListener('cancel',e=>{e.preventDefault();closeReader(false)});
 reader.addEventListener('click',e=>{if(e.target===reader)closeReader(false)});
-addEventListener('popstate',()=>{const q=new URLSearchParams(location.search).get('read');if(q){openEssay('/insights/'+q+'.html',false)}else{closeReader(true)}});
+addEventListener('popstate',()=>{const q=new URLSearchParams(location.search).get('read');if(q){if(depth>0)depth--;openEssay('/insights/'+q+'.html',false)}else{closeReader(true)}});
 const initial=new URLSearchParams(location.search).get('read');
 if(initial){history.replaceState({read:initial},'');openEssay('/insights/'+initial+'.html',false)}
 
