@@ -1,21 +1,30 @@
 <!DOCTYPE html>
+<!--
+  Essay template. Copy to insights/<slug>.html and replace every {{TOKEN}}.
+  Tokens: TITLE, TITLE_HTML (title with optional <span class="wide">…</span>), DEK, SLUG, DATE_ISO (YYYY-MM-DD),
+  DATE_TEXT (Month D, YYYY), AUTHOR, AUTHOR_FIRST, AUTHOR_URL, AUTHOR_BIO, MINUTES, WORDS, SERIES (e.g. "Insights series · Part 2 of 6"), BODY, FOOTNOTES.
+  Then add a card for it in insights/index.html (copy the first <a class="card">, newest first; pick a new data-cover number), and add it to sitemap.xml and llms.txt.
+  This file is listed in .vercelignore and never deploys.
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offerings | Noetic Synthesis</title>
-<meta name="description" content="Three ways to work with the Noetic Innovation Cycle: leadership workshops, direct agent access, and multi-week leadership programs. San Diego, engagements worldwide.">
-<link rel="canonical" href="https://www.noeticsynthesis.com/offerings.html">
+<title>{{TITLE}} | Noetic Synthesis</title>
+<meta name="description" content="{{DEK}}">
+<link rel="canonical" href="https://www.noeticsynthesis.com/insights/{{SLUG}}.html">
 <meta name="theme-color" content="#f7f5f0">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='38' font-weight='700' fill='%23f2f2f0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.noeticsynthesis.com/offerings.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.noeticsynthesis.com/insights/{{SLUG}}.html">
 <meta property="og:site_name" content="Noetic Synthesis">
-<meta property="og:title" content="Offerings | Noetic Synthesis">
-<meta property="og:description" content="Workshops, agent access, and leadership programs — three ways the Noetic Innovation Cycle enters an organization.">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DEK}}">
 <meta property="og:image" content="https://www.noeticsynthesis.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="article:published_time" content="{{DATE_ISO}}">
+<meta property="article:author" content="{{AUTHOR}}">
 <meta name="twitter:card" content="summary_large_image">
 <script>
 (function(){var t=localStorage.getItem('ns-theme')||'light';if(t==='light'){document.documentElement.setAttribute('data-theme','light')}})();
@@ -26,15 +35,18 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "OfferCatalog",
-  "name": "Noetic Synthesis Offerings",
-  "url": "https://www.noeticsynthesis.com/offerings.html",
-  "provider": { "@type": "Organization", "@id": "https://www.noeticsynthesis.com/#org", "name": "Noetic Synthesis" },
-  "itemListElement": [
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Workshops", "description": "Half-day to two-day immersions in which leadership teams run a live strategic decision through the full Noetic Innovation Cycle.", "serviceType": "Leadership workshop" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Agent Access", "description": "Direct access to the five agents of the Noetic Innovation Cycle — Art of the Question, What If, Divergence, Causal Foresight, and What Now — as an ongoing thinking practice, for one person or a team.", "serviceType": "AI thinking-partner access" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Leadership Programs", "description": "Multi-week cohort programs training five capacities as durable leadership habits, run inside a company or inside a curriculum.", "serviceType": "Leadership development program" } }
-  ]
+  "@type": "Article",
+  "headline": "{{TITLE}}",
+  "description": "{{DEK}}",
+  "url": "https://www.noeticsynthesis.com/insights/{{SLUG}}.html",
+  "mainEntityOfPage": "https://www.noeticsynthesis.com/insights/{{SLUG}}.html",
+  "datePublished": "{{DATE_ISO}}",
+  "dateModified": "{{DATE_ISO}}",
+  "wordCount": {{WORDS}},
+  "author": { "@type": "Person", "name": "{{AUTHOR}}", "url": "{{AUTHOR_URL}}" },
+  "publisher": { "@type": "Organization", "@id": "https://www.noeticsynthesis.com/#org", "name": "Noetic Synthesis", "url": "https://www.noeticsynthesis.com/" },
+  "image": "https://www.noeticsynthesis.com/og.png",
+  "isPartOf": { "@type": "CollectionPage", "url": "https://www.noeticsynthesis.com/insights/", "name": "Insights" }
 }
 </script>
 <style>
@@ -93,39 +105,72 @@ nav.open .nav-menu .ic-x{display:block}
 .nav-cta{color:var(--text) !important;border-bottom:1px solid var(--text);border-radius:0 !important;padding:2px 0 3px !important;margin-left:var(--s12)}
 .nav-cta:hover{background:none !important}
 
-header.page{padding:calc(var(--s128) + var(--s48)) 0 var(--s96);border-bottom:1px solid var(--line)}
+/* Essay */
+header.page{padding:calc(var(--s128) + var(--s48)) 0 var(--s64);border-bottom:1px solid var(--line)}
+.prose-wrap{max-width:720px;margin:0 auto}
+.crumb{font-size:13px;color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.crumb:hover{color:var(--text);border-bottom-color:var(--line2)}
 h1{font-family:var(--display);font-variation-settings:'wdth' 116;font-weight:600;
-  font-size:clamp(34px,6.6vw,68px);line-height:.98;letter-spacing:-.03em;
-  text-transform:uppercase;max-width:17ch;margin-top:var(--s24)}
-.lede{margin-top:var(--s24);font-size:17px;color:var(--muted);max-width:52ch}
-section{padding:var(--s96) 0}
-.offer{padding:var(--s64) 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:180px 1fr;gap:var(--s48);position:relative}
-.offer:last-child{border-bottom:none}
-@media(max-width:760px){.offer{grid-template-columns:1fr;gap:var(--s16);padding:var(--s48) 0}}
-.offer h2{font-family:var(--display);font-variation-settings:'wdth' 113;font-weight:600;
-  font-size:26px;letter-spacing:-.014em;text-transform:uppercase;margin-bottom:var(--s8);
-  transition:transform .4s var(--ease)}
-.offer:hover h2{transform:translateX(10px)}
-.offer::before{content:'';position:absolute;left:-24px;top:var(--s64);bottom:var(--s64);width:2px;background:var(--text);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease)}
-.offer:hover::before{transform:scaleY(1)}
-@media(max-width:760px){.offer::before{left:-12px}}
-.offer .tag{color:var(--faint);margin-bottom:var(--s16);font-size:15px;letter-spacing:-.011em}
-.offer p{color:var(--muted);max-width:56ch;font-size:15px;letter-spacing:-.011em}
-.offer ul{margin-top:var(--s16);list-style:none;color:var(--muted);font-size:15px}
-.offer li{padding:var(--s8) 0 var(--s8) var(--s24);position:relative;border-top:1px solid var(--line)}
-.offer li::before{content:'—';position:absolute;left:0;color:var(--faint)}
-.cta{padding:var(--s128) 0;text-align:center;border-top:1px solid var(--line)}
-.cta h2{font-family:var(--display);font-variation-settings:'wdth' 114;font-weight:600;
-  font-size:clamp(23px,3.3vw,38px);max-width:24ch;margin:0 auto;line-height:1.06;
-  letter-spacing:-.028em;text-transform:uppercase}
-.mail{display:inline-block;margin-top:var(--s32);font-family:var(--display);font-variation-settings:'wdth' 106;font-weight:500;font-size:clamp(18px,2.6vw,26px);letter-spacing:-.024em;color:var(--text);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:6px;transition:border-color .3s}
-.mail:hover{border-color:var(--text)}
+  font-size:clamp(32px,5.4vw,58px);line-height:1;letter-spacing:-.03em;
+  text-transform:uppercase;margin-top:var(--s24)}
+.dek{margin-top:var(--s24);font-size:clamp(17px,2vw,21px);line-height:1.45;letter-spacing:-.016em;color:var(--muted);max-width:52ch}
+.byline{margin-top:var(--s32);display:flex;gap:var(--s24);flex-wrap:wrap;font-size:13px;color:var(--faint)}
+.byline strong{color:var(--text);font-weight:500}
+.sample-note{margin-top:var(--s24);padding:var(--s12) var(--s16);border:1px dashed var(--line2);border-radius:6px;font-size:13px;color:var(--faint);max-width:58ch}
+
+article.prose{padding:var(--s64) 0 var(--s96)}
+.prose p{font-size:18px;line-height:1.65;letter-spacing:-.011em;color:var(--text);margin-bottom:var(--s24)}
+.prose .prose-wrap > p:first-of-type::first-letter{font-family:var(--display);font-variation-settings:'wdth' 116;font-weight:600;font-size:3.4em;line-height:.8;float:left;margin:8px 10px 0 0}
+.prose h2{font-family:var(--display);font-variation-settings:'wdth' 113;font-weight:600;
+  font-size:clamp(20px,2.4vw,26px);letter-spacing:-.016em;line-height:1.1;text-transform:uppercase;
+  margin:var(--s64) 0 var(--s24)}
+.prose h2:first-child{margin-top:0}
+.prose blockquote{margin:var(--s48) 0;padding-left:var(--s24);border-left:2px solid var(--text);font-family:var(--display);font-variation-settings:'wdth' 106;font-weight:400;font-size:clamp(20px,2.6vw,27px);line-height:1.25;letter-spacing:-.02em}
+.prose blockquote p{font:inherit;color:var(--text);margin:0}
+.prose ul,.prose ol{margin:0 0 var(--s24) var(--s24);font-size:18px;line-height:1.65;color:var(--text)}
+.prose li{margin-bottom:var(--s8)}
+.prose a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line2);transition:border-color .2s}
+.prose a:hover{border-color:var(--text)}
+.prose sup{font-size:.62em;line-height:0;vertical-align:baseline;position:relative;top:-.55em;margin-left:1px}
+.prose sup a{border:none;color:var(--faint);padding:0 2px}
+.prose sup a:hover{color:var(--text)}
+.prose hr{border:none;border-top:1px solid var(--line);margin:var(--s48) 0}
+.prose em{font-style:italic}
+
+.footnotes{margin-top:var(--s64);padding-top:var(--s32);border-top:1px solid var(--line)}
+.footnotes .label{margin-bottom:var(--s16)}
+.footnotes ol{margin-left:var(--s24);font-size:14px;line-height:1.6;color:var(--muted)}
+.footnotes li{margin-bottom:var(--s12);padding-left:var(--s4)}
+.footnotes li:target{color:var(--text)}
+.footnotes a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.footnotes a:hover{color:var(--text);border-color:var(--text)}
+.footnotes .back{border:none;margin-left:var(--s4);color:var(--faint)}
+
+.author{margin-top:var(--s64);padding-top:var(--s32);border-top:1px solid var(--line);display:grid;grid-template-columns:180px 1fr;gap:var(--s24)}
+@media(max-width:640px){.author{grid-template-columns:1fr;gap:var(--s8)}}
+.author p{font-size:15px;color:var(--muted);letter-spacing:-.011em;max-width:56ch}
+.author a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+.author a:hover{color:var(--text);border-color:var(--text)}
+
+.continue{border-top:1px solid var(--line);padding:var(--s96) 0}
+.continue .label{margin-bottom:var(--s24)}
+.continue-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s24)}
+@media(max-width:760px){.continue-grid{grid-template-columns:1fr}}
+.continue-card{display:block;padding:var(--s32);border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .3s,transform .4s var(--ease)}
+.continue-card:hover{border-color:var(--text);transform:translateY(-2px)}
+.continue-card h3{font-family:var(--display);font-variation-settings:'wdth' 113;font-weight:600;font-size:20px;letter-spacing:-.016em;text-transform:uppercase;margin-bottom:var(--s8)}
+.continue-card p{font-size:15px;color:var(--muted);letter-spacing:-.011em}
+.continue-card span{display:inline-block;margin-top:var(--s16);font-size:13px;color:var(--text);border-bottom:1px solid var(--line2);padding-bottom:2px}
+.all{margin-top:var(--s48);font-size:14px}
+.all a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+.all a:hover{color:var(--text);border-color:var(--text)}
+
 footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;color:var(--faint)}
 .foot-inner{max-width:1200px;margin:0 auto;padding:0 var(--s32);display:flex;justify-content:space-between;gap:var(--s16);flex-wrap:wrap}
 @media(max-width:640px){.foot-inner{padding:0 var(--s24)}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s var(--ease)}
 .reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.grain{animation:none}.offer h2,.offer::before{transition:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.grain{animation:none}.continue-card{transition:none}html{scroll-behavior:auto}}
 .foot-links{display:flex;gap:var(--s16);flex-wrap:wrap}
 .foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
@@ -141,8 +186,8 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
       <a href="/#cycle">The Cycle</a>
       <a href="/council.html">The Council</a>
       <a href="/#trace">In Action</a>
-      <a href="/insights/">Insights</a>
-      <a href="/offerings.html" aria-current="page">Offerings</a>
+      <a href="/insights/" aria-current="page">Insights</a>
+      <a href="/offerings.html">Offerings</a>
       <a href="/#people">Who We Are</a>
       <a href="/#contact" class="nav-cta">Inquiries</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
@@ -158,57 +203,55 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 </nav>
 <header class="page">
   <div class="container">
-    <p class="label">Offerings</p>
-    <h1>Three ways the cycle <span class="wide">enters</span> an organization.</h1>
-    <p class="lede">Every engagement starts with one of these.</p>
+    <div class="prose-wrap">
+      <a class="crumb" href="/insights/">← Insights</a>
+      <h1>{{TITLE_HTML}}</h1>
+      <p class="dek">{{DEK}}</p>
+      <div class="byline">
+        <span>By <strong>{{AUTHOR}}</strong></span>
+        <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time>
+        <span>{{MINUTES}} min read</span>
+        <span>{{SERIES}}</span>
+      </div>
+    </div>
   </div>
 </header>
 <main>
-<section>
+<article class="prose">
   <div class="container">
-    <article class="offer reveal">
-      <p class="label">No. 01</p>
-      <div>
-        <h2>Workshops</h2>
-        <p class="tag">Half-day to two-day immersions.</p>
-        <p>A leadership team brings one live decision and runs it through the full cycle. They leave with the outcome and the method — built for offsites, strategy resets, and the weeks before a big call.</p>
-        <ul>
-          <li>One real strategic question, worked end to end</li>
-          <li>The five capacities, practiced rather than presented</li>
-          <li>Experiments scoped to start within 72 hours</li>
-        </ul>
+    <div class="prose-wrap">
+      <!-- {{BODY}}: paragraphs, h2 subheads, blockquotes. Cite with <sup><a href="#fn1" id="ref1">1</a></sup> -->
+      <div class="footnotes">
+        <p class="label">Notes</p>
+        <ol>
+          <!-- {{FOOTNOTES}}: one <li id="fnN"> per citation, ending with <a class="back" href="#refN" aria-label="Back to reference N">↩</a> -->
+        </ol>
       </div>
-    </article>
-    <article class="offer reveal">
-      <p class="label">No. 02</p>
-      <div>
-        <h2>Agent Access</h2>
-        <p class="tag">The cycle, on demand.</p>
-        <p>Direct access to all five agents for teams who want the cycle as an ongoing practice. The agents keep your history of inquiry, so the questions get sharper the longer you work with them.</p>
-        <ul>
-          <li>Held by one person, or opened to a team</li>
-          <li>Agents that remember what you've already worked through</li>
-        </ul>
+      <div class="author">
+        <p class="label">About the author</p>
+        <p>{{AUTHOR_BIO}} <a href="{{AUTHOR_URL}}" target="_blank" rel="noopener">{{AUTHOR_FIRST}} on LinkedIn</a></p>
       </div>
-    </article>
-    <article class="offer reveal">
-      <p class="label">No. 03</p>
-      <div>
-        <h2>Leadership Programs</h2>
-        <p class="tag">A curriculum, not a keynote.</p>
-        <p>Multi-week cohort programs that train the five capacities as durable habits, with the agents as practice partners between sessions.</p>
-        <ul>
-          <li>Cohort-based, six to twelve weeks</li>
-          <li>Run inside a company, or inside a curriculum</li>
-        </ul>
-      </div>
-    </article>
+    </div>
   </div>
-</section>
-<section class="cta">
+</article>
+<section class="continue">
   <div class="container">
-    <h2>Engagements begin with a conversation.</h2>
-    <a class="mail" href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
+    <div class="prose-wrap">
+      <p class="label">Continue</p>
+      <div class="continue-grid">
+        <a class="continue-card reveal" href="/cycle.html">
+          <h3>Run the cycle</h3>
+          <p>Bring one real question. Six rounds of opening it, five futures, one fracture, its consequences, and a plan. About ten minutes, free, no account.</p>
+          <span>Start with a question</span>
+        </a>
+        <a class="continue-card reveal" href="/council.html">
+          <h3>Convene the Council</h3>
+          <p>Already have a decision? Five advisors on five model families stress-test it across two rounds and tell you where they could not agree.</p>
+          <span>Test a decision</span>
+        </a>
+      </div>
+      <p class="all"><a href="/insights/">All insights</a></p>
+    </div>
   </div>
 </section>
 </main>

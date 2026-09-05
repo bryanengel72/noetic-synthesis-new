@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights | Noetic Synthesis</title>
+<meta name="description" content="A six-part essay series from Noetic Synthesis on why AI returns depend on how organizations think. By Julie Engel.">
+<link rel="canonical" href="https://www.noeticsynthesis.com/insights/">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='38' font-weight='700' fill='%23f2f2f0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.noeticsynthesis.com/insights/">
+<meta property="og:site_name" content="Noetic Synthesis">
+<meta property="og:title" content="Insights | Noetic Synthesis">
+<meta property="og:description" content="Essays on how people question, imagine, forecast, and act when AI is in the room.">
+<meta property="og:image" content="https://www.noeticsynthesis.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+(function(){var t=localStorage.getItem('ns-theme')||'light';if(t==='light'){document.documentElement.setAttribute('data-theme','light')}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Insights",
+  "url": "https://www.noeticsynthesis.com/insights/",
+  "description": "Essays from Noetic Synthesis on how people question, imagine, forecast, and act when AI is in the room.",
+  "isPartOf": { "@type": "WebSite", "url": "https://www.noeticsynthesis.com/", "name": "Noetic Synthesis" },
+  "publisher": { "@type": "Organization", "@id": "https://www.noeticsynthesis.com/#org", "name": "Noetic Synthesis" }
+}
+</script>
+<style>
+:root{
+  --bg:#0a0a0a;--bg2:#0e0e0e;--surface:#141414;--text:#f2f2f0;--muted:#a8a8a8;--faint:#7d7d78;
+  --line:rgba(255,255,255,0.13);--line2:rgba(255,255,255,0.2);--grain:.045;
+  --s4:4px;--s8:8px;--s12:12px;--s16:16px;--s24:24px;--s32:32px;--s48:48px;--s64:64px;--s96:96px;--s128:128px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --display:'Archivo',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  --sans:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+}
+html[data-theme="light"]{--bg:#f7f5f0;--bg2:#f1eee7;--surface:#e9e5dc;--text:#14140f;--muted:#4f4f48;--faint:#78786e;--line:rgba(20,20,20,0.15);--line2:rgba(20,20,20,0.24);--grain:.03}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;transition:background .3s,color .3s}
+::selection{background:var(--text);color:var(--bg)}
+.grain{position:fixed;inset:-50%;z-index:9999;pointer-events:none;opacity:var(--grain);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:gs 8s steps(6) infinite}
+@keyframes gs{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,1%)}100%{transform:translate(0,0)}}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--s32)}
+@media(max-width:640px){.container{padding:0 var(--s24)}}
+a:focus-visible,button:focus-visible{outline:1px solid var(--text);outline-offset:3px}
+
+.label{font-family:var(--display);font-variation-settings:'wdth' 92;
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.wide{font-variation-settings:'wdth' 125;font-weight:300}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:var(--s16) var(--s32);display:flex;align-items:center;justify-content:space-between}
+@media(max-width:640px){.nav-inner{padding:var(--s12) var(--s24)}}
+.wordmark{font-family:var(--display);font-variation-settings:'wdth' 104;font-weight:700;font-size:14px;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:var(--s8);align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:400;padding:var(--s8) var(--s12);border-radius:6px;white-space:nowrap;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
+.nav-links a[aria-current="page"]{color:var(--text)}
+.theme-toggle{width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,border-color .2s;flex-shrink:0}
+.theme-toggle:hover{color:var(--text);border-color:var(--text)}
+.theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+html[data-theme="light"] .icon-sun{display:none}
+html:not([data-theme="light"]) .icon-moon{display:none}
+.nav-menu{display:none;width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;margin-left:var(--s12);transition:color .2s,border-color .2s}
+.nav-menu:hover{color:var(--text);border-color:var(--text)}
+.nav-menu svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.nav-menu .ic-x,nav.open .nav-menu .ic-bars{display:none}
+nav.open .nav-menu .ic-x{display:block}
+@media(max-width:980px){
+  .nav-menu{display:flex}
+  .nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:var(--s8) var(--s24) var(--s24);background:var(--bg);border-bottom:1px solid var(--line)}
+  nav.open .nav-links{display:flex}
+  .nav-links a{padding:var(--s12) 0;border-bottom:1px solid var(--line);border-radius:0;font-size:15px}
+  .nav-links a:hover{background:none}
+  .nav-links .nav-cta{margin:0;padding:var(--s12) 0 !important;border-bottom:1px solid var(--line) !important}
+  .theme-toggle{margin-top:var(--s16)}
+}
+@media(max-width:640px){.grain{display:none}}
+.nav-cta{color:var(--text) !important;border-bottom:1px solid var(--text);border-radius:0 !important;padding:2px 0 3px !important;margin-left:var(--s12)}
+.nav-cta:hover{background:none !important}
+
+header.page{padding:calc(var(--s128) + var(--s48)) 0 var(--s64)}
+h1{font-family:var(--display);font-variation-settings:'wdth' 116;font-weight:600;
+  font-size:clamp(34px,6.6vw,68px);line-height:.98;letter-spacing:-.03em;
+  text-transform:uppercase;max-width:17ch;margin-top:var(--s24)}
+.lede{margin-top:var(--s24);font-size:17px;color:var(--muted);max-width:52ch}
+
+/* Shelf: intro row + horizontal rail */
+.shelf{padding:var(--s48) 0 var(--s96);border-top:1px solid var(--line)}
+.shelf-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s32);margin-bottom:var(--s32)}
+.shelf-intro{max-width:34ch;font-size:15px;line-height:1.5;letter-spacing:-.011em}
+.shelf-intro span{color:var(--faint)}
+.rail-nav{display:flex;gap:var(--s8);flex-shrink:0}
+.rail-btn{width:40px;height:40px;border-radius:9999px;border:1px solid var(--line2);background:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,border-color .2s,opacity .2s}
+.rail-btn:hover{color:var(--text);border-color:var(--text)}
+.rail-btn[disabled]{opacity:.3;cursor:default}
+.rail-btn[disabled]:hover{color:var(--muted);border-color:var(--line2)}
+.rail-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.rail-wrap{margin:0 calc(-1 * var(--s32))}
+@media(max-width:640px){.rail-wrap{margin:0 calc(-1 * var(--s24))}}
+.rail{display:flex;gap:var(--s4);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 var(--s32);scroll-padding:0 var(--s32);cursor:grab}
+.rail::-webkit-scrollbar{display:none}
+.rail.dragging{cursor:grabbing;scroll-snap-type:none}
+@media(max-width:640px){.rail{padding:0 var(--s24);scroll-padding:0 var(--s24)}}
+.rail::after{content:'';flex:0 0 var(--s24)}
+
+/* Card */
+.card{flex:0 0 clamp(300px,42vw,520px);scroll-snap-align:start;background:var(--bg2);border:1px solid var(--line);display:flex;flex-direction:column;min-height:560px;text-decoration:none;color:var(--text);position:relative;transition:border-color .3s}
+@media(max-width:640px){.card{flex-basis:84vw;min-height:520px}}
+a.card:hover{border-color:var(--line2)}
+.card-kind{display:flex;align-items:center;gap:var(--s8);padding:var(--s16) var(--s16) 0;font-size:12px;color:var(--faint);letter-spacing:.01em}
+.card-kind::before{content:'';width:6px;height:6px;border-radius:9999px;border:1px solid var(--faint)}
+.card-kind[data-live]::before{background:var(--faint)}
+.card-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:var(--s32) var(--s16)}
+.cover{width:clamp(200px,58%,280px);aspect-ratio:1/1.4;background:#fdfcf9;color:#14140f;padding:14px 16px 18px;display:flex;flex-direction:column;box-shadow:0 18px 40px -18px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.08);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+a.card:hover .cover{transform:translateY(-6px);box-shadow:0 28px 50px -20px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.08)}
+.cover-top{display:flex;justify-content:space-between;align-items:center;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:7px;letter-spacing:.04em;color:#6b6b62;text-transform:uppercase}
+.cover-top b{font-family:var(--display);font-variation-settings:'wdth' 104;font-weight:700;font-size:9px;color:#14140f;letter-spacing:.05em}
+.cover h3{font-family:var(--display);font-variation-settings:'wdth' 110;font-weight:600;font-size:clamp(13px,1.35vw,17px);line-height:1.08;letter-spacing:-.02em;text-transform:uppercase;margin:auto 0 12px;padding-top:26px}
+.cover-art{width:100%;aspect-ratio:1/1;display:block}
+.cover-art svg{width:100%;height:100%;display:block}
+.card-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s16);padding:var(--s16);border-top:1px solid var(--line)}
+.card-foot p{font-size:14px;line-height:1.45;color:var(--muted);letter-spacing:-.011em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-foot .meta{display:block;font-size:12px;color:var(--faint);margin-bottom:var(--s4)}
+.card-go{flex-shrink:0;width:32px;height:32px;border-radius:9999px;background:var(--text);color:var(--bg);display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease)}
+.card-go svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+a.card:hover .card-go{transform:translate(2px,-2px)}
+.card.soon{opacity:.75}
+.card.soon .cover{background:#f1efe8}
+.card.soon .card-go{background:none;border:1px dashed var(--line2);color:var(--faint)}
+
+/* Reader overlay */
+.reader{border:none;padding:0;margin:0;width:100vw;height:100vh;max-width:none;max-height:none;background:var(--bg);color:var(--text);overflow:hidden}
+.reader::backdrop{background:rgba(0,0,0,.55)}
+.reader[open]{display:flex;flex-direction:column}
+.reader-bar{display:flex;align-items:center;justify-content:space-between;gap:var(--s16);padding:var(--s12) var(--s32);border-bottom:1px solid var(--line);flex-shrink:0;background:var(--bg)}
+@media(max-width:640px){.reader-bar{padding:var(--s12) var(--s24)}}
+.reader-bar .label{margin:0}
+.reader-actions{display:flex;gap:var(--s8);align-items:center}
+.reader-link{font-size:13px;color:var(--muted);text-decoration:none;padding:var(--s8) var(--s12);border-radius:6px;white-space:nowrap}
+.reader-link:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
+.reader-close{width:36px;height:36px;border-radius:9999px;border:1px solid var(--line2);background:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,border-color .2s}
+.reader-close:hover{color:var(--text);border-color:var(--text)}
+.reader-close svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.reader-scroll{overflow-y:auto;flex:1;overscroll-behavior:contain}
+.reader-body{max-width:720px;margin:0 auto;padding:var(--s64) var(--s32) var(--s128)}
+@media(max-width:640px){.reader-body{padding:var(--s48) var(--s24) var(--s96)}}
+.reader-body .crumb{display:none}
+.reader-body .status{color:var(--faint);font-size:14px}
+.reader-body h1{font-size:clamp(30px,4.6vw,52px);line-height:1;margin-top:0}
+.reader-body .dek{margin-top:var(--s24);font-size:clamp(17px,2vw,21px);line-height:1.45;letter-spacing:-.016em;color:var(--muted);max-width:52ch}
+.reader-body .byline{margin-top:var(--s24);display:flex;gap:var(--s24);flex-wrap:wrap;font-size:13px;color:var(--faint)}
+.reader-body .byline strong{color:var(--text);font-weight:500}
+.reader-body .sample-note{margin-top:var(--s24);padding:var(--s12) var(--s16);border:1px dashed var(--line2);border-radius:6px;font-size:13px;color:var(--faint);max-width:58ch}
+.reader-body .prose{margin-top:var(--s48);padding-top:var(--s48);border-top:1px solid var(--line)}
+
+.reader-body .prose p{font-size:18px;line-height:1.65;letter-spacing:-.011em;color:var(--text);margin-bottom:var(--s24)}
+.reader-body .prose > p:first-of-type::first-letter{font-family:var(--display);font-variation-settings:'wdth' 116;font-weight:600;font-size:3.4em;line-height:.8;float:left;margin:8px 10px 0 0}
+.reader-body .prose h2{font-family:var(--display);font-variation-settings:'wdth' 113;font-weight:600;
+  font-size:clamp(20px,2.4vw,26px);letter-spacing:-.016em;line-height:1.1;text-transform:uppercase;
+  margin:var(--s64) 0 var(--s24)}
+.reader-body .prose h2:first-child{margin-top:0}
+.reader-body .prose blockquote{margin:var(--s48) 0;padding-left:var(--s24);border-left:2px solid var(--text);font-family:var(--display);font-variation-settings:'wdth' 106;font-weight:400;font-size:clamp(20px,2.6vw,27px);line-height:1.25;letter-spacing:-.02em}
+.reader-body .prose blockquote p{font:inherit;color:var(--text);margin:0}
+.reader-body .prose ul,.reader-body .prose ol{margin:0 0 var(--s24) var(--s24);font-size:18px;line-height:1.65;color:var(--text)}
+.reader-body .prose li{margin-bottom:var(--s8)}
+.reader-body .prose a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line2);transition:border-color .2s}
+.reader-body .prose a:hover{border-color:var(--text)}
+.reader-body .prose sup{font-size:.62em;line-height:0;vertical-align:baseline;position:relative;top:-.55em;margin-left:1px}
+.reader-body .prose sup a{border:none;color:var(--faint);padding:0 2px}
+.reader-body .prose sup a:hover{color:var(--text)}
+.reader-body .prose hr{border:none;border-top:1px solid var(--line);margin:var(--s48) 0}
+.reader-body .prose em{font-style:italic}
+
+.reader-body .footnotes{margin-top:var(--s64);padding-top:var(--s32);border-top:1px solid var(--line)}
+.reader-body .footnotes .label{margin-bottom:var(--s16)}
+.reader-body .footnotes ol{margin-left:var(--s24);font-size:14px;line-height:1.6;color:var(--muted)}
+.reader-body .footnotes li{margin-bottom:var(--s12);padding-left:var(--s4)}
+.reader-body .footnotes li:target{color:var(--text)}
+.reader-body .footnotes a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.reader-body .footnotes a:hover{color:var(--text);border-color:var(--text)}
+.reader-body .footnotes .back{border:none;margin-left:var(--s4);color:var(--faint)}
+
+.reader-body .author{margin-top:var(--s64);padding-top:var(--s32);border-top:1px solid var(--line);display:grid;grid-template-columns:180px 1fr;gap:var(--s24)}
+@media(max-width:640px){.reader-body .author{grid-template-columns:1fr;gap:var(--s8)}}
+.reader-body .author p{font-size:15px;color:var(--muted);letter-spacing:-.011em;max-width:56ch}
+.reader-body .author a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+.reader-body .author a:hover{color:var(--text);border-color:var(--text)}
+.reader-next{margin-top:var(--s64);padding-top:var(--s32);border-top:1px solid var(--line);display:flex;gap:var(--s24);flex-wrap:wrap;font-size:14px}
+.reader-next a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px}
+.reader-next a:hover{border-color:var(--text)}
+.cta{padding:var(--s128) 0;text-align:center;border-top:1px solid var(--line)}
+.cta h2{font-family:var(--display);font-variation-settings:'wdth' 114;font-weight:600;
+  font-size:clamp(23px,3.3vw,38px);max-width:24ch;margin:0 auto;line-height:1.06;
+  letter-spacing:-.028em;text-transform:uppercase}
+.cta p{margin-top:var(--s16);color:var(--muted);max-width:48ch;margin-left:auto;margin-right:auto}
+.mail{display:inline-block;margin-top:var(--s32);font-family:var(--display);font-variation-settings:'wdth' 106;font-weight:500;font-size:clamp(18px,2.6vw,26px);letter-spacing:-.024em;color:var(--text);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:6px;transition:border-color .3s}
+.mail:hover{border-color:var(--text)}
+footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;color:var(--faint)}
+.foot-inner{max-width:1200px;margin:0 auto;padding:0 var(--s32);display:flex;justify-content:space-between;gap:var(--s16);flex-wrap:wrap}
+@media(max-width:640px){.foot-inner{padding:0 var(--s24)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.grain{animation:none}.cover,.card-go{transition:none}html{scroll-behavior:auto}}
+.foot-links{display:flex;gap:var(--s16);flex-wrap:wrap}
+.foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
+.foot-def{margin-top:var(--s4);opacity:.8}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<nav aria-label="Primary">
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Noetic Synthesis</a>
+    <div class="nav-links" id="nav-links">
+      <a href="/#cycle">The Cycle</a>
+      <a href="/council.html">The Council</a>
+      <a href="/#trace">In Action</a>
+      <a href="/insights/" aria-current="page">Insights</a>
+      <a href="/offerings.html">Offerings</a>
+      <a href="/#people">Who We Are</a>
+      <a href="/#contact" class="nav-cta">Inquiries</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+      <button class="nav-menu" id="nav-menu" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ic-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+  </div>
+</nav>
+<header class="page">
+  <div class="container">
+    <p class="label">Insights</p>
+    <h1>The thinking <span class="wide">behind</span> the tools.</h1>
+    <p class="lede">Essays on how people question, imagine, forecast, and act when AI is in the room. Written by the founders, cited where it counts, and long enough to make the argument.</p>
+  </div>
+</header>
+<main>
+<section class="shelf" aria-labelledby="shelf-heading">
+  <div class="container">
+    <div class="shelf-head">
+      <p class="shelf-intro reveal" id="shelf-heading">A six-part series by Julie Engel, read in order. <span>Open one to read it here, or scroll for the rest.</span></p>
+      <div class="rail-nav" aria-hidden="true">
+        <button class="rail-btn" id="rail-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="rail-btn" id="rail-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <div class="rail-wrap">
+      <!-- Series order, part 1 on the left. A real essay is an <a class="card"> pointing at its page; data-cover seeds the cover art. -->
+      <div class="rail" id="rail" role="list">
+        <a class="card reveal" role="listitem" href="/insights/your-ai-isnt-failing-your-thinking-is.html" data-cover="3">
+          <span class="card-kind" data-live>Part 1 of 6</span>
+          <span class="card-stage">
+            <span class="cover">
+              <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>No. 01</span><b>N</b></span>
+              <h3>Your AI isn't failing. Your thinking is.</h3>
+              <span class="cover-art"></span>
+            </span>
+          </span>
+          <span class="card-foot">
+            <p><span class="meta">Julie Engel · September 2026 · 5 min</span>Why the next competitive advantage won't belong to the companies with the best AI.</p>
+            <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </span>
+        </a>
+        <a class="card reveal" role="listitem" href="/insights/why-i-stopped-looking-for-better-answers.html" data-cover="5">
+          <span class="card-kind" data-live>Part 2 of 6</span>
+          <span class="card-stage">
+            <span class="cover">
+              <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>No. 02</span><b>N</b></span>
+              <h3>Why I stopped looking for better answers and started asking better questions</h3>
+              <span class="cover-art"></span>
+            </span>
+          </span>
+          <span class="card-foot">
+            <p><span class="meta">Julie Engel · September 2026 · 1 min</span>A therapist's turn from treating problems one at a time to studying the systems that connect them.</p>
+            <span class="card-go"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </span>
+        </a>
+        <div class="card soon reveal" role="listitem" data-cover="7" aria-label="Part 3 of 6, in progress">
+          <span class="card-kind">Part 3 of 6 · In progress</span>
+          <span class="card-stage">
+            <span class="cover">
+              <span class="cover-top"><span>● Noetic Synthesis · Insights</span><span>No. 03</span><b>N</b></span>
+              <h3>Next in the series</h3>
+              <span class="cover-art"></span>
+            </span>
+          </span>
+          <span class="card-foot">
+            <p><span class="meta">Julie Engel · Coming soon</span>Six essays, read in order. The next one is on its way.</p>
+            <span class="card-go"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<dialog class="reader" id="reader" aria-labelledby="reader-title">
+  <div class="reader-bar">
+    <p class="label">Insights</p>
+    <div class="reader-actions">
+      <a class="reader-link" id="reader-page" href="#">Open as its own page</a>
+      <button class="reader-close" id="reader-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="reader-scroll" id="reader-scroll">
+    <div class="reader-body" id="reader-body"><p class="status">Loading…</p></div>
+  </div>
+</dialog>
+<section class="cta">
+  <div class="container">
+    <h2>Read enough. Try it on a real question.</h2>
+    <p>The cycle is free, takes about ten minutes, and needs no account.</p>
+    <a class="mail" href="/cycle.html">Run the cycle</a>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div>Noetic Synthesis</div>
+      <div class="foot-def">Noetic: of the mind, and how it comes to know.</div>
+    </div>
+    <div class="foot-links" role="navigation" aria-label="Footer">
+      <a href="/council.html">The Council</a>
+      <a href="/insights/">Insights</a>
+      <a href="/offerings.html">Offerings</a>
+      <a href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
+    </div>
+    <div>San Diego, California</div>
+  </div>
+</footer>
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* Cover art: a deterministic dot field seeded by data-cover, so every essay gets its own cover with no image file. */
+const PALETTE=['#c8552b','#1f3a5f','#5d6b3a','#14140f','#8a4d2f','#3d5a80'];
+document.querySelectorAll('.card').forEach(card=>{
+  const seed=parseInt(card.dataset.cover||'1',10);let x=seed*9301+49297;const rnd=()=>{x=(x*9301+49297)%233280;return x/233280};
+  const N=14,cell=100/N,bg=PALETTE[seed%PALETTE.length];let r='';
+  for(let i=0;i<N;i++)for(let j=0;j<N;j++){
+    const d=Math.hypot(i-N/2+.5,j-N/2+.5)/(N/2);const p=Math.max(0,1-d*(0.9+rnd()*.4));
+    if(rnd()<p*p){const sz=cell*(0.55+rnd()*.5);r+=`<rect x="${(i*cell).toFixed(2)}" y="${(j*cell).toFixed(2)}" width="${sz.toFixed(2)}" height="${sz.toFixed(2)}"/>`}
+  }
+  const art=card.querySelector('.cover-art');
+  if(art)art.innerHTML=`<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="${bg}"/><g fill="${card.classList.contains('soon')?'#f1efe8':'#fdfcf9'}" opacity=".92">${r}</g></svg>`;
+});
+
+/* Rail: arrows, keyboard, drag-to-scroll */
+const rail=document.getElementById('rail'),prev=document.getElementById('rail-prev'),next=document.getElementById('rail-next');
+const step=()=>{const c=rail.querySelector('.card');return c?c.getBoundingClientRect().width+4:400};
+const sync=()=>{prev.disabled=rail.scrollLeft<=2;next.disabled=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-2};
+prev.addEventListener('click',()=>rail.scrollBy({left:-step(),behavior:'smooth'}));
+next.addEventListener('click',()=>rail.scrollBy({left:step(),behavior:'smooth'}));
+rail.addEventListener('scroll',sync,{passive:true});addEventListener('resize',sync);sync();
+rail.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){rail.scrollBy({left:step(),behavior:'smooth'})}else if(e.key==='ArrowLeft'){rail.scrollBy({left:-step(),behavior:'smooth'})}});
+let drag=null;
+rail.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;drag={x:e.clientX,left:rail.scrollLeft,moved:false};});
+rail.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>6){drag.moved=true;rail.classList.add('dragging')}if(drag.moved)rail.scrollLeft=drag.left-dx});
+const endDrag=()=>{if(!drag)return;const moved=drag.moved;drag=null;rail.classList.remove('dragging');if(moved){rail.addEventListener('click',e=>e.preventDefault(),{capture:true,once:true})}};
+rail.addEventListener('pointerup',endDrag);rail.addEventListener('pointerleave',endDrag);
+
+/* Reader: open an essay in place, loaded from its own page. URL carries ?read=slug so it can be shared and Back closes it. */
+const reader=document.getElementById('reader'),body=document.getElementById('reader-body'),pageLink=document.getElementById('reader-page'),scroller=document.getElementById('reader-scroll');
+const cache={};
+async function openEssay(href,push){
+  if(!reader.showModal)return location.assign(href);
+  const slug=href.split('/').pop().replace(/\.html$/,'');
+  pageLink.href=href;body.innerHTML='<p class="status">Loading…</p>';
+  if(!reader.open)reader.showModal();scroller.scrollTop=0;document.documentElement.style.overflow='hidden';
+  if(push)history.pushState({read:slug},'',`?read=${slug}`);
+  try{
+    if(!cache[href]){
+      const html=await(await fetch(href)).text();const doc=new DOMParser().parseFromString(html,'text/html');
+      const head=doc.querySelector('header.page .prose-wrap'),prose=doc.querySelector('article.prose .prose-wrap');
+      if(!head||!prose)throw new Error('shape');
+      const h=head.querySelector('h1');if(h)h.id='reader-title';
+      cache[href]=head.innerHTML+'<div class="prose">'+prose.innerHTML+'</div>'+
+        '<div class="reader-next"><a href="/cycle.html">Run the cycle</a><a href="/council.html">Convene the Council</a><a href="'+href+'">Open this essay as its own page</a></div>';
+      document.title=(doc.title||'Insights');
+    }
+    body.innerHTML=cache[href];
+  }catch(err){body.innerHTML='<p class="status">Could not load the essay here. <a href="'+href+'">Open it as its own page</a>.</p>'}
+}
+function closeReader(pop){
+  if(!reader.open)return;reader.close();document.documentElement.style.overflow='';document.title='Insights | Noetic Synthesis';
+  if(!pop&&history.state&&history.state.read)history.back();
+}
+document.querySelectorAll('a.card').forEach(a=>a.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.button===1)return;e.preventDefault();openEssay(a.getAttribute('href'),true)}));
+document.getElementById('reader-close').addEventListener('click',()=>closeReader(false));
+reader.addEventListener('cancel',e=>{e.preventDefault();closeReader(false)});
+reader.addEventListener('click',e=>{if(e.target===reader)closeReader(false)});
+addEventListener('popstate',()=>{const q=new URLSearchParams(location.search).get('read');if(q){openEssay('/insights/'+q+'.html',false)}else{closeReader(true)}});
+const initial=new URLSearchParams(location.search).get('read');
+if(initial){history.replaceState({read:initial},'');openEssay('/insights/'+initial+'.html',false)}
+
+const themeBtn=document.getElementById('theme-toggle');
+function syncThemeUI(){
+  const light=document.documentElement.getAttribute('data-theme')==='light';
+  themeBtn.setAttribute('aria-label',light?'Switch to dark mode':'Switch to light mode');
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',light?'#f7f5f0':'#0a0a0a');
+}
+themeBtn.addEventListener('click',()=>{
+  const light=document.documentElement.getAttribute('data-theme')==='light';
+  if(light){document.documentElement.removeAttribute('data-theme')}else{document.documentElement.setAttribute('data-theme','light')}
+  localStorage.setItem('ns-theme',light?'dark':'light');
+  syncThemeUI();
+});
+syncThemeUI();
+const navEl=document.querySelector('nav');
+const navMenu=document.getElementById('nav-menu');
+if(navMenu){
+  const setOpen=o=>{navEl.classList.toggle('open',o);navMenu.setAttribute('aria-expanded',o);navMenu.setAttribute('aria-label',o?'Close menu':'Open menu')};
+  navMenu.addEventListener('click',()=>setOpen(!navEl.classList.contains('open')));
+  document.querySelectorAll('#nav-links a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+}
+</script>
+</body>
+</html>

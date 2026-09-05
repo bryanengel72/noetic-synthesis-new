@@ -1,7 +1,7 @@
 # noeticsynthesis.com — source
 
-The live site: a hand-written static `index.html` + `offerings.html` plus two
-serverless functions, deployed on Vercel. Canonical host is
+The live site: hand-written static pages (`index.html`, `offerings.html`,
+`council.html`, `cycle.html`, `insights/`) plus serverless functions, deployed on Vercel. Canonical host is
 `https://www.noeticsynthesis.com` (the apex 308-redirects to www).
 
 ## History
@@ -22,6 +22,9 @@ what is live; it's a dormant earlier direction.
 | `index.html` | the live page. The hero plays `hero.mp4` full-bleed behind the headline (see *The hero clip* below). The SVG braid band that used to close the hero is gone. |
 | `offerings.html` | the offerings page |
 | `cycle.html` | the full Noetic Innovation Cycle, runnable in the browser — six AoQ rounds → What If → Divergence → Foresight → What Now, per `../noetic-cycle-prototype.md`. Live since 2026-09-03; ships together with `api/cycle.js`. |
+| `insights/index.html` | the Insights landing page (`/insights/`): a horizontal rail of cover cards in series order (part 1 on the left). Clicking a card opens the essay in a full-screen reader loaded from the essay's own page (`?read=<slug>` deep-links to it; without JS the card is a plain link). Cover art is generated from `data-cover` (any integer), so no image files. Add a new essay as an `<a class="card">` here in series position, plus `sitemap.xml` and `llms.txt`. The "In progress" card is a placeholder for the next part. |
+| `insights/<slug>.html` | one page per essay. Julie's series is six parts in a fixed order; part 1 is `your-ai-isnt-failing-your-thinking-is.html`. Source PDFs arrive from Julie; the text is converted by hand. |
+| `insights/_template.html` | the essay template: copy it to `insights/<slug>.html` and replace every `{{TOKEN}}` (the file's header comment lists them). Listed in `.vercelignore`, so it never deploys. |
 | `api/cycle.js` | the cycle's five-stage endpoint. All prompts live here server-side, one stage per request, structured outputs, per-IP rate limit (40/hr ≈ four runs). Live since 2026-09-03. |
 | `council.html` | The Council: five advisors on five model families, two rounds, a synthesis that ends on the questions they could not resolve (each links into `cycle.html?q=`). Rebuilt on-site 2026-09-04, replacing the MindStudio iframe; ships together with `api/council.js`. |
 | `api/council.js` | the Council's endpoint, via OpenRouter (`OPENROUTER_API_KEY`). Three phases per run (round1 / round2 / synthesis), five seats in parallel per round, a seat that fails shows "did not answer". Seat prompts are the MindStudio agent's verbatim (source: `../council-mindstudio-prompts.md`). Per-IP rate limit (30/hr ≈ ten runs). |
