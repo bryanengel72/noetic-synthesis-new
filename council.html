@@ -114,24 +114,57 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
   font-size:clamp(26px,4vw,46px);line-height:1.02;letter-spacing:-.028em;
   text-transform:uppercase;max-width:22ch;margin-top:var(--s16)}
 
-.cycle-grid{display:grid;grid-template-columns:repeat(2,1fr);margin-top:var(--s64);border-top:1px solid var(--line)}
-@media(max-width:720px){.cycle-grid{grid-template-columns:1fr}}
-.agent-card{padding:var(--s48) var(--s48) var(--s48) var(--s24);position:relative;border-bottom:1px solid var(--line)}
-.agent-card:nth-child(odd){border-right:1px solid var(--line)}
-.agent-card:nth-child(even){padding-left:var(--s48)}
-.agent-card:last-child:nth-child(odd){grid-column:1/-1;border-right:none}
-@media(max-width:720px){.agent-card{border-right:none !important;padding-left:var(--s24) !important;padding-right:0}}
-.agent-card::before{content:'';position:absolute;left:0;top:var(--s48);bottom:var(--s48);width:2px;background:var(--text);transform:scaleY(0);transform-origin:top;transition:transform .45s var(--ease)}
-.agent-card:nth-child(even)::before{left:var(--s24)}
-@media(max-width:720px){.agent-card:nth-child(even)::before{left:0}}
-.agent-card:hover::before{transform:scaleY(1)}
-.agent-card h3{font-family:var(--display);font-variation-settings:'wdth' 112;font-weight:600;
-  font-size:20px;letter-spacing:-.008em;text-transform:uppercase;margin-bottom:var(--s8);
-  transition:transform .45s var(--ease)}
-.agent-card:hover h3{transform:translateX(12px)}
+/* The Seats — a sequenced roll call. Four advisors in a row, then the adversary across the table. */
+.seats-table{margin-top:var(--s64)}
+.seat-row{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:0 var(--s32)}
+@media(max-width:980px){.seat-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.seat-row{grid-template-columns:1fr}}
+.seat-card{position:relative;padding:var(--s24) 0 var(--s48);--acc:var(--text)}
+.seat-card.reveal,.seat-divider.reveal{opacity:1;transform:none;transition:none}
+.seat-rule{position:absolute;top:0;left:0;right:0;height:1px;background:var(--line)}
+.seat-rule::after{content:'';position:absolute;left:0;top:-1px;height:2px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:left}
+.adversary .seat-rule::after{box-shadow:0 0 14px color-mix(in srgb,var(--acc) 55%,transparent)}
+.seat-num{display:block;font-family:var(--display);font-weight:200;font-size:clamp(56px,6.4vw,84px);line-height:.92;letter-spacing:-.045em;
+  font-variation-settings:'wdth' 62;color:var(--text);opacity:0;margin-bottom:var(--s24);transition:color .5s var(--ease);will-change:font-variation-settings,opacity}
+.seat-role{display:block;color:var(--faint);margin-bottom:var(--s8)}
+.adversary .seat-role{color:var(--acc)}
+.seat-card h3{font-family:var(--display);font-variation-settings:'wdth' 112;font-weight:600;font-size:20px;letter-spacing:-.008em;text-transform:uppercase;margin-bottom:var(--s8)}
 .agent-tag{color:var(--faint);font-size:15px;margin-bottom:var(--s16);letter-spacing:-.011em}
-.agent-card p{color:var(--muted);font-size:15px;letter-spacing:-.011em}
-.agent-card .label{display:block;margin-bottom:var(--s16)}
+.seat-desc{color:var(--muted);font-size:15px;letter-spacing:-.011em;transition:color .4s}
+.seat-card .seat-role,.seat-card h3,.seat-card .agent-tag,.seat-card .seat-desc{opacity:0;transform:translateY(12px)}
+.seat-num{color:var(--muted)}
+.seat-card:hover .seat-num{color:var(--text)}
+.adversary .seat-num,.adversary:hover .seat-num{color:var(--acc)}
+.seat-card:hover .seat-desc{color:var(--text)}
+@keyframes seat-rule{to{transform:scaleX(1)}}
+@keyframes seat-num{from{opacity:0;font-variation-settings:'wdth' 62;transform:translateY(10px)}to{opacity:1;font-variation-settings:'wdth' 118;transform:none}}
+@keyframes seat-up{to{opacity:1;transform:none}}
+.seat-card.in .seat-rule::after{animation:seat-rule 1s var(--ease) forwards;animation-delay:calc(var(--i,0)*140ms)}
+.seat-card.in .seat-num{animation:seat-num 1.1s var(--ease) forwards;animation-delay:calc(var(--i,0)*140ms + 80ms)}
+.seat-card.in .seat-role{animation:seat-up .7s var(--ease) forwards;animation-delay:calc(var(--i,0)*140ms + 260ms)}
+.seat-card.in h3{animation:seat-up .7s var(--ease) forwards;animation-delay:calc(var(--i,0)*140ms + 340ms)}
+.seat-card.in .agent-tag{animation:seat-up .7s var(--ease) forwards;animation-delay:calc(var(--i,0)*140ms + 420ms)}
+.seat-card.in .seat-desc{animation:seat-up .7s var(--ease) forwards;animation-delay:calc(var(--i,0)*140ms + 500ms)}
+/* The divider: a line drawn from the centre outward, with the turn of phrase in the middle. */
+.seat-divider{display:flex;align-items:center;gap:var(--s24);margin:var(--s24) 0 var(--s32)}
+.seat-divider::before,.seat-divider::after{content:'';flex:1;height:1px;background:var(--line2);transform:scaleX(0)}
+.seat-divider::before{transform-origin:right}
+.seat-divider::after{transform-origin:left}
+.seat-divider span{opacity:0;transform:translateY(6px);white-space:nowrap}
+.seat-divider.in::before,.seat-divider.in::after{animation:seat-rule 1.1s var(--ease) forwards;animation-delay:.15s}
+.seat-divider.in span{animation:seat-up .7s var(--ease) forwards}
+/* The adversary sits alone, in red, with the room's attention on it. */
+.seat-card.adversary{display:grid;grid-template-columns:auto 1fr;column-gap:var(--s48);align-items:start;padding:var(--s48) var(--s48) var(--s48) var(--s32);
+  background:linear-gradient(100deg,color-mix(in srgb,var(--acc) 9%,transparent),transparent 62%);border-radius:4px;overflow:hidden}
+.adversary .seat-rule{background:color-mix(in srgb,var(--acc) 30%,var(--line))}
+.adversary .seat-rule::before{content:'';position:absolute;top:-1px;height:2px;width:22%;left:-22%;background:linear-gradient(90deg,transparent,var(--text),transparent);opacity:0}
+.adversary.in .seat-rule::before{animation:seat-scan 5.5s linear 1.6s infinite}
+@keyframes seat-scan{0%{left:-22%;opacity:0}6%{opacity:.7}30%{left:100%;opacity:.7}31%{opacity:0}100%{left:100%;opacity:0}}
+.adversary .seat-num{grid-row:1/3;font-size:clamp(88px,12vw,164px);color:var(--acc);margin:0;line-height:.8}
+.adversary .adv-body{grid-column:2}
+.adversary .seat-desc{grid-column:2;max-width:64ch;font-size:16px;margin-top:var(--s16)}
+.adversary h3{font-size:clamp(22px,2.6vw,30px)}
+@media(max-width:560px){.seat-card.adversary{grid-template-columns:1fr;padding:var(--s32) var(--s24)}.adversary .seat-num{grid-row:auto;font-size:96px;margin-bottom:var(--s16)}.adversary .adv-body,.adversary .seat-desc{grid-column:1}}
 .seat-note{margin-top:var(--s48);max-width:780px;border-left:1px solid var(--text);padding:var(--s4) 0 var(--s4) var(--s32)}
 .seat-note p{color:var(--muted);font-size:16px}
 .seat-note b{color:var(--text);font-weight:600}
@@ -193,7 +226,7 @@ textarea:focus{border-color:var(--text);outline:none}
 .q a:hover{color:var(--text);border-bottom-color:var(--text);letter-spacing:.24em}
 .hidden{display:none !important}
 @media(prefers-reduced-motion:reduce){.pulse{animation:none}}
-@media print{nav,.grain,.btn-row,.status,.errbox,.pair-sect,.inquiry,footer,header.page .hero-actions,#seats,#rounds{display:none !important}header.page{padding:0 0 var(--s24)}section{padding:0}.seat,.q{break-inside:avoid}}
+@media print{nav,.grain,.btn-row,.status,.errbox,.pair-sect,.inquiry,footer,header.page .hero-actions,#seats,#rounds{display:none !important}header.page{padding:0 0 var(--s24)}section{padding:0}.seat,.seat-card,.q{break-inside:avoid}}
 
 .pair-sect{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s64);margin-top:var(--s64);align-items:start}
@@ -224,7 +257,10 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .stagger.reveal{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
 .reveal,.stagger>*{opacity:1;transform:none;transition:none}
-.agent-card::before,.agent-card h3{transition:none}
+.seat-card .seat-num,.seat-card .seat-role,.seat-card h3,.seat-card .agent-tag,.seat-card .seat-desc,.seat-divider span{opacity:1;transform:none;animation:none !important}
+.seat-card .seat-num{font-variation-settings:'wdth' 118}
+.seat-rule::after,.seat-divider::before,.seat-divider::after{transform:none;animation:none !important}
+.adversary .seat-rule::before{display:none}
 .grain{animation:none}
 html{scroll-behavior:auto}
 }
@@ -279,36 +315,51 @@ html{scroll-behavior:auto}
     <p class="label reveal">The Seats</p>
     <h2 id="seats-heading" class="reveal">Four advisors <span class="wide">and one adversary.</span></h2>
     <p class="lede reveal">Each seat holds one job and is prohibited from doing the others'. That's what keeps five voices from collapsing into one.</p>
-    <div class="cycle-grid reveal stagger">
-      <article class="agent-card">
-        <span class="label">01 · Systems</span>
-        <h3>Connections</h3>
-        <p class="agent-tag">What moves when this moves.</p>
-        <p>Maps the interconnections, feedback loops, and second-order couplings your decision touches — the structure of the situation, before anyone judges it.</p>
-      </article>
-      <article class="agent-card">
-        <span class="label">02 · Risk &amp; Ethics</span>
-        <h3>Consequences</h3>
-        <p class="agent-tag">Who bears the cost.</p>
-        <p>Surfaces the pitfalls, unintended consequences, and ethical weight — who wasn't in the room, and what precedent the decision quietly sets.</p>
-      </article>
-      <article class="agent-card">
-        <span class="label">03 · Implementation</span>
-        <h3>Execution</h3>
-        <p class="agent-tag">How this actually gets built.</p>
-        <p>Takes the decision as given and works out what it costs to do: sequence, dependencies, technical feasibility, and the first real obstacle.</p>
-      </article>
-      <article class="agent-card">
-        <span class="label">04 · Innovation</span>
-        <h3>The Other Route</h3>
-        <p class="agent-tag">The version nobody proposed.</p>
-        <p>Explores the creative alternatives and unconventional pivots — the adjacent moves you haven't considered because you were busy defending the original.</p>
-      </article>
-      <article class="agent-card">
-        <span class="label">05 · Red Team</span>
-        <h3>The Adversary</h3>
-        <p class="agent-tag">How this dies.</p>
-        <p>Attacks the idea outright — hidden flaws, catastrophic failure scenarios, the quiet ways it fails slowly. Not negativity: the stress test that finds blind spots before you commit resources.</p>
+    <div class="seats-table">
+      <ol class="seat-row" role="list">
+        <li class="seat-card reveal" style="--i:0">
+          <span class="seat-rule" aria-hidden="true"></span>
+          <span class="seat-num" aria-hidden="true">01</span>
+          <span class="label seat-role">Systems</span>
+          <h3>Connections</h3>
+          <p class="agent-tag">What moves when this moves.</p>
+          <p class="seat-desc">Maps the interconnections, feedback loops, and second-order couplings your decision touches — the structure of the situation, before anyone judges it.</p>
+        </li>
+        <li class="seat-card reveal" style="--i:1">
+          <span class="seat-rule" aria-hidden="true"></span>
+          <span class="seat-num" aria-hidden="true">02</span>
+          <span class="label seat-role">Risk &amp; Ethics</span>
+          <h3>Consequences</h3>
+          <p class="agent-tag">Who bears the cost.</p>
+          <p class="seat-desc">Surfaces the pitfalls, unintended consequences, and ethical weight — who wasn't in the room, and what precedent the decision quietly sets.</p>
+        </li>
+        <li class="seat-card reveal" style="--i:2">
+          <span class="seat-rule" aria-hidden="true"></span>
+          <span class="seat-num" aria-hidden="true">03</span>
+          <span class="label seat-role">Implementation</span>
+          <h3>Execution</h3>
+          <p class="agent-tag">How this actually gets built.</p>
+          <p class="seat-desc">Takes the decision as given and works out what it costs to do: sequence, dependencies, technical feasibility, and the first real obstacle.</p>
+        </li>
+        <li class="seat-card reveal" style="--i:3">
+          <span class="seat-rule" aria-hidden="true"></span>
+          <span class="seat-num" aria-hidden="true">04</span>
+          <span class="label seat-role">Innovation</span>
+          <h3>The Other Route</h3>
+          <p class="agent-tag">The version nobody proposed.</p>
+          <p class="seat-desc">Explores the creative alternatives and unconventional pivots — the adjacent moves you haven't considered because you were busy defending the original.</p>
+        </li>
+      </ol>
+      <div class="seat-divider reveal" aria-hidden="true"><span class="label">And, across the table</span></div>
+      <article class="seat-card adversary reveal" style="--acc:var(--acc-redteam);--i:3">
+        <span class="seat-rule" aria-hidden="true"></span>
+        <span class="seat-num" aria-hidden="true">05</span>
+        <div class="adv-body">
+          <span class="label seat-role">Red Team</span>
+          <h3>The Adversary</h3>
+          <p class="agent-tag">How this dies.</p>
+        </div>
+        <p class="seat-desc">Attacks the idea outright — hidden flaws, catastrophic failure scenarios, the quiet ways it fails slowly. Not negativity: the stress test that finds blind spots before you commit resources.</p>
       </article>
     </div>
     <div class="seat-note reveal">
