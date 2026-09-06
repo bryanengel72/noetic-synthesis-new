@@ -73,6 +73,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
 
 .label{font-family:var(--display);font-variation-settings:'wdth' 92;
   font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+@media(max-width:640px){.label{font-size:12px}}
 .wide{font-variation-settings:'wdth' 125;font-weight:300}
 
 .grain{position:fixed;inset:-50%;z-index:9999;pointer-events:none;opacity:var(--grain);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:gs 8s steps(6) infinite}
@@ -134,97 +135,11 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .hero-note{font-size:13px;color:var(--faint);letter-spacing:.01em}
 /* The bloom runs under the copy in places, so the small text carries a soft
    halo in the page colour and the note steps up one contrast level. */
-.hero .sub p,.hero .hero-note,.hero .cta-alt,.hero .cta-link,.hero .asking-q,.hero .asking-go,.hero .asking .label{text-shadow:0 0 6px var(--bg),0 0 14px var(--bg),0 0 26px var(--bg)}
+.hero .sub p,.hero .hero-note,.hero .cta-alt,.hero .cta-link{text-shadow:0 0 6px var(--bg),0 0 14px var(--bg),0 0 26px var(--bg)}
 .hero .hero-note{color:var(--muted)}
 .cta-alt{font-size:14px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
 .cta-alt:hover{color:var(--text);border-bottom-color:var(--text)}
 @media(max-width:640px){.sub{gap:var(--s32)}.hrule{margin:var(--s32) 0 var(--s24)}}
-/* Art of the Question, live */
-.ask{padding:var(--s96) 0;border-top:1px solid var(--line)}
-.ask h2{max-width:22ch}
-.ask .note{margin-top:var(--s16);font-size:15px;color:var(--faint);max-width:52ch}
-.ask-form{margin-top:var(--s48);max-width:640px;display:grid;gap:var(--s16)}
-.ask-form input{width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--sans);font-size:clamp(18px,2.2vw,24px);line-height:1.4;letter-spacing:-.018em;padding:var(--s12) 0;transition:border-color .3s}
-.ask-form input:focus{outline:none;border-bottom-color:var(--text)}
-.ask-form input::placeholder{color:var(--faint);opacity:.55}
-.ask-row{display:flex;gap:var(--s24);align-items:center;flex-wrap:wrap}
-.ask-btn{background:var(--text);color:var(--bg);border:none;font-family:var(--display);font-variation-settings:'wdth' 100;font-weight:600;font-size:14px;letter-spacing:.04em;padding:var(--s12) var(--s24);cursor:pointer;transition:opacity .2s}
-.ask-btn:disabled{opacity:.45;cursor:wait}
-.ask-status{font-size:13px;color:var(--faint);min-height:1.2em}
-.ask-out{margin-top:var(--s48);max-width:640px;display:none}
-.ask-out.show{display:block;animation:fade .6s ease forwards}
-.ask-insight{font-family:var(--sans);font-size:clamp(17px,2vw,21px);line-height:1.45;letter-spacing:-.016em;color:var(--text)}
-.ask-qs{list-style:none;margin:var(--s32) 0 0;padding:0;display:grid;gap:var(--s12)}
-.ask-qs button{all:unset;display:block;width:100%;box-sizing:border-box;cursor:pointer;font-family:var(--sans);font-size:16px;line-height:1.45;color:var(--muted);padding:var(--s12) 0;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s,padding-left .25s}
-.ask-qs button:hover,.ask-qs button:focus-visible{color:var(--text);border-bottom-color:var(--text);padding-left:var(--s8)}
-.ask-round{margin-top:var(--s24);font-size:13px;color:var(--faint)}
-.ask-round a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
-.ask-syn{margin-top:var(--s32)}
-.ask-syn[hidden]{display:none}
-/* Session record: one real Art of the Question run, framed as an object laid on the page. Source: replay-source.md */
-.rec{max-width:680px;margin-top:var(--s64);border:1px solid var(--line2);background:var(--surface);box-shadow:0 1px 0 var(--line),0 24px 60px -30px rgba(0,0,0,.55)}
-.rec-head{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--s12) var(--s24);padding:var(--s16) 28px 14px;border-bottom:1px solid var(--line)}
-.rec-head .k{display:block;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
-.rec-head .v{font-size:13px;color:var(--muted)}
-.rec-body{padding:36px 28px 40px;max-width:calc(640px + 56px)}
-.rec-seed{font-family:var(--display);font-variation-settings:'wdth' 108;font-weight:500;font-size:clamp(20px,2.4vw,26px);line-height:1.15;letter-spacing:-.02em;text-wrap:balance;max-width:24ch}
-.rec-seed::before{content:'\201C'}.rec-seed::after{content:'\201D'}
-.rec-key{margin-top:var(--s8);font-size:13px;color:var(--faint)}
-.rec-rail{position:relative;margin-top:40px}
-.rec-rail::before{content:'';position:absolute;left:12px;top:14px;bottom:14px;width:1px;background:var(--line2)}
-.rec-rounds{list-style:none;margin:0;padding:0}
-.rec-rnd{position:relative;padding-left:52px;margin-bottom:40px}
-.rec-dot{position:absolute;left:0;top:2px;width:25px;height:25px;border-radius:9999px;background:var(--surface);border:1px solid var(--text);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-variation-settings:'wdth' 92;font-weight:700;font-size:11px}
-.rec-rnd .label{display:block;margin-bottom:6px}
-.rec-agent{font-size:15px;color:var(--faint);max-width:52ch;margin-bottom:var(--s16)}
-.rec-qs{list-style:none;margin:0;padding:0;display:grid;gap:var(--s12)}
-.rec-qs li{padding-left:var(--s16);font-size:14px;line-height:1.5;color:var(--faint);max-width:56ch}
-.rec-qs li.pick{font-size:17px;line-height:1.45;color:var(--text);border-left:2px solid var(--text);letter-spacing:-.012em}
-.rec-note{margin-top:14px;font-size:13px;color:var(--faint)}
-.rec-more{margin:0 0 40px 52px}
-.rec-more summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
-.rec-more summary::-webkit-details-marker{display:none}
-.rec-more summary::before{content:'';width:6px;height:6px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(-45deg) translateY(-1px);transition:transform .25s}
-.rec-more[open] summary::before{transform:rotate(45deg) translateY(-2px)}
-.rec-more summary .c{display:none}
-.rec-more[open] summary .o{display:none}.rec-more[open] summary .c{display:inline}
-.rec-more .rec-rounds{margin:36px 0 0 -52px}
-.rec-title{font-family:var(--display);font-variation-settings:'wdth' 108;font-weight:500;font-size:clamp(20px,2.4vw,26px);line-height:1.15;letter-spacing:-.02em;margin-bottom:14px;text-wrap:balance}
-.rec-syn{color:var(--muted);font-size:15px;max-width:56ch;letter-spacing:-.011em;margin-bottom:var(--s24)}
-.rec-askq{all:unset;display:block;width:100%;box-sizing:border-box;cursor:pointer;font-family:var(--sans);font-size:17px;line-height:1.45;color:var(--text);padding:var(--s12) 0;border-bottom:1px solid var(--line);transition:border-color .2s,padding-left .25s}
-.rec-askq:hover,.rec-askq:focus-visible{border-bottom-color:var(--text);padding-left:var(--s8)}
-.rec-next{margin-top:var(--s48);padding-top:28px;border-top:1px solid var(--line)}
-.rec-next .label{display:block;margin-bottom:var(--s16)}
-.rec-next-row{display:grid;grid-template-columns:110px 1fr;gap:var(--s8) var(--s24);margin-bottom:var(--s16)}
-.rec-next-row .k{font-size:13px;color:var(--faint);padding-top:2px}
-.rec-next-row .v{font-size:15px;color:var(--muted);max-width:56ch;letter-spacing:-.011em}
-.rec-foot{display:flex;justify-content:space-between;gap:var(--s16);flex-wrap:wrap;padding:14px 28px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
-@media(max-width:760px){
-  .rec-head,.rec-body,.rec-foot{padding-left:18px;padding-right:18px}
-  .rec-rail::before{display:none}
-  .rec-rnd{padding-left:0}
-  .rec-dot{display:none}
-  .rec-more{margin-left:0}
-  .rec-more .rec-rounds{margin-left:0}
-  .rec-next-row{grid-template-columns:1fr}
-}
-
-.asking{border-top:1px solid var(--line);padding-top:var(--s24);display:flex;gap:var(--s32);align-items:baseline;justify-content:space-between;opacity:0;animation:fade 1s ease 1.5s forwards}
-.asking-field{display:grid;gap:var(--s12);justify-items:end;width:min(100%,480px)}
-.asking-q{display:block;width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--sans);font-weight:400;font-size:clamp(16px,2.2vw,24px);line-height:1.32;letter-spacing:-.022em;text-align:right;padding:0 0 var(--s8);resize:none;overflow:hidden;transition:border-color .3s}
-.asking-q:focus{outline:none;border-bottom-color:var(--text)}
-.asking-q::placeholder{color:var(--text);opacity:1;transition:opacity .55s ease,filter .55s ease,transform .55s ease}
-.asking-q:focus::placeholder{opacity:.35}
-.asking-q.out::placeholder{opacity:0;filter:blur(7px);transform:translateY(-7px)}
-.asking-row{display:flex;gap:var(--s24);align-items:baseline;justify-content:flex-end;flex-wrap:wrap}
-.asking-go{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);background:none;border:none;border-bottom:1px solid var(--text);padding:0 0 var(--s4);cursor:pointer;transition:letter-spacing .4s var(--ease);white-space:nowrap;display:inline-flex;flex-direction:column;align-items:flex-end;text-align:right}
-/* Reserve the hovered width up front (a hidden copy at hover spacing), so the
-   spacing animation never reflows the row: reflow moved the button out from
-   under the cursor and made it jitter. */
-.asking-go::after{content:attr(data-label);letter-spacing:.28em;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
-.asking-go:hover{letter-spacing:.28em}
-@media(max-width:760px){.asking{flex-direction:column;gap:var(--s12);align-items:flex-start}.asking-field{justify-items:start;width:100%}.asking-q{text-align:left}.asking-row{justify-content:flex-start}}
-
 /* ===== HERO MEDIA =====
    Ink blooming in black water, full-bleed behind the hero. One clip serves
    both themes: dark plays it straight (screen blend drops the black to the
@@ -395,7 +310,7 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .inq-form{margin-top:var(--s48);max-width:520px;display:grid;gap:var(--s24)}
 .field{display:grid;gap:var(--s8)}
 .field label{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
-.field .opt{text-transform:none;font-weight:400;letter-spacing:0;font-size:10px;color:var(--faint);opacity:.75;margin-left:6px}
+.field .opt{text-transform:none;font-weight:400;letter-spacing:0;font-size:12px;color:var(--faint);opacity:.75;margin-left:6px}
 .field input,.field textarea{width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.5;padding:var(--s8) 0;transition:border-color .3s}
 .field textarea{resize:vertical;min-height:140px}
 .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--text)}
@@ -424,13 +339,12 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .stagger.reveal{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
 .reveal,.stagger>*{opacity:1;transform:none;transition:none}
-.line>span,.hrule,.sub,.asking{animation:none;transform:none;opacity:1}
+.line>span,.hrule,.sub{animation:none;transform:none;opacity:1}
 .hero-media img{opacity:1;transition:none}
 .trace::before{transform:scaleY(1);transition:none}
 .trace-dot{transform:none;transition:none}
 .agent-card::before,.agent-card h3{transition:none}
 .grain{animation:none}
-.asking-q{transition:none}
 html{scroll-behavior:auto}
 }
 

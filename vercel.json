@@ -4,6 +4,19 @@
   "outputDirectory": null,
   "installCommand": "npm install",
   "functions": {
-    "api/*.js": { "maxDuration": 60 }
-  }
+    "api/*.js": {
+      "maxDuration": 60
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)\\.(mp4|jpg|jpeg|png|webp|svg|woff2)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
 }
