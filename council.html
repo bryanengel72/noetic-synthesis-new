@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Council | Noetic Synthesis</title>
-<meta name="description" content="Five distinct AI perspectives — each a different model family — deliberate on one decision, then a dedicated red team attacks it. Stress-test your thinking before you commit.">
+<meta name="description" content="Five AI advisors, each a different model family, deliberate on one decision across two rounds while a red team attacks it. Stress-test your thinking first.">
 <link rel="canonical" href="https://www.noeticsynthesis.com/council.html">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='38' font-weight='700' fill='%23f2f2f0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
@@ -268,6 +268,10 @@ html{scroll-behavior:auto}
 .foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
 .foot-def{margin-top:var(--s4);opacity:.8}
+/* 44px hit areas on small controls, without changing how they look. */
+.nav-links a,.theme-toggle,.nav-menu,.cta-link,.cta-alt,.btn,.trace-more,.rail-btn,.crumb,.mail,.foot-links a,.offer-action,.cycle-run-link{position:relative}
+.nav-links a::after,.cta-link::after,.cta-alt::after,.btn::after,.trace-more::after,.crumb::after,.mail::after,.foot-links a::after,.offer-action::after,.cycle-run-link::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.theme-toggle::after,.nav-menu::after,.rail-btn::after{content:'';position:absolute;inset:-6px}
 </style>
 </head>
 <body>

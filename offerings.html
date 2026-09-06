@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Offerings | Noetic Synthesis</title>
-<meta name="description" content="Three ways to work with the Noetic Innovation Cycle: leadership workshops, direct agent access, and multi-week leadership programs. San Diego, engagements worldwide.">
+<meta name="description" content="Three ways to work with the Noetic Innovation Cycle: leadership workshops, direct agent access, and multi-week leadership programs. Engagements worldwide.">
 <link rel="canonical" href="https://www.noeticsynthesis.com/offerings.html">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='38' font-weight='700' fill='%23f2f2f0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
@@ -144,9 +144,16 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .cta-copy{max-width:55ch;margin:24px auto 0;color:var(--muted)}
 .cta .mail{display:table;margin:24px auto 0;font-size:18px;overflow-wrap:anywhere}
 @media(max-width:640px){.offer-action{width:100%}}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:200;background:var(--text);color:var(--bg);padding:var(--s8) var(--s16);font-weight:600;text-decoration:none}
+.skip-link:focus{left:var(--s16);top:var(--s16)}
+/* 44px hit areas on small controls, without changing how they look. */
+.nav-links a,.theme-toggle,.nav-menu,.cta-link,.cta-alt,.btn,.trace-more,.rail-btn,.crumb,.mail,.foot-links a,.offer-action,.cycle-run-link{position:relative}
+.nav-links a::after,.cta-link::after,.cta-alt::after,.btn::after,.trace-more::after,.crumb::after,.mail::after,.foot-links a::after,.offer-action::after,.cycle-run-link::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.theme-toggle::after,.nav-menu::after,.rail-btn::after{content:'';position:absolute;inset:-6px}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="grain" aria-hidden="true"></div>
 <nav aria-label="Primary">
   <div class="nav-inner">
@@ -177,7 +184,7 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
     <p class="lede">Work through one live decision, make the Cycle an ongoing practice, or develop the method with a cohort. Choose the format that fits your team.</p>
   </div>
 </header>
-<main>
+<main id="main">
 <section>
   <div class="container">
     <article class="offer reveal" id="workshops" aria-labelledby="workshops-heading">

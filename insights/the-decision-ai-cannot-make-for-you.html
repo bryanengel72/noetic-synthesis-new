@@ -177,9 +177,16 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
 .foot-def{margin-top:var(--s4);opacity:.8}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:200;background:var(--text);color:var(--bg);padding:var(--s8) var(--s16);font-weight:600;text-decoration:none}
+.skip-link:focus{left:var(--s16);top:var(--s16)}
+/* 44px hit areas on small controls, without changing how they look. */
+.nav-links a,.theme-toggle,.nav-menu,.cta-link,.cta-alt,.btn,.trace-more,.rail-btn,.crumb,.mail,.foot-links a,.offer-action,.cycle-run-link{position:relative}
+.nav-links a::after,.cta-link::after,.cta-alt::after,.btn::after,.trace-more::after,.crumb::after,.mail::after,.foot-links a::after,.offer-action::after,.cycle-run-link::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.theme-toggle::after,.nav-menu::after,.rail-btn::after{content:'';position:absolute;inset:-6px}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="grain" aria-hidden="true"></div>
 <nav aria-label="Primary">
   <div class="nav-inner">
@@ -217,7 +224,7 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
     </div>
   </div>
 </header>
-<main>
+<main id="main">
 <article class="prose">
   <div class="container">
     <div class="prose-wrap">
