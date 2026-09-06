@@ -205,31 +205,41 @@ html[data-theme="light"] .plate{--pl-muted:#a8a8a8;--pl-faint:#7d7d78;--pl-line:
 @media(max-width:820px){.ledger{grid-template-columns:1fr;column-gap:0}.ledger-item{border-right:none;padding:var(--s24) 0;border-bottom:1px solid var(--pl-line)}.ledger-item:last-child{border-bottom:none}.ledger-num{font-size:clamp(48px,14vw,64px)}}
 @media(max-width:820px){.ledger{grid-template-columns:1fr;column-gap:0}.ledger-item{border-right:none;padding:var(--s24) 0;border-bottom:1px solid var(--line)}.ledger-item:last-child{border-bottom:none}.ledger-num{font-size:clamp(48px,14vw,64px)}}
 
-.cycle-grid{display:grid;grid-template-columns:repeat(2,1fr);margin-top:var(--s64);border-top:1px solid var(--line)}
-@media(max-width:720px){.cycle-grid{grid-template-columns:1fr}}
-.agent-card{padding:var(--s48) var(--s48) var(--s48) var(--s24);position:relative;border-bottom:1px solid var(--line)}
-.agent-card:nth-child(odd){border-right:1px solid var(--line)}
-.agent-card:nth-child(even){padding-left:var(--s48)}
-.agent-card:last-child:nth-child(odd){grid-column:1/-1;border-right:none}
-@media(max-width:720px){.agent-card{border-right:none !important;padding-left:var(--s24) !important;padding-right:0}}
-.agent-card::before{content:'';position:absolute;left:0;top:var(--s48);bottom:var(--s48);width:2px;background:var(--text);transform:scaleY(0);transform-origin:top;transition:transform .45s var(--ease)}
-.agent-card:nth-child(even)::before{left:var(--s24)}
-@media(max-width:720px){.agent-card:nth-child(even)::before{left:0}}
-.agent-card:hover::before{transform:scaleY(1)}
-.agent-card h3{font-family:var(--display);font-variation-settings:'wdth' 112;font-weight:600;
-  font-size:20px;letter-spacing:-.008em;text-transform:uppercase;margin-bottom:var(--s8);
-  transition:transform .45s var(--ease)}
-.agent-card:hover h3{transform:translateX(12px)}
-.agent-tag{color:var(--faint);font-size:15px;margin-bottom:var(--s16);letter-spacing:-.011em}
-.agent-card p{color:var(--muted);font-size:15px;letter-spacing:-.011em}
-.agent-card .label{display:block;margin-bottom:var(--s16)}
-.cycle-loop{margin-top:var(--s48);color:var(--faint);font-size:15px}
+/* The loop: one ring draws itself as the five stages scroll past. Its centre
+   carries the real run's line for the active stage, read from the trace so
+   the two can never disagree. Phones get the ring drawn once, no scrub. */
+.loop{display:grid;grid-template-columns:minmax(280px,400px) minmax(0,1fr);gap:var(--s96);margin-top:var(--s64);align-items:start}
+.loop-ring{position:sticky;top:clamp(96px,calc(50vh - 200px),30vh);width:100%;max-width:400px;aspect-ratio:1}
+.ring{width:100%;height:100%;overflow:visible;display:block}
+.ring-track{fill:none;stroke:var(--line2);stroke-width:1}
+.ring-arc{fill:none;stroke:var(--text);stroke-width:1.5;stroke-linecap:round;transform:rotate(-90deg);transform-origin:200px 200px;transition:stroke-dashoffset .4s var(--ease)}
+.ring-stop{fill:var(--bg);stroke:var(--text);stroke-width:1;transition:fill .3s}
+.ring-stop.on{fill:var(--text)}
+.ring-num{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;letter-spacing:.14em;fill:var(--faint);text-anchor:middle;dominant-baseline:central;transition:fill .3s}
+.ring-stop.on+.ring-num{fill:var(--text)}
+.ring-center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:21%;pointer-events:none}
+.ring-center>div{transition:opacity .18s ease,transform .18s ease}
+.loop.swap .ring-center>div{opacity:0;transform:translateY(4px)}
+.ring-stage{display:block;margin-bottom:var(--s12)}
+.ring-line{font-family:var(--sans);font-size:16px;line-height:1.35;letter-spacing:-.014em;color:var(--text);margin:0}
+.ring-line.long{font-size:13.5px}
+.loop-stages{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.stage{position:relative;padding:var(--s48) 0 var(--s48) var(--s24);border-bottom:1px solid var(--line);min-height:36vh;display:flex;flex-direction:column;justify-content:center}
+.stage::before{content:'';position:absolute;left:0;top:var(--s48);bottom:var(--s48);width:2px;background:var(--text);transform:scaleY(0);transform-origin:top;transition:transform .45s var(--ease)}
+.stage.on::before{transform:scaleY(1)}
+.stage .label{display:block;margin-bottom:var(--s16)}
+.stage h3{font-family:var(--display);font-variation-settings:'wdth' 112;font-weight:600;font-size:clamp(22px,2.4vw,30px);line-height:1.05;letter-spacing:-.02em;color:var(--faint);transition:color .35s}
+.stage p{color:var(--faint);font-size:15px;letter-spacing:-.011em;transition:color .35s}
+.stage .agent-tag{color:var(--faint)}
+.stage.on h3,.stage.done h3{color:var(--text)}
+.stage.on p,.stage.done p{color:var(--muted)}
+.stage.on .agent-tag{color:var(--text)}
+.stage-return h3{font-weight:400;font-variation-settings:'wdth' 118}
+@media(max-width:820px){.loop{grid-template-columns:1fr;gap:var(--s48)}.loop-ring{position:relative;top:auto;max-width:320px;margin:0 auto}.stage{min-height:0}}
 .cycle-run{margin-top:var(--s32);display:flex;gap:var(--s24);align-items:baseline;flex-wrap:wrap}
 .cycle-run-link{font-family:var(--display);font-variation-settings:'wdth' 100;font-weight:600;font-size:14px;letter-spacing:.04em;color:var(--bg);background:var(--text);padding:var(--s12) var(--s24);text-decoration:none;transition:opacity .2s}
 .cycle-run-link:hover{opacity:.85}
 .cycle-run-note{font-size:14px;color:var(--faint);max-width:44ch}
-.cycle-loop a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
-.cycle-loop a:hover{color:var(--text);border-bottom-color:var(--text)}
 
 .trace-sect{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .trace{margin-top:var(--s64);position:relative;max-width:780px;list-style:none}
@@ -349,7 +359,7 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .hero-media img{opacity:1;transition:none}
 .trace::before{transform:scaleY(1);transition:none}
 .trace-dot{transform:none;transition:none}
-.agent-card::before,.agent-card h3{transition:none}
+.stage::before,.stage h3,.stage p,.ring-arc,.ring-stop,.ring-num,.ring-center>div{transition:none}
 .grain{animation:none}
 html{scroll-behavior:auto}
 }
@@ -557,39 +567,57 @@ html{scroll-behavior:auto}
     <p class="label reveal">The Noetic Innovation Cycle</p>
     <h2 id="cycle-heading" class="reveal">Five stages. <span class="wide">One loop.</span></h2>
     <p class="lede reveal">You bring one question you're actually sitting with. Five agents take it in turn: one reshapes it, one builds futures from it, one attacks the assumption underneath, one traces the consequences, and one turns what's left into a plan. About ten minutes and six choices along the way. You leave with a decision you can defend, and the next question it raised.</p>
-    <div class="cycle-grid reveal stagger">
-      <article class="agent-card">
+    <div class="loop reveal">
+      <div class="loop-ring" aria-hidden="true">
+        <svg class="ring" viewBox="-24 -24 448 448">
+          <circle class="ring-track" cx="200" cy="200" r="160"/>
+          <circle class="ring-arc" cx="200" cy="200" r="160"/>
+        <g><circle class="ring-stop" cx="200.0" cy="40.0" r="5"/><text class="ring-num" x="200.0" y="8.0">01</text></g>
+        <g><circle class="ring-stop" cx="352.2" cy="150.6" r="5"/><text class="ring-num" x="382.6" y="140.7">02</text></g>
+        <g><circle class="ring-stop" cx="294.0" cy="329.4" r="5"/><text class="ring-num" x="312.9" y="355.3">03</text></g>
+        <g><circle class="ring-stop" cx="106.0" cy="329.4" r="5"/><text class="ring-num" x="87.1" y="355.3">04</text></g>
+        <g><circle class="ring-stop" cx="47.8" cy="150.6" r="5"/><text class="ring-num" x="17.4" y="140.7">05</text></g>
+        </svg>
+        <div class="ring-center"><div><span class="label ring-stage"></span><p class="ring-line"></p></div></div>
+      </div>
+      <ol class="loop-stages">
+      <li class="stage">
         <span class="label">01 · Six rounds</span>
         <h3>Art of the Question</h3>
         <p class="agent-tag">We shape our lives by the questions we dare to ask.</p>
         <p>Six rounds of opening the question. Each round offers three or four ways in: reframe it, deepen it, turn it sideways, invert it. You choose the one that carries. It never answers; it only reshapes what you are asking.</p>
-      </article>
-      <article class="agent-card">
+      </li>
+      <li class="stage">
         <span class="label">02 · Five futures</span>
         <h3>What If</h3>
         <p class="agent-tag">Take the question seriously. Where does it lead?</p>
         <p>Builds five plausible futures from the question that survived. Each is specific enough that a reasonable person could defend it. No wishes, no straw men. You pick the one worth carrying forward.</p>
-      </article>
-      <article class="agent-card">
+      </li>
+      <li class="stage">
         <span class="label">03 · One assumption</span>
         <h3>Divergence</h3>
         <p class="agent-tag">What if the opposite of your belief is also true?</p>
         <p>Names the assumption your chosen future is quietly resting on, then shows why it is shakier than it looks. It ends on the exposed tension and refuses to resolve it.</p>
-      </article>
-      <article class="agent-card">
+      </li>
+      <li class="stage">
         <span class="label">04 · Three orders of consequence</span>
         <h3>Causal Foresight</h3>
         <p class="agent-tag">Micro-choice, macro-trajectory.</p>
         <p>Traces that fracture forward through first-, second-, and third-order consequences, including the ones you would rather not see. A consequence chain only. No recommendations in any disguise.</p>
-      </article>
-      <article class="agent-card">
+      </li>
+      <li class="stage">
         <span class="label">05 · A plan you can test in days</span>
         <h3>What Now</h3>
         <p class="agent-tag">What do you do on Thursday?</p>
         <p>The only stage allowed to recommend: a first move, a next move, and a checkpoint that tells you within days whether it is working. It is built to run while the tension from stage three is still live, instead of pretending it is settled.</p>
-      </article>
+      </li>
+      <li class="stage stage-return">
+        <span class="label">Back to 01 · The next question</span>
+        <h3>The output of What Now becomes the next question.</h3>
+        <p>The checkpoint from stage five is a question again, sharper than the one that came in. The cycle continues.</p>
+      </li>
+      </ol>
     </div>
-    <p class="cycle-loop reveal">The output of What Now becomes the next question. The cycle continues.</p>
     <p class="cycle-run reveal"><a class="cycle-run-link" href="cycle.html">Run the cycle</a><span class="cycle-run-note">Free, no account, about ten minutes. Six rounds, five futures, one fracture, its consequences, and a plan.</span></p>
   </div>
 </section>
@@ -712,6 +740,40 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     requestAnimationFrame(tick);
   });
   new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){run();o.disconnect()}})},{threshold:0.12,rootMargin:'0px 0px -7% 0px'}).observe(ledger);
+})();
+
+// The loop ring. Progress runs 0 -> 1 as the six stage rows pass the middle of
+// the viewport; the centre shows the question that came in, then each stage's
+// line from the trace, then the question that went out.
+(function(){
+  const loop=document.querySelector('.loop');if(!loop)return;
+  const arc=loop.querySelector('.ring-arc'),stops=[...loop.querySelectorAll('.ring-stop')],stages=[...loop.querySelectorAll('.stage')];
+  const stageEl=loop.querySelector('.ring-stage'),lineEl=loop.querySelector('.ring-line');
+  const C=2*Math.PI*160;arc.style.strokeDasharray=C;arc.style.strokeDashoffset=C;
+  const txt=sel=>{const e=document.querySelector(sel);return e?e.textContent.trim():''};
+  const tq=[...document.querySelectorAll('.trace .trace-q')].map(e=>e.textContent.trim());
+  const states=[{k:'The question that came in',q:txt('.turn-in .tq')}]
+    .concat(stages.slice(0,5).map((st,i)=>({k:st.querySelector('h3').textContent,q:tq[i]||st.querySelector('.agent-tag').textContent})))
+    .concat([{k:'The question that went out',q:txt('.turn-out .tq')||tq[5]||''}]);
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches,narrow=matchMedia('(max-width: 820px)');
+  let cur=-1,swapTimer=0;
+  const show=i=>{if(i===cur)return;cur=i;const st=states[i];const apply=()=>{stageEl.textContent=st.k;lineEl.textContent=st.q;lineEl.classList.toggle('long',st.q.length>110)};
+    if(still){apply();return}
+    loop.classList.add('swap');clearTimeout(swapTimer);swapTimer=setTimeout(()=>{apply();loop.classList.remove('swap')},180)};
+  const paint=()=>{
+    if(still||narrow.matches){arc.style.strokeDashoffset=0;stages.forEach(s=>{s.classList.add('on');s.classList.remove('done')});stops.forEach(s=>s.classList.add('on'));show(0);return}
+    const y=scrollY+innerHeight*0.5,tops=stages.map(s=>s.getBoundingClientRect().top+scrollY);
+    let p=0,idx=0;
+    if(y>=tops[0]){let i=0;while(i<5&&y>=tops[i+1])i++;
+      if(i>=5){p=1;idx=6}else{const f=Math.min(1,Math.max(0,(y-tops[i])/(tops[i+1]-tops[i])));p=(i+f)/5;idx=i+1}}
+    arc.style.strokeDashoffset=C*(1-p);
+    stages.forEach((s,i)=>{s.classList.toggle('on',idx===i+1);s.classList.toggle('done',idx>i+1)});
+    stops.forEach((s,i)=>s.classList.toggle('on',idx===6||i<idx));
+    show(idx);
+  };
+  let ticking=false;const queue=()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{paint();ticking=false})};
+  addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);narrow.addEventListener('change',paint);
+  paint();
 })();
 
 // Hero clip: the poster is in the HTML so first paint has the image; the
