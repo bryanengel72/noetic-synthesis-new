@@ -113,7 +113,7 @@ html[data-theme="light"] .icon-sun{display:none}
 html:not([data-theme="light"]) .icon-moon{display:none}
 
 .hero{position:relative;min-height:78svh;display:grid;grid-template-rows:1fr auto;padding:calc(var(--s96) + var(--s24)) var(--s32) var(--s32);max-width:1400px;margin:0 auto}
-@media(max-width:640px){.hero{padding:var(--s96) var(--s24) var(--s24)}}
+@media(max-width:640px){.hero{min-height:auto;padding:var(--s96) var(--s24) var(--s24)}}
 .hero h1{font-family:var(--display);font-variation-settings:'wdth' 118;font-weight:600;
   font-size:clamp(38px,8vw,96px);line-height:.92;letter-spacing:-.032em;
   text-transform:uppercase;align-self:center;max-width:15ch}
@@ -287,8 +287,6 @@ h2{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600
 .pill:hover::after{transform:scaleX(1)}
 .pill span{font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;color:var(--faint);display:block;letter-spacing:.2em;margin-bottom:var(--s8)}
 .pill p{font-family:var(--sans);font-weight:400;font-size:14px;line-height:1.5;letter-spacing:-.011em;text-transform:none;color:var(--faint);margin-top:var(--s8)}
-.try{border-bottom:1px solid var(--line)}
-.try-actions{margin-top:var(--s48);display:flex;gap:var(--s24);align-items:baseline;flex-wrap:wrap}
 @media(max-width:1040px){.pillars{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:720px){.pillars{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:460px){.pillars{grid-template-columns:1fr}.pill{padding-right:0}.pill::after{right:0}}
@@ -575,17 +573,6 @@ html{scroll-behavior:auto}
 </section>
 
 
-<section class="try" id="try" aria-labelledby="try-heading">
-  <div class="container">
-    <p class="label reveal">Try It</p>
-    <h2 id="try-heading" class="reveal">Bring a decision. <span class="wide">Five advisors argue it out.</span></h2>
-    <p class="lede reveal">The Council is the fastest way to feel the method. Five AI advisors, each on a different model, stress-test one decision across two rounds. One of them exists only to find what kills the plan. You watch the argument before you read the verdict.</p>
-    <div class="try-actions reveal">
-      <a href="/council.html" class="cta-link cta-primary">Convene the Council</a>
-      <span class="hero-note">Free · no account · about two minutes</span>
-    </div>
-  </div>
-</section>
 
 <section id="approach" aria-labelledby="approach-heading">
   <div class="container">
