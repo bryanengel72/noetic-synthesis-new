@@ -130,6 +130,20 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 .foot-links a{color:var(--faint);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .foot-links a:hover{color:var(--text);border-bottom-color:var(--line2)}
 .foot-def{margin-top:var(--s4);opacity:.8}
+
+/* Keep the offering facts and next step consistent across all three formats. */
+.offer{scroll-margin-top:100px}
+.offer-facts{max-width:56ch;font-size:15px;color:var(--muted)}
+.offer-facts dt,.offer-subheading{font-size:13px;font-weight:600;color:var(--text);margin-top:24px}
+.offer-facts dd{margin-top:6px}
+.offer-subheading{letter-spacing:0;text-transform:none}
+.offer .offer-note{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+.offer-note a{color:var(--text);text-underline-offset:3px}
+.offer-action{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:28px;padding:12px 20px;border:1px solid var(--text);background:var(--text);color:var(--bg);font-size:14px;font-weight:600;text-decoration:none;line-height:1.5;text-align:center}
+.offer-action:hover{background:var(--bg);color:var(--text)}
+.cta-copy{max-width:55ch;margin:24px auto 0;color:var(--muted)}
+.cta .mail{display:table;margin:24px auto 0;font-size:18px;overflow-wrap:anywhere}
+@media(max-width:640px){.offer-action{width:100%}}
 </style>
 </head>
 <body>
@@ -160,54 +174,73 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
   <div class="container">
     <p class="label">Offerings</p>
     <h1>Three ways the cycle <span class="wide">enters</span> an organization.</h1>
-    <p class="lede">Every engagement starts with one of these.</p>
+    <p class="lede">Work through one live decision, make the Cycle an ongoing practice, or develop the method with a cohort. Choose the format that fits your team.</p>
   </div>
 </header>
 <main>
 <section>
   <div class="container">
-    <article class="offer reveal">
+    <article class="offer reveal" id="workshops" aria-labelledby="workshops-heading">
       <p class="label">No. 01</p>
       <div>
-        <h2>Workshops</h2>
-        <p class="tag">Half-day to two-day immersions.</p>
-        <p>A leadership team brings one live decision and runs it through the full cycle. They leave with the outcome and the method — built for offsites, strategy resets, and the weeks before a big call.</p>
+        <h2 id="workshops-heading">Workshops</h2>
+        <p class="tag">One decision. A focused immersion.</p>
+        <dl class="offer-facts">
+          <dt>Who it is for</dt><dd>Leadership teams preparing for an offsite, a strategy reset, or a consequential decision.</dd>
+          <dt>Format</dt><dd>Half-day to two-day workshops. Your team brings one live strategic question and works through the full Cycle.</dd>
+        </dl>
+        <h3 class="offer-subheading">What you leave with</h3>
         <ul>
-          <li>One real strategic question, worked end to end</li>
-          <li>The five capacities, practiced rather than presented</li>
+          <li>One strategic question worked through from reframing to action</li>
+          <li>Practice using the five capacities on your own decision</li>
           <li>Experiments scoped to start within 72 hours</li>
         </ul>
+        <a class="offer-action" href="mailto:evolve@noeticsynthesis.com?subject=Workshop%20inquiry">Discuss a workshop</a>
       </div>
     </article>
-    <article class="offer reveal">
+    <article class="offer reveal" id="agent-access" aria-labelledby="agent-access-heading">
       <p class="label">No. 02</p>
       <div>
-        <h2>Agent Access</h2>
-        <p class="tag">The cycle, on demand.</p>
-        <p>Direct access to all five agents for teams who want the cycle as an ongoing practice. The agents keep your history of inquiry, so the questions get sharper the longer you work with them.</p>
+        <h2 id="agent-access-heading">Agent Access</h2>
+        <p class="tag">The Cycle as an ongoing practice.</p>
+        <dl class="offer-facts">
+          <dt>Who it is for</dt><dd>Individuals and teams who want to return to the method as new questions and decisions emerge.</dd>
+          <dt>Format</dt><dd>On-demand access to all five Cycle agents, for one person or a team.</dd>
+        </dl>
+        <h3 class="offer-subheading">What it adds</h3>
         <ul>
-          <li>Held by one person, or opened to a team</li>
-          <li>Agents that remember what you've already worked through</li>
+          <li>A continuing practice across repeated inquiries</li>
+          <li>Inquiry history that carries earlier work into later sessions</li>
         </ul>
+        <p class="offer-note">The free <a href="/council.html">Council</a> and <a href="/cycle.html">Cycle</a> let you experience the method without an account. Paid Agent Access is for continuing work with inquiry history. Contact us to discuss availability, setup, and pricing for your needs.</p>
+        <a class="offer-action" href="mailto:evolve@noeticsynthesis.com?subject=Agent%20Access%20inquiry">Discuss agent access</a>
       </div>
     </article>
-    <article class="offer reveal">
+    <article class="offer reveal" id="leadership-programs" aria-labelledby="leadership-programs-heading">
       <p class="label">No. 03</p>
       <div>
-        <h2>Leadership Programs</h2>
-        <p class="tag">A curriculum, not a keynote.</p>
-        <p>Multi-week cohort programs that train the five capacities as durable habits, with the agents as practice partners between sessions.</p>
+        <h2 id="leadership-programs-heading">Leadership Programs</h2>
+        <p class="tag">Build the practice together.</p>
+        <dl class="offer-facts">
+          <dt>Who it is for</dt><dd>Organizations and educators developing how a cohort questions, imagines, forecasts, and acts.</dd>
+          <dt>Format</dt><dd>Cohort programs lasting six to twelve weeks, run inside a company or an educational curriculum. Agents serve as practice partners between sessions.</dd>
+        </dl>
+        <h3 class="offer-subheading">What participants practice</h3>
         <ul>
-          <li>Cohort-based, six to twelve weeks</li>
-          <li>Run inside a company, or inside a curriculum</li>
+          <li>Adaptive curiosity and imaginative synthesis</li>
+          <li>Ethical foresight and awareness of their own thinking</li>
+          <li>Integrating emotion into decisions through practice between sessions</li>
         </ul>
+        <a class="offer-action" href="mailto:evolve@noeticsynthesis.com?subject=Leadership%20Program%20inquiry">Discuss a leadership program</a>
       </div>
     </article>
   </div>
 </section>
 <section class="cta">
   <div class="container">
-    <h2>Engagements begin with a conversation.</h2>
+    <h2>Start with the decision your team is facing.</h2>
+    <p class="cta-copy">Tell us the question, who would take part, and your timing. If you are unsure which offering fits, start there and we can discuss the format together.</p>
+    <a class="offer-action" href="/#contact">Begin an inquiry</a>
     <a class="mail" href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a>
   </div>
 </section>
