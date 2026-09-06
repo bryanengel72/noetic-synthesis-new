@@ -115,10 +115,18 @@ main{max-width:1200px;margin:0 auto;padding:calc(var(--s96) + var(--s32)) var(--
 .q-now{border-left:2px solid var(--acc,var(--line2));padding:var(--s8) 0 var(--s8) var(--s24);margin:0 0 var(--s32);font-size:clamp(17px,2.2vw,22px);line-height:1.4;letter-spacing:-.012em;max-width:60ch}
 .q-now .label{display:block;margin-bottom:var(--s8)}
 
-textarea{width:100%;max-width:680px;min-height:120px;background:var(--bg2);border:1px solid var(--line2);border-radius:10px;color:var(--text);font-family:var(--sans);font-size:16.5px;line-height:1.55;padding:var(--s16);resize:vertical;transition:border-color .2s}
-textarea:focus{border-color:var(--text)}
-.field-label{display:block;margin-bottom:var(--s12)}
-.counter{color:var(--faint);font-size:12px;margin-top:var(--s8)}
+/* The intake is a hairline field in the site's own type, not a box. It grows
+   with the question; the counter only appears once there is something to count. */
+textarea{display:block;width:100%;max-width:680px;background:none;border:0;border-bottom:1px solid var(--line2);border-radius:0;color:var(--text);font-family:var(--sans);font-size:clamp(20px,2.4vw,27px);line-height:1.35;letter-spacing:-.018em;padding:var(--s12) 0;resize:none;overflow:hidden;transition:border-color .3s}
+textarea:focus{outline:none;border-bottom-color:var(--text)}
+textarea::placeholder{color:var(--faint);opacity:.75}
+.field-label{display:block;margin-bottom:var(--s8)}
+.counter{color:var(--faint);font-size:12px;margin-top:var(--s8);opacity:0;transition:opacity .3s}
+.counter.on{opacity:1}
+.seeds{margin-top:var(--s48);max-width:680px}
+.seeds .label{display:block;margin-bottom:var(--s4)}
+.seeds button{all:unset;display:block;width:100%;box-sizing:border-box;cursor:pointer;font-family:var(--sans);font-size:16px;line-height:1.45;letter-spacing:-.011em;color:var(--muted);padding:var(--s12) 0;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s,padding-left .25s var(--ease)}
+.seeds button:hover,.seeds button:focus-visible{color:var(--text);border-bottom-color:var(--text);padding-left:var(--s8);outline:none}
 
 .opts{list-style:none;display:flex;flex-direction:column;gap:var(--s12);max-width:680px;margin-bottom:var(--s24)}
 .opt{position:relative;width:100%;text-align:left;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:var(--s16) var(--s48) var(--s16) var(--s16);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.5;cursor:pointer;transition:border-color .2s,transform .25s var(--ease),background .2s}
@@ -378,17 +386,27 @@ function screenEntry(){
   const fieldLabel=el('label','label field-label','What are you sitting with?');
   fieldLabel.setAttribute('for','q-input');
   const ta=el('textarea');
-  ta.id='q-input';ta.maxLength=500;
+  ta.id='q-input';ta.maxLength=500;ta.rows=1;
   ta.placeholder='What question is your strategy actually answering?';
   const counter=el('p','counter','0 / 500');
-  ta.addEventListener('input',()=>{counter.textContent=ta.value.length+' / 500';go.disabled=!ta.value.trim()});
+  const grow=()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};
+  ta.addEventListener('input',()=>{counter.textContent=ta.value.length+' / 500';counter.classList.toggle('on',ta.value.length>0);go.disabled=!ta.value.trim();grow()});
   const slot=el('div');
   const row=el('div','btn-row');
   const go=el('button','btn','Begin round one');
   go.disabled=true;
   go.addEventListener('click',()=>startRound(ta.value.trim(),slot,go));
   row.append(go);
-  stageEl.append(label,h,lede,fieldLabel,ta,counter,slot,row);
+  // Three ways in for anyone arriving without a question. The first is the run on the homepage.
+  const seeds=el('div','seeds');
+  seeds.append(el('span','label','Or start from one of these'));
+  ['How do we increase revenue and still keep staff hired?','Do we roll AI out to everyone at once, or to one team first?','What would we stop doing if the new strategy were real?'].forEach(q=>{
+    const b=el('button',null,q);b.type='button';
+    b.addEventListener('click',()=>{ta.value=q;ta.dispatchEvent(new Event('input'));ta.focus();ta.setSelectionRange(q.length,q.length)});
+    seeds.append(b);
+  });
+  stageEl.append(label,h,lede,fieldLabel,ta,counter,slot,row,seeds);
+  requestAnimationFrame(grow);
   // A question can arrive in the URL (the homepage hero posts here).
   const fromUrl=new URLSearchParams(location.search).get('q');
   if(fromUrl&&fromUrl.trim()){
