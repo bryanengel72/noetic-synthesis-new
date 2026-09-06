@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Run the Cycle | Noetic Synthesis</title>
-<meta name="description" content="Run the Noetic Innovation Cycle: six rounds of questioning, five plausible futures, one fracture, its consequences, and a plan. About ten minutes. No answers — better questions.">
+<meta name="description" content="Run the Noetic Innovation Cycle: six rounds of questioning, five futures, one fracture, its consequences, and a plan. About ten minutes, no account needed.">
 <link rel="canonical" href="https://www.noeticsynthesis.com/cycle.html">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='38' font-weight='700' fill='%23f2f2f0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
@@ -58,8 +58,21 @@ nav.scrolled{border-bottom-color:var(--line)}
 .nav-links a:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
 .nav-links a[aria-current="page"]{color:var(--text)}
 .nav-cta{color:var(--text) !important;border-bottom:1px solid var(--text);border-radius:0 !important;padding:2px 0 3px !important;margin:0 var(--s12)}
+.nav-menu{display:none;width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;margin-left:var(--s12);transition:color .2s,border-color .2s}
+.nav-menu:hover{color:var(--text);border-color:var(--text)}
+.nav-menu svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.nav-menu .ic-x,nav.open .nav-menu .ic-bars{display:none}
+nav.open .nav-menu .ic-x{display:block}
+@media(max-width:980px){
+  .nav-menu{display:flex}
+  .nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:var(--s8) var(--s24) var(--s24);background:var(--bg);border-bottom:1px solid var(--line)}
+  nav.open .nav-links{display:flex}
+  .nav-links a{padding:var(--s12) 0;border-bottom:1px solid var(--line);border-radius:0;font-size:15px}
+  .nav-links a:hover{background:none}
+  .nav-links .nav-cta{margin:0;padding:var(--s12) 0 !important;border-bottom:1px solid var(--line) !important}
+  .theme-toggle{margin-top:var(--s16)}
+}
 .nav-cta:hover{background:none !important}
-@media(max-width:980px){.nav-links a:not(.nav-cta){display:none}}
 .theme-toggle{width:32px;height:32px;border-radius:9999px;border:1px solid var(--line2);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,border-color .2s;flex-shrink:0}
 .theme-toggle:hover{color:var(--text);border-color:var(--text)}
 .theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
@@ -95,8 +108,8 @@ main{max-width:1200px;margin:0 auto;padding:calc(var(--s96) + var(--s32)) var(--
 }
 
 /* ===== SCREENS ===== */
-.screen h2{font-family:var(--display);font-variation-settings:'wdth' 112;font-weight:600;font-size:clamp(26px,4.4vw,44px);line-height:1.04;letter-spacing:-.022em;text-transform:uppercase;margin:var(--s8) 0 var(--s16)}
-.screen h2:focus{outline:none}
+.screen h1,.screen h2{font-family:var(--display);font-variation-settings:'wdth' 112;font-weight:600;font-size:clamp(26px,4.4vw,44px);line-height:1.04;letter-spacing:-.022em;text-transform:uppercase;margin:var(--s8) 0 var(--s16)}
+.screen h1:focus,.screen h2:focus{outline:none}
 .stage-label{color:var(--acc,var(--faint))}
 .lede{color:var(--muted);font-size:16.5px;max-width:56ch;margin-bottom:var(--s32)}
 .q-now{border-left:2px solid var(--acc,var(--line2));padding:var(--s8) 0 var(--s8) var(--s24);margin:0 0 var(--s32);font-size:clamp(17px,2.2vw,22px);line-height:1.4;letter-spacing:-.012em;max-width:60ch}
@@ -149,7 +162,7 @@ textarea:focus{border-color:var(--text)}
 .map-move{color:var(--faint);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--display);font-variation-settings:'wdth' 92;font-weight:700}
 
 footer{border-top:1px solid var(--line);margin-top:var(--s96)}
-.foot-inner{max-width:1200px;margin:0 auto;padding:var(--s24) var(--s32);display:flex;justify-content:space-between;color:var(--faint);font-size:13px}
+.foot-inner{max-width:1200px;margin:0 auto;padding:var(--s24) var(--s32);display:flex;justify-content:space-between;gap:var(--s24);flex-wrap:wrap;color:var(--faint);font-size:13px}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
@@ -162,7 +175,24 @@ footer{border-top:1px solid var(--line);margin-top:var(--s96)}
   .block,.q-now{border-left-color:#999}
   .map-sect{break-inside:avoid}
 }
+/* 44px hit areas on small controls, without changing how they look. */
+.nav-links a,.theme-toggle,.nav-menu,.cta-link,.cta-alt,.btn,.trace-more,.rail-btn,.crumb,.mail,.foot-links a,.offer-action,.cycle-run-link{position:relative}
+.nav-links a::after,.cta-link::after,.cta-alt::after,.btn::after,.trace-more::after,.crumb::after,.mail::after,.foot-links a::after,.offer-action::after,.cycle-run-link::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.theme-toggle::after,.nav-menu::after,.rail-btn::after{content:'';position:absolute;inset:-6px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": "https://www.noeticsynthesis.com/cycle.html#app",
+  "name": "The Noetic Innovation Cycle",
+  "url": "https://www.noeticsynthesis.com/cycle.html",
+  "applicationCategory": "BusinessApplication",
+  "description": "Bring one question. Six rounds of questioning, then five plausible futures, one fracture, its consequences, and a plan you can test in days. About ten minutes, no account.",
+  "provider": { "@id": "https://www.noeticsynthesis.com/#org" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -171,7 +201,7 @@ footer{border-top:1px solid var(--line);margin-top:var(--s96)}
 <nav aria-label="Primary">
   <div class="nav-inner">
     <a href="/" class="wordmark">Noetic Synthesis</a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="/#cycle">The Cycle</a>
       <a href="/council.html">The Council</a>
       <a href="/#trace">In Action</a>
@@ -184,6 +214,10 @@ footer{border-top:1px solid var(--line);margin-top:var(--s96)}
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
     </div>
+      <button class="nav-menu" id="nav-menu" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ic-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
   </div>
 </nav>
 
@@ -229,6 +263,13 @@ themeBtn.addEventListener('click',()=>{
 syncThemeUI();
 const navEl=document.querySelector('nav');
 addEventListener('scroll',()=>navEl.classList.toggle('scrolled',scrollY>10),{passive:true});
+const navMenu=document.getElementById('nav-menu');
+if(navMenu){
+  const setOpen=o=>{navEl.classList.toggle('open',o);navMenu.setAttribute('aria-expanded',o);navMenu.setAttribute('aria-label',o?'Close menu':'Open menu')};
+  navMenu.addEventListener('click',()=>setOpen(!navEl.classList.contains('open')));
+  document.querySelectorAll('#nav-links a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+}
 
 /* ===== the run ===== */
 // One linear thread; no editing back upstream (per the protocol).
@@ -265,7 +306,7 @@ function el(tag,cls,text){
 }
 function clear(){stageEl.replaceChildren()}
 function focusHeading(){
-  const h=stageEl.querySelector('h2');
+  const h=stageEl.querySelector('h1,h2');
   if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:false});}
   scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
 }
@@ -332,7 +373,7 @@ function showError(container,message,retry){
 function screenEntry(){
   clear();paintRail(null);
   const label=el('p','label','The Noetic Innovation Cycle');
-  const h=el('h2',null,'Run the cycle.');
+  const h=el('h1',null,'Run the cycle.');
   const lede=el('p','lede','Six rounds of questioning, then five futures, one fracture, its consequences, and a plan. About ten minutes. No answers — better questions.');
   const fieldLabel=el('label','label field-label','What are you sitting with?');
   fieldLabel.setAttribute('for','q-input');
