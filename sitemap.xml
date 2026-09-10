@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://www.noeticsynthesis.com/insights/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -63,6 +63,12 @@
   <url>
     <loc>https://www.noeticsynthesis.com/insights/the-decision-ai-cannot-make-for-you.html</loc>
     <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.noeticsynthesis.com/insights/psychology-is-the-missing-layer-in-ai.html</loc>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
