@@ -84,6 +84,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid transparent;transition:border-color .3s}
 nav.scrolled{border-bottom-color:var(--line)}
+/* over the inverted plate the translucent bar picks up the cream and reads grey */
+nav.over-plate{background:var(--bg);backdrop-filter:none}
 .nav-inner{max-width:1200px;margin:0 auto;padding:var(--s16) var(--s32);display:flex;align-items:center;justify-content:space-between}
 @media(max-width:640px){.nav-inner{padding:var(--s12) var(--s24)}}
 .wordmark{font-family:var(--display);font-variation-settings:'wdth' 104;font-weight:700;font-size:14px;
@@ -115,7 +117,7 @@ nav.open .nav-menu .ic-x{display:block}
 html[data-theme="light"] .icon-sun{display:none}
 html:not([data-theme="light"]) .icon-moon{display:none}
 
-.hero{position:relative;min-height:78svh;display:grid;grid-template-rows:1fr auto;padding:calc(var(--s96) + var(--s24)) var(--s32) var(--s32);max-width:1400px;margin:0 auto}
+.hero{position:relative;min-height:78svh;display:grid;grid-template-rows:1fr auto;padding:calc(var(--s96) + var(--s24)) var(--s32) var(--s32);max-width:1200px;margin:0 auto}
 @media(max-width:640px){.hero{min-height:auto;padding:var(--s96) var(--s24) var(--s24)}}
 .hero h1{font-family:var(--display);font-variation-settings:'wdth' 118;font-weight:600;
   font-size:clamp(38px,8vw,96px);line-height:.92;letter-spacing:-.032em;
@@ -468,44 +470,44 @@ html{scroll-behavior:auto}
       <li class="trace-step">
         <div class="trace-dot" aria-hidden="true">1</div>
         <span class="label">Art of the Question</span>
-        <p class="trace-q">"What would it cost to write that promise down and post it where revenue decisions get made?"</p>
+        <p class="trace-q">“What would it cost to write that promise down and post it where revenue decisions get made?”</p>
         <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-1">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-1"><div class="trace-body-in"><ol class="ladder" data-ladder aria-label="The six rounds, the question that carried each time"></ol>        <p>Six rounds. Round one inverted the question: "What if revenue and headcount aren&#x27;t actually competing for the same resource at all?" By round four it was asking whether keeping staff hired is really about staff, or a proxy for a promise the organization made to itself. Round six asked what it would cost to post that promise where revenue decisions get made.</p></div></div>
+        <div class="trace-body" id="trace-body-1"><div class="trace-body-in"><ol class="ladder" data-ladder aria-label="The six rounds, the question that carried each time"></ol>        <p>Six rounds. Round one inverted the question: “What if revenue and headcount aren&#x27;t actually competing for the same resource at all?” By round four it was asking whether keeping staff hired is really about staff, or a proxy for a promise the organization made to itself. Round six asked what it would cost to post that promise where revenue decisions get made.</p></div></div>
       </li>
       <li class="trace-step">
         <div class="trace-dot" aria-hidden="true">2</div>
         <span class="label">What If</span>
-        <p class="trace-q">"The promise becomes a filter, revenue slows then compounds."</p>
+        <p class="trace-q">“The promise becomes a filter, revenue slows then compounds.”</p>
         <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-2">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
         <div class="trace-body" id="trace-body-2"><div class="trace-body-in">        <p>Leadership drafts the promise—something like &#x27;we do not trade people for quarterly wins&#x27;—and posts it in the room where pricing and layoffs get decided. Some fast, margin-thin deals get declined; short-term revenue dips for two quarters. But retained institutional knowledge lets the team win slower, stickier contracts that a leaner competitor couldn&#x27;t service, and revenue recovers on a sturdier base by year two.</p></div></div>
       </li>
       <li class="trace-step">
         <div class="trace-dot" aria-hidden="true">3</div>
         <span class="label">Divergence</span>
-        <p class="trace-q">"That the promise, once written and posted, will actually govern the room the way it&#x27;s imagined to — that leadership under quarterly pressure will treat a sentence on a wall as binding rather than aspirational."</p>
+        <p class="trace-q">“That the promise, once written and posted, will actually govern the room the way it&#x27;s imagined to — that leadership under quarterly pressure will treat a sentence on a wall as binding rather than aspirational.”</p>
         <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-3">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
         <div class="trace-body" id="trace-body-3"><div class="trace-body-in">        <p>Promises posted in rooms compete with numbers that arrive quarterly, and numbers have a way of feeling more real than sentences. The two-quarter dip isn&#x27;t an abstraction on a timeline — it&#x27;s a board meeting, a nervous investor, a CFO asking whether principle is affordable this specific month. Nothing in the scenario explains what stops the same leadership that drafted the promise from quietly revising it, or reading it narrowly, once the dip stops being hypothetical and starts being their own signature on a bad quarter.</p></div></div>
       </li>
       <li class="trace-step">
         <div class="trace-dot" aria-hidden="true">4</div>
         <span class="label">Causal Foresight</span>
-        <p class="trace-q">"The promise was written for clear cases, not clever ones."</p>
+        <p class="trace-q">“The promise was written for clear cases, not clever ones.”</p>
         <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-4">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
         <div class="trace-body" id="trace-body-4"><div class="trace-body-in">        <p>Six consequences, two per order. First order: A mid-tier manager, pressured to hit a quarterly number, finds a deal that technically doesn&#x27;t &#x27;trade people for wins&#x27; but functionally does — reclassifying a layoff as &#x27;restructuring&#x27; or a margin-thin deal as &#x27;strategic&#x27; — and no one in the room stops it, because the promise was written for clear cases, not clever ones. Third order: The promise, having been bent once under pressure and not visibly punished for it, becomes a template other departments imitate — each writing its own wall-mounted principle that sounds binding but is understood internally as negotiable, quietly changing what &#x27;commitment&#x27; means across the company&#x27;s culture.</p></div></div>
       </li>
       <li class="trace-step">
         <div class="trace-dot" aria-hidden="true">5</div>
         <span class="label">What Now</span>
-        <p class="trace-q">"Write the promise together with two or three specific past deals attached."</p>
+        <p class="trace-q">“Write the promise together with two or three specific past deals attached.”</p>
         <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-5">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
         <div class="trace-body" id="trace-body-5"><div class="trace-body-in">        <p>The first move in full: This week, before posting anything, write the promise together with two or three specific past deals attached — name the exact margin-thin contract or layoff decision each clause would have blocked, so the sentence has teeth from case law, not just intention. The next move: Designate one named person outside the revenue chain (not the CFO, not sales) who must sign off whenever a deal is labeled &#x27;strategic&#x27; or a role change labeled &#x27;restructuring&#x27; — someone whose job depends on catching the reclassification, not approving the number. The checkpoint: Within two weeks, test it on a live deal already in the pipeline: if it passes the promise&#x27;s filter without anyone renaming or reclassifying its terms to fit, the mechanism is real; if it gets relabeled to slide through, you&#x27;ll know within days that the promise is decorative and needs the enforcement role fixed before the real dip arrives.</p></div></div>
       </li>
       <li class="trace-step">
         <div class="trace-dot" aria-hidden="true">6</div>
         <span class="label">The next question</span>
-        <p class="trace-q">"Not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something."</p>
+        <p class="trace-q">“Not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something.”</p>
         <button class="trace-more" type="button" aria-expanded="false" aria-controls="trace-body-6">The agent's full reading <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1 5h8"/></svg></button>
-        <div class="trace-body" id="trace-body-6"><div class="trace-body-in">        <p>The checkpoint went back into round one of the Art of the Question, unedited, and this is what came out. The agent's full reading: You&#x27;ve designed an elegant test, but notice what it&#x27;s really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you&#x27;re watching for is a social act, not a procedural one. One of the three ways in it offered: "Who in the organization currently has both the standing and the incentive to say &quot;this deal fails the filter&quot; out loud, and what happens to them afterward?" The loop continues.</p></div></div>
+        <div class="trace-body" id="trace-body-6"><div class="trace-body-in">        <p>The checkpoint went back into round one of the Art of the Question, unedited, and this is what came out. The agent's full reading: You&#x27;ve designed an elegant test, but notice what it&#x27;s really testing: not the mechanism, but whether the people around it will tell you the truth when the mechanism costs them something. The relabeling you&#x27;re watching for is a social act, not a procedural one. One of the three ways in it offered: “Who in the organization currently has both the standing and the incentive to say ‘this deal fails the filter’ out loud, and what happens to them afterward?” The loop continues.</p></div></div>
       </li>
     </ol>
     <div class="trace-turn">
@@ -840,8 +842,10 @@ const traceEl=document.querySelector('.trace');
 const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(traceEl&&still){traceEl.style.setProperty('--trace-p','1')}
 
+const plateEl=document.querySelector('.plate');
 function onScroll(){
   navEl.classList.toggle('scrolled',scrollY>10);
+  if(plateEl){const pr=plateEl.getBoundingClientRect(),nb=navEl.offsetHeight;navEl.classList.toggle('over-plate',pr.top<nb&&pr.bottom>0)}
   if(!traceEl||still)return;
   const r=traceEl.getBoundingClientRect();
   // 0 while the list is still low on screen, 1 once its end has risen past
