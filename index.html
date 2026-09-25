@@ -134,7 +134,7 @@ html:not([data-theme="light"]) .icon-moon{display:none}
 .sub{display:flex;gap:var(--s48);align-items:flex-end;flex-wrap:wrap;opacity:0;animation:fade .9s ease .95s forwards}
 @keyframes fade{to{opacity:1}}
 .sub p{color:var(--muted);font-size:16.5px;line-height:1.6;max-width:46ch}
-.cta-link{flex-shrink:0;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);text-decoration:none;padding-bottom:var(--s8);border-bottom:1px solid var(--text);transition:letter-spacing .4s var(--ease);white-space:nowrap}
+.cta-link{flex-shrink:0;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);text-decoration:none;padding-bottom:var(--s8);border-bottom:1px solid var(--text);transition:letter-spacing .4s var(--ease),background .25s,color .25s;white-space:nowrap}
 .cta-link:hover{letter-spacing:.28em}
 .hero-actions{flex-shrink:0;display:grid;gap:var(--s12);justify-items:start}
 .hero-note{font-size:13px;color:var(--faint);letter-spacing:.01em}
@@ -241,9 +241,7 @@ html[data-theme="light"] .plate{--pl-muted:#a8a8a8;--pl-faint:#7d7d78;--pl-line:
 .stage.on .agent-tag{color:var(--text)}
 .stage-return h3{font-weight:400;font-variation-settings:'wdth' 118}
 @media(max-width:820px){.loop{grid-template-columns:1fr;gap:var(--s48)}.loop-ring{position:relative;top:auto;max-width:320px;margin:0 auto}.stage{min-height:0}}
-.cycle-run{margin-top:var(--s32);display:flex;gap:var(--s24);align-items:baseline;flex-wrap:wrap}
-.cycle-run-link{font-family:var(--display);font-variation-settings:'wdth' 100;font-weight:600;font-size:14px;letter-spacing:.04em;color:var(--bg);background:var(--text);padding:var(--s12) var(--s24);text-decoration:none;transition:opacity .2s}
-.cycle-run-link:hover{opacity:.85}
+.cycle-run{margin-top:var(--s32);display:flex;gap:var(--s24);align-items:center;flex-wrap:wrap}
 .cycle-run-note{font-size:14px;color:var(--faint);max-width:44ch}
 
 .trace-sect{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -336,8 +334,8 @@ html[data-theme="light"] .plate{--pl-muted:#a8a8a8;--pl-faint:#7d7d78;--pl-line:
 .field textarea{resize:vertical;min-height:140px}
 .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--text)}
 .field input::placeholder,.field textarea::placeholder{color:var(--faint);opacity:.55}
-.send-btn{justify-self:start;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);background:none;border:1px solid var(--line2);padding:var(--s12) var(--s24);cursor:pointer;transition:background .25s,color .25s,border-color .25s,letter-spacing .4s var(--ease)}
-.send-btn:hover:not(:disabled){background:var(--text);color:var(--bg);border-color:var(--text);letter-spacing:.26em}
+.send-btn{justify-self:start;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--bg);background:var(--text);border:1px solid var(--text);min-height:48px;padding:14px 22px;cursor:pointer;transition:background .25s,color .25s,border-color .25s,letter-spacing .4s var(--ease)}
+.send-btn:hover:not(:disabled){background:var(--bg);color:var(--text);letter-spacing:.28em}
 .send-btn:disabled{opacity:.45;cursor:default}
 .form-status{font-size:14.5px;line-height:1.5;color:var(--muted);min-height:1.3em}
 .form-status a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line)}
@@ -388,8 +386,8 @@ html{scroll-behavior:auto}
 .hero .cta-link.cta-primary{text-shadow:none}
 @media(max-width:640px){.experience-intro,.example-summary{grid-template-columns:1fr}.example-summary{gap:24px}.cta-link.cta-primary{width:100%;box-sizing:border-box}}
 /* 44px hit areas on small controls, without changing how they look. */
-.nav-links a,.theme-toggle,.nav-menu,.cta-link,.cta-alt,.btn,.trace-more,.rail-btn,.crumb,.mail,.foot-links a,.offer-action,.cycle-run-link{position:relative}
-.nav-links a::after,.cta-link::after,.cta-alt::after,.btn::after,.trace-more::after,.crumb::after,.mail::after,.foot-links a::after,.offer-action::after,.cycle-run-link::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.nav-links a,.theme-toggle,.nav-menu,.cta-link,.cta-alt,.btn,.trace-more,.rail-btn,.crumb,.mail,.foot-links a,.offer-action{position:relative}
+.nav-links a::after,.cta-link::after,.cta-alt::after,.btn::after,.trace-more::after,.crumb::after,.mail::after,.foot-links a::after,.offer-action::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
 .theme-toggle::after,.nav-menu::after,.rail-btn::after{content:'';position:absolute;inset:-6px}
 </style>
 </head>
@@ -623,11 +621,11 @@ html{scroll-behavior:auto}
       <li class="stage stage-return">
         <span class="label">Back to 01 · The next question</span>
         <h3>The output of What Now becomes the next question.</h3>
-        <p>The checkpoint from stage five is a question again, sharper than the one that came in. The cycle continues.</p>
+        <p>The checkpoint from stage five is a question again, sharper than the one that came in. The Cycle continues.</p>
       </li>
       </ol>
     </div>
-    <p class="cycle-run reveal"><a class="cycle-run-link" href="cycle.html">Run the cycle</a><span class="cycle-run-note">Free, no account, about ten minutes. Six rounds, five futures, one fracture, its consequences, and a plan.</span></p>
+    <p class="cycle-run reveal"><a class="cta-link cta-primary" href="cycle.html">Run the Cycle</a><span class="cycle-run-note">Free, no account, about ten minutes. Six rounds, five futures, one fracture, its consequences, and a plan.</span></p>
   </div>
 </section>
 
@@ -636,7 +634,7 @@ html{scroll-behavior:auto}
 <section id="approach" aria-labelledby="approach-heading">
   <div class="container">
     <p class="label reveal">The Approach</p>
-    <h2 id="approach-heading" class="reveal">Five capacities the cycle trains.</h2>
+    <h2 id="approach-heading" class="reveal">Five capacities the Cycle trains.</h2>
     <p class="lede reveal">None of them show up on an IQ test. All of them show up in decisions.</p>
     <div class="pillars reveal stagger">
       <div class="pill"><span>I</span>Adaptive Curiosity<p>Asking a better question when the first one stops working.</p></div>

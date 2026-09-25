@@ -410,8 +410,8 @@ footer{border-top:1px solid var(--line);padding:var(--s48) 0;font-size:13px;colo
 <section class="cta">
   <div class="container">
     <h2>Read enough. Try it on a real question.</h2>
-    <p>The cycle is free, takes about ten minutes, and needs no account.</p>
-    <a class="mail" href="/cycle.html">Run the cycle</a>
+    <p>The Cycle is free, takes about ten minutes, and needs no account.</p>
+    <a class="mail" href="/cycle.html">Run the Cycle</a>
   </div>
 </section>
 </main>
@@ -494,7 +494,7 @@ async function openEssay(href,push,card){
       const i=ESSAYS.findIndex(e=>e.href===href),next=i>=0&&ESSAYS.length>1?ESSAYS[(i+1)%ESSAYS.length]:null;
       cache[href]={title:doc.title||'Insights',html:head.innerHTML+'<div class="prose">'+prose.innerHTML+'</div>'+
         (next?'<a class="reader-next-essay" href="'+next.href+'" data-next><span class="label">Next essay</span><strong>'+next.title+'</strong><span class="dek2">'+next.dek+'</span></a>':'')+
-        '<div class="reader-next"><a href="/cycle.html">Run the cycle</a><a href="/council.html">Convene the Council</a><a href="'+href+'">Open this essay as its own page</a></div>'};
+        '<div class="reader-next"><a href="/cycle.html">Run the Cycle</a><a href="/council.html">Convene the Council</a><a href="'+href+'">Open this essay as its own page</a></div>'};
     }
     if(current!==href)return;
     body.innerHTML=cache[href].html;document.title=cache[href].title;

@@ -355,7 +355,7 @@ async function callStage(stage,payload){
     return data;
   }catch(e){
     if(e.name==='AbortError')throw new Error('That took too long — the request was cancelled.');
-    if(e instanceof TypeError)throw new Error('Couldn’t reach the cycle — check your connection and try again.');
+    if(e instanceof TypeError)throw new Error('Couldn’t reach the Cycle — check your connection and try again.');
     throw e;
   }finally{clearTimeout(timer)}
 }
@@ -384,7 +384,7 @@ function showError(container,message,retry){
 function screenEntry(){
   clear();paintRail(null);
   const label=el('p','label','The Noetic Innovation Cycle');
-  const h=el('h1',null,'Run the cycle.');
+  const h=el('h1',null,'Run the Cycle.');
   const lede=el('p','lede','Six rounds of questioning, then five futures, one fracture, its consequences, and a plan. About ten minutes. No answers — better questions.');
   const fieldLabel=el('label','label field-label','What are you sitting with?');
   fieldLabel.setAttribute('for','q-input');

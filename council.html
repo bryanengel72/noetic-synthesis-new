@@ -108,8 +108,10 @@ h1{font-family:var(--display);font-variation-settings:'wdth' 116;font-weight:600
   text-transform:uppercase;max-width:16ch;margin-top:var(--s16)}
 .lede{margin-top:var(--s24);font-size:17px;color:var(--muted);max-width:54ch}
 .hero-actions{margin-top:var(--s48);display:flex;gap:var(--s32);align-items:center;flex-wrap:wrap}
-.cta-link{flex-shrink:0;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);text-decoration:none;padding-bottom:var(--s8);border-bottom:1px solid var(--text);transition:letter-spacing .4s var(--ease);white-space:nowrap}
+.cta-link{flex-shrink:0;font-family:var(--display);font-variation-settings:'wdth' 92;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text);text-decoration:none;padding-bottom:var(--s8);border-bottom:1px solid var(--text);transition:letter-spacing .4s var(--ease),background .25s,color .25s;white-space:nowrap}
 .cta-link:hover{letter-spacing:.28em}
+.cta-link.cta-primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:14px 22px;background:var(--text);color:var(--bg);border:1px solid var(--text);text-decoration:none}
+.cta-link.cta-primary:hover{background:var(--bg);color:var(--text)}
 .hero-note{font-size:14px;color:var(--faint)}
 
 section{padding:var(--s128) 0;position:relative}
@@ -310,7 +312,7 @@ html{scroll-behavior:auto}
     <h1>Five perspectives. <span class="wide">One decision.</span></h1>
     <p class="lede">Bring a decision you're about to make. Five advisors — each a genuinely different intelligence, not five copies of one — deliberate across two rounds, and one of them exists only to find what kills the plan.</p>
     <div class="hero-actions">
-      <a href="#run" class="cta-link">Convene the Council</a>
+      <a href="#run" class="cta-link cta-primary">Convene the Council</a>
       <p class="hero-note">Free · no account · about two minutes</p>
     </div>
   </div>
