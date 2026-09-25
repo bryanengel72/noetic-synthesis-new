@@ -315,6 +315,7 @@ html[data-theme="light"] .plate{--pl-muted:#a8a8a8;--pl-faint:#7d7d78;--pl-line:
 .people{border-top:1px solid var(--line)}
 .people-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s64);margin-top:var(--s64);border-top:1px solid var(--line)}
 .person{padding-top:var(--s32)}
+.person-photo{display:block;width:100%;max-width:240px;height:auto;aspect-ratio:4/5;object-fit:cover;background:var(--line);margin-bottom:var(--s24)}
 .person h3{font-family:var(--display);font-variation-settings:'wdth' 115;font-weight:600;font-size:clamp(22px,2.4vw,28px);letter-spacing:-.02em;line-height:1.1}
 .person-role{font-family:var(--display);font-variation-settings:'wdth' 92;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:var(--s8)}
 .person p{color:var(--muted);font-size:16px;line-height:1.6;margin-top:var(--s16);max-width:44ch;letter-spacing:-.011em}
@@ -664,12 +665,14 @@ html{scroll-behavior:auto}
     <p class="lede reveal">A theorist and an operator. One builds the framework; the other builds the systems that run it.</p>
     <div class="people-grid reveal stagger">
       <div class="person">
+        <img class="person-photo" src="/img/julie.webp" alt="Portrait of Julie Engel" width="480" height="600" loading="lazy" decoding="async">
         <h3>Julie Engel</h3>
         <div class="person-role">Founder · Integrative Theorist</div>
         <p>Author and human-AI collaboration strategist. Her work traces how biology, systems, and AI fit together, and what that means for how people think and decide.</p>
         <a href="https://www.linkedin.com/in/julie-engel-80863116/" target="_blank" rel="noopener">Julie on LinkedIn</a>
       </div>
       <div class="person">
+        <img class="person-photo" src="/img/bryan.webp" alt="Portrait of Bryan Engel" width="480" height="600" loading="lazy" decoding="async">
         <h3>Bryan Engel</h3>
         <div class="person-role">Co-founder · AI Agent Builder</div>
         <p>Retired U.S. Air Force. Twenty-plus years leading federal IT programs across the VA, the Department of Defense, and three combatant commands. MBA and MS in Innovation and Technology. He builds the agent systems behind the Council and the Cycle.</p>
