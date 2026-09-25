@@ -340,6 +340,17 @@ html[data-theme="light"] .plate{--pl-muted:#a8a8a8;--pl-faint:#7d7d78;--pl-line:
 .form-status{font-size:14.5px;line-height:1.5;color:var(--muted);min-height:1.3em}
 .form-status a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line)}
 .inq-alt{margin-top:var(--s32);font-size:14px;color:var(--faint)}
+.inq-grid{display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:var(--s96);align-items:start}
+.inq-next{margin-top:var(--s48);max-width:44ch}
+.inq-next ol{list-style:none;margin:var(--s16) 0 0;padding:0;border-top:1px solid var(--line)}
+.inq-next li{padding:var(--s24) 0;border-bottom:1px solid var(--line)}
+.inq-next h3{margin-top:var(--s8);font-family:var(--display);font-variation-settings:'wdth' 106;font-weight:600;font-size:19px;letter-spacing:-.015em;color:var(--text)}
+.inq-next li>p:last-child{margin-top:var(--s8);font-size:15px;line-height:1.6;color:var(--muted)}
+.inq-prep{margin-top:var(--s24);font-size:14px;line-height:1.6;color:var(--faint)}
+.inq-prep strong{color:var(--muted);font-weight:600}
+.inq-prep a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.inq-prep a:hover{color:var(--text);border-bottom-color:var(--text)}
+@media(max-width:900px){.inq-grid{grid-template-columns:1fr;gap:0}.inq-next{margin-top:var(--s64);max-width:none}}
 .inq-alt a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
 .inq-alt a:hover{color:var(--text);border-bottom-color:var(--text)}
 
@@ -673,6 +684,8 @@ html{scroll-behavior:auto}
     <p class="label reveal">Inquiries</p>
     <h2 id="contact-heading" class="reveal">We work with a small number of organizations <span class="wide">at a time.</span></h2>
     <p class="note reveal">Engagements begin with a conversation. Tell us the question you're sitting with.</p>
+    <div class="inq-grid">
+    <div>
     <form class="inq-form reveal" id="inq-form" novalidate>
       <div class="field">
         <label for="f-name">Name</label>
@@ -694,6 +707,17 @@ html{scroll-behavior:auto}
       <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
     </form>
     <p class="inq-alt reveal">Prefer to write directly? <a href="mailto:evolve@noeticsynthesis.com">evolve@noeticsynthesis.com</a></p>
+    </div>
+    <aside class="inq-next reveal" aria-labelledby="next-heading">
+      <p class="label" id="next-heading">What happens next</p>
+      <ol>
+        <li><p class="label">01</p><h3>We read it ourselves.</h3><p>Julie or Bryan replies within two business days, not an autoresponder. If we&rsquo;re not the right fit, we&rsquo;ll say so and point you somewhere better.</p></li>
+        <li><p class="label">02</p><h3>A conversation, not a pitch.</h3><p>Forty-five minutes on a video call with both founders. We spend it on your question, not our slides. You&rsquo;ll leave with a sharper version of it either way.</p></li>
+        <li><p class="label">03</p><h3>A proposal, if it&rsquo;s useful.</h3><p>If there&rsquo;s work to do, we write up which format fits (a workshop, agent access, or a program), what it would cost, and what you&rsquo;d have at the end, within a week of the call.</p></li>
+      </ol>
+      <p class="inq-prep"><strong>Before the call:</strong> bring the decision you&rsquo;re actually weighing. If you want to see how we think first, <a href="/council.html">run it through the Council</a>. It takes two minutes.</p>
+    </aside>
+    </div>
   </div>
 </section>
 </main>
