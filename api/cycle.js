@@ -6,6 +6,7 @@
 // Excluded from production via .vercelignore until the /cycle page ships.
 import Anthropic from "@anthropic-ai/sdk";
 import { allow, clientIp } from "./_ratelimit.js";
+import { countStart } from "./_counter.js";
 
 const client = new Anthropic();
 
@@ -244,12 +245,14 @@ export default async function handler(req, res) {
   if (!userMessage) {
     return res.status(400).json({ error: "That stage is missing what it needs from the thread." });
   }
-  // One line per run: round one of the Art of the Question. `ref` is the
-  // campaign tag from /cycle?ref=..., so runs from a post can be counted in
-  // the Vercel logs. No question text, no IP.
+  // One count per run: round one of the Art of the Question. `ref` is the
+  // campaign tag from /cycle?ref=..., so runs from a post can be scored. Counted
+  // in Redis by day (_counter.js) and logged. No question text, no IP.
   if (req.body.stage === "aoq" && Number(req.body.payload?.round) === 1) {
-    const ref = str(req.body.payload?.ref, 40).toLowerCase();
-    console.log("cycle start", { ref: /^[a-z0-9-]+$/.test(ref) ? ref : ref ? "other" : "none" });
+    const raw = str(req.body.payload?.ref, 40).toLowerCase();
+    const ref = /^[a-z0-9-]+$/.test(raw) ? raw : raw ? "other" : "none";
+    console.log("cycle start", { ref });
+    await countStart(ref);
   }
 
   try {
