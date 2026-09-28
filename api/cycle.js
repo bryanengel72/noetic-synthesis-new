@@ -230,7 +230,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
   if (!process.env.ANTHROPIC_API_KEY) {
-    return res.status(503).json({ error: "The cycle is not configured yet — check back soon." });
+    return res.status(503).json({ error: "The cycle is not configured yet. Check back soon." });
   }
   if (!allow(clientIp(req), RATE_LIMIT, RATE_WINDOW_MS)) {
     return res.status(429).json({ error: "You've run the cycle a lot this hour. Give it a rest and come back." });
@@ -243,6 +243,13 @@ export default async function handler(req, res) {
   const userMessage = stage.build(req.body?.payload || {});
   if (!userMessage) {
     return res.status(400).json({ error: "That stage is missing what it needs from the thread." });
+  }
+  // One line per run: round one of the Art of the Question. `ref` is the
+  // campaign tag from /cycle?ref=..., so runs from a post can be counted in
+  // the Vercel logs. No question text, no IP.
+  if (req.body.stage === "aoq" && Number(req.body.payload?.round) === 1) {
+    const ref = str(req.body.payload?.ref, 40).toLowerCase();
+    console.log("cycle start", { ref: /^[a-z0-9-]+$/.test(ref) ? ref : ref ? "other" : "none" });
   }
 
   try {
@@ -261,11 +268,11 @@ export default async function handler(req, res) {
       });
 
       if (response.stop_reason === "refusal") {
-        return res.status(422).json({ error: "The cycle declined to work with that — try rephrasing." });
+        return res.status(422).json({ error: "The cycle declined to work with that. Try rephrasing." });
       }
       if (response.stop_reason === "max_tokens") {
         console.error("cycle truncated", { stage: req.body.stage });
-        return res.status(502).json({ error: "The stage ran long and was cut off — run it again." });
+        return res.status(502).json({ error: "The stage ran long and was cut off. Run it again." });
       }
       const text = response.content.find((b) => b.type === "text")?.text ?? "";
       const parsed = JSON.parse(text);
@@ -273,11 +280,11 @@ export default async function handler(req, res) {
       else console.error("cycle output failed check, retrying", { stage: req.body.stage, attempt });
     }
     if (!data) {
-      return res.status(502).json({ error: "The stage came back incomplete twice — run it again." });
+      return res.status(502).json({ error: "The stage came back incomplete twice. Run it again." });
     }
     return res.status(200).json(data);
   } catch (err) {
     console.error("cycle error", { stage: req.body?.stage, err });
-    return res.status(502).json({ error: "The cycle is unavailable right now — try again in a moment." });
+    return res.status(502).json({ error: "The cycle is unavailable right now. Try again in a moment." });
   }
 }

@@ -1,7 +1,7 @@
 {
   "seed": "How do we increase revenue and still keep staff hired?",
   "date": "2026-09-03",
-  "rule": "At each round the opening with the most business words (revenue, staff, headcount, customers, payroll, hiring, cost, margin, price, company, team, clients, sales, profit) is chosen; ties go to the earliest. Same rule for the future. Later stages offer no choice. Any stage whose text came back cut off was re-requested.",
+  "rule": "At each round the opening with the most business words (revenue, staff, headcount, customers, payroll, hiring, cost, margin, price, company, team, clients, sales, profit) is chosen, counting word forms (so 'hired' counts as 'hiring'); ties go to the earliest. Same rule for the future. Later stages offer no choice. Any stage whose text came back cut off was re-requested. The went-out question on the homepage is one of the three the loop handed back, picked by us, not by the rule.",
   "rounds": [
     {
       "round": 1,

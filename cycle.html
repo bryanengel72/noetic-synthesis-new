@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://www.noeticsynthesis.com/cycle">
 <meta property="og:site_name" content="Noetic Synthesis">
 <meta property="og:title" content="Run the Cycle | Noetic Synthesis">
-<meta property="og:description" content="Six rounds of questioning, five futures, one fracture, its consequences, and a plan. No answers — better questions.">
+<meta property="og:description" content="Six rounds of questioning, five futures, one fracture, its consequences, and a plan. No answers. Better questions.">
 <meta property="og:image" content="https://www.noeticsynthesis.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -282,6 +282,9 @@ if(navMenu){
 }
 
 /* ===== the run ===== */
+// Where the visitor came from (/cycle?ref=li-cycle-replay). Read once at load,
+// before the ?q hand-off rewrites the URL, and sent with round one only.
+const REF=(new URLSearchParams(location.search).get('ref')||'').slice(0,40);
 // One linear thread; no editing back upstream (per the protocol).
 const run={
   opening:'',         // the question as brought, kept for every later stage
@@ -353,8 +356,8 @@ async function callStage(stage,payload){
     if(!res.ok)throw new Error(data.error||('The cycle hit a snag ('+res.status+').'));
     return data;
   }catch(e){
-    if(e.name==='AbortError')throw new Error('That took too long — the request was cancelled.');
-    if(e instanceof TypeError)throw new Error('Couldn’t reach the Cycle — check your connection and try again.');
+    if(e.name==='AbortError')throw new Error('That took too long. The request was cancelled.');
+    if(e instanceof TypeError)throw new Error('Couldn’t reach the Cycle. Check your connection and try again.');
     throw e;
   }finally{clearTimeout(timer)}
 }
@@ -384,7 +387,7 @@ function screenEntry(){
   clear();paintRail(null);
   const label=el('p','label','The Noetic Innovation Cycle');
   const h=el('h1',null,'Run the Cycle.');
-  const lede=el('p','lede','Six rounds of questioning, then five futures, one fracture, its consequences, and a plan. About ten minutes. No answers — better questions.');
+  const lede=el('p','lede','Six rounds of questioning, then five futures, one fracture, its consequences, and a plan. About ten minutes. No answers. Better questions.');
   const fieldLabel=el('label','label field-label','What are you sitting with?');
   fieldLabel.setAttribute('for','q-input');
   const ta=el('textarea');
@@ -425,9 +428,9 @@ async function startRound(question,slot,btn){
   btn.disabled=true;
   showStatus(slot,'aoq');
   try{
-    const data=await callStage('aoq',{question:run.question,round:run.round,opening:run.opening,history:run.path.map(p=>p.question)});
+    const data=await callStage('aoq',{question:run.question,round:run.round,opening:run.opening,history:run.path.map(p=>p.question),ref:REF});
     run.openings=(data.openings||[]).slice(0,4);
-    if(run.openings.length<2)throw new Error('The round came back thin — run it again.');
+    if(run.openings.length<2)throw new Error('The round came back thin. Run it again.');
     screenRound();
   }catch(e){
     btn.disabled=false;
@@ -444,7 +447,7 @@ function screenRound(){
   const qNow=el('blockquote','q-now');
   qNow.style.setProperty('--acc',acc);
   qNow.append(el('span','label','The question as it stands'),el('p',null,run.question));
-  const lede=el('p','lede','Four ways this question could open. Choose the one that unsettles you most — it becomes the question for the next round.');
+  const lede=el('p','lede','Four ways this question could open. Choose the one that unsettles you most. It becomes the question for the next round.');
   const list=el('ul','opts');
   let chosen=null;
   run.openings.forEach(o=>{
@@ -482,7 +485,7 @@ async function advanceRound(chosen,slot,btn,list){
     try{
       const data=await callStage('aoq',{question:run.question,round:run.round,opening:run.opening,history:run.path.map(p=>p.question)});
       run.openings=(data.openings||[]).slice(0,4);
-      if(run.openings.length<2)throw new Error('The round came back thin — run it again.');
+      if(run.openings.length<2)throw new Error('The round came back thin. Run it again.');
       screenRound();
     }catch(e){
       // undo the advance so retry replays it cleanly
@@ -495,7 +498,7 @@ async function advanceRound(chosen,slot,btn,list){
     try{
       const data=await callStage('what_if',{question:run.question,opening:run.opening,path:run.path.map(p=>p.question)});
       run.futures=(data.futures||[]).slice(0,5);
-      if(run.futures.length<2)throw new Error('The futures came back thin — run it again.');
+      if(run.futures.length<2)throw new Error('The futures came back thin. Run it again.');
       screenWhatIf();
     }catch(e){
       run.path.pop();
@@ -549,7 +552,7 @@ async function chooseFuture(chosen,slot,btn,list){
   try{
     const data=await callStage('divergence',{question:run.question,opening:run.opening,path:run.path.map(p=>p.question),future:chosen.label+' — '+chosen.future});
     run.fracture={assumption:data.assumption||'',destabilization:data.destabilization||''};
-    if(!run.fracture.assumption)throw new Error('Divergence came back empty — run it again.');
+    if(!run.fracture.assumption)throw new Error('Divergence came back empty. Run it again.');
     screenDivergence();
   }catch(e){
     btn.disabled=false;list.querySelectorAll('.opt').forEach(b=>b.disabled=false);
@@ -563,7 +566,7 @@ function screenDivergence(){
   const label=el('p','label stage-label','Divergence');
   label.style.setProperty('--acc',acc);
   const h=el('h2',null,'The fracture.');
-  const lede=el('p','lede','What the future you chose is quietly resting on — and why it is shakier than it looks. This stage does not resolve; it ends on the tension.');
+  const lede=el('p','lede','What the future you chose is quietly resting on, and why it is shakier than it looks. This stage does not resolve; it ends on the tension.');
   const a=el('div','block');a.style.setProperty('--acc',acc);
   a.append(el('span','label','The buried assumption'),el('p','big',run.fracture.assumption));
   const d=el('div','block');d.style.setProperty('--acc',acc);
@@ -590,7 +593,7 @@ async function runForesight(slot,btn){
       destabilization:run.fracture.destabilization,
     });
     run.consequences=(data.consequences||[]).slice(0,8);
-    if(run.consequences.length<3)throw new Error('The chain came back thin — run it again.');
+    if(run.consequences.length<3)throw new Error('The chain came back thin. Run it again.');
     screenForesight();
   }catch(e){
     btn.disabled=false;
@@ -604,7 +607,7 @@ function screenForesight(){
   const label=el('p','label stage-label','Causal Foresight');
   label.style.setProperty('--acc',acc);
   const h=el('h2',null,'Micro-choice, macro-trajectory.');
-  const lede=el('p','lede','The fracture, traced forward — including the consequences you would rather not see. No advice lives here.');
+  const lede=el('p','lede','The fracture, traced forward, including the consequences you would rather not see. No advice lives here.');
   stageEl.append(label,h,lede);
   const orders=[['first','First order'],['second','Second order'],['third','Third order']];
   orders.forEach(([key,name])=>{
@@ -617,7 +620,7 @@ function screenForesight(){
   });
   const slot=el('div');
   const row=el('div','btn-row');
-  const go=el('button','btn','So — what now?');
+  const go=el('button','btn','So, what now?');
   go.addEventListener('click',()=>runWhatNow(slot,go));
   row.append(go);
   stageEl.append(slot,row);
@@ -638,7 +641,7 @@ async function runWhatNow(slot,btn){
       consequences:run.consequences.map(c=>c.order+': '+c.consequence),
     });
     run.plan={first_move:data.first_move||'',next_move:data.next_move||'',checkpoint:data.checkpoint||''};
-    if(!run.plan.first_move)throw new Error('The plan came back empty — run it again.');
+    if(!run.plan.first_move)throw new Error('The plan came back empty. Run it again.');
     screenPlan();
   }catch(e){
     btn.disabled=false;
@@ -652,7 +655,7 @@ function screenPlan(){
   const label=el('p','label stage-label','What Now');
   label.style.setProperty('--acc',acc);
   const h=el('h2',null,'Insight without action is decoration.');
-  const lede=el('p','lede','Built to operate inside the tension the thread exposed — not by pretending it is settled. Scoped to days, not quarters.');
+  const lede=el('p','lede','Built to operate inside the tension the thread exposed, not by pretending it is settled. Scoped to days, not quarters.');
   const blocks=[['The first move',run.plan.first_move],['The next move',run.plan.next_move],['The checkpoint',run.plan.checkpoint]];
   stageEl.append(label,h,lede);
   blocks.forEach(([name,text])=>{
@@ -672,11 +675,11 @@ function screenMap(){
   clear();paintRail('what_now');
   const label=el('p','label','The thread');
   const h=el('h2',null,'What you actually did here.');
-  const lede=el('p','lede','The whole run — what was asked, what you chose, and where it landed. Print it; the paper copy is the point.');
+  const lede=el('p','lede','The whole run: what was asked, what you chose, and where it landed. Print it; the paper copy is the point.');
   stageEl.append(label,h,lede);
 
   const s1=el('div','map-sect');
-  s1.append(el('p','label stage-label','Art of the Question — six rounds'));
+  s1.append(el('p','label stage-label','Art of the Question: six rounds'));
   s1.querySelector('.label').style.setProperty('--acc',STAGE_META.aoq.acc);
   run.path.forEach((p,i)=>{
     const item=el('div','map-item');
@@ -686,8 +689,8 @@ function screenMap(){
   stageEl.append(s1);
 
   const sects=[
-    ['what_if','What If — the future you chose',[[run.future.label,run.future.future]]],
-    ['divergence','Divergence — the fracture',[['The buried assumption',run.fracture.assumption],['Destabilized',run.fracture.destabilization]]],
+    ['what_if','What If: the future you chose',[[run.future.label,run.future.future]]],
+    ['divergence','Divergence: the fracture',[['The buried assumption',run.fracture.assumption],['Destabilized',run.fracture.destabilization]]],
   ];
   sects.forEach(([key,title,items])=>{
     const s=el('div','map-sect');
@@ -703,7 +706,7 @@ function screenMap(){
   });
 
   const sf=el('div','map-sect');
-  const lf=el('p','label stage-label','Causal Foresight — the chain');
+  const lf=el('p','label stage-label','Causal Foresight: the chain');
   lf.style.setProperty('--acc',STAGE_META.foresight.acc);
   sf.append(lf);
   run.consequences.forEach(c=>{
@@ -714,7 +717,7 @@ function screenMap(){
   stageEl.append(sf);
 
   const sp=el('div','map-sect');
-  const lp=el('p','label stage-label','What Now — the plan');
+  const lp=el('p','label stage-label','What Now: the plan');
   lp.style.setProperty('--acc',STAGE_META.what_now.acc);
   sp.append(lp);
   [['The first move',run.plan.first_move],['The next move',run.plan.next_move],['The checkpoint',run.plan.checkpoint]].forEach(([name,text])=>{
